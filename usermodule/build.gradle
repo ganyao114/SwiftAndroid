@@ -1,0 +1,84 @@
+buildscript {
+    repositories {
+        jcenter()
+
+    }
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility rootProject.ext.javaSDKVersion
+        targetCompatibility rootProject.ext.javaSDKVersion
+    }
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+
+    lintOptions {
+        checkReleaseBuilds true
+        quiet true
+        abortOnError false
+        ignoreWarnings true
+        disable 'InvalidPackage'  // Some libraries have issues with this
+        disable 'OldTargetApi'    // Due to Robolectric that modifies the manifest when running tests
+    }
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile rootProject.ext.dependencies.support_v4
+    compile rootProject.ext.dependencies.support_v7
+    compile rootProject.ext.dependencies.support_design
+    compile rootProject.ext.dependencies.retrofit_main
+    compile rootProject.ext.dependencies.retrofit_gson
+    compile rootProject.ext.dependencies.retrofit_rxjava
+    compile rootProject.ext.dependencies.asimplecache
+    compile rootProject.ext.dependencies.rxjava
+    compile rootProject.ext.dependencies.rxandroid
+    //https://github.com/tbruyelle/RxPermissions 权限检测工具 6.0 + 需要动态权限检测
+    compile rootProject.ext.dependencies.rxpermission
+    compile rootProject.ext.dependencies.nineold
+    compile rootProject.ext.dependencies.picasso
+    testCompile rootProject.ext.dependencies.junit
+    provided rootProject.ext.dependencies.javaxapi
+    compile rootProject.ext.dependencies.dagger_lib
+    compile rootProject.ext.dependencies.dagger_compiler
+    compile rootProject.ext.dependencies.butterknife
+    compile rootProject.ext.dependencies.realm
+    compile project(path: ':utils')
+    compile project(path: ':eventposter')
+}

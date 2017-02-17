@@ -1,0 +1,41 @@
+ext {
+
+    javaSDKVersion = JavaVersion.VERSION_1_8
+
+    minSdkVersion = 15
+    targetSdkVersion = 24
+    compileSdkVersion = 24
+    buildToolsVersion = '24.0.2'
+
+    // library_version
+    supportLibraryVersion = '24.2.1'
+    retrofitVersion = "2.0.0"
+    rxjavaVersion = "1.1.0"
+    realmVersion = "0.84.1"
+    nineoldVersion = "2.4.0"
+    picassoVersion = "2.5.2"
+    daggerVersion = "2.2"
+    butterknifeVersion = "7.0.1"
+    junitVersion = "4.12"
+
+    dependencies = [
+        support_v4: "com.android.support:support-v4:${supportLibraryVersion}",
+        support_v7: "com.android.support:appcompat-v7:${supportLibraryVersion}",
+        support_design: "com.android.support:design:${supportLibraryVersion}",
+        retrofit_main: "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+        retrofit_gson: "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+        retrofit_rxjava: "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
+        rxjava: "io.reactivex:rxjava:${rxjavaVersion}",
+        rxandroid: "io.reactivex:rxandroid:${rxjavaVersion}",
+        realm: "io.realm:realm-android:${realmVersion}",
+        nineold: "com.nineoldandroids:library:${nineoldVersion}",
+        picasso: "com.squareup.picasso:picasso:${picassoVersion}",
+        dagger_lib: "com.google.dagger:dagger:${daggerVersion}",
+        dagger_compiler: "com.google.dagger:dagger-compiler:${daggerVersion}",
+        butterknife: "com.jakewharton:butterknife:${butterknifeVersion}",
+        javaxapi: "javax.annotation:jsr250-api:1.0",
+        rxpermission: "com.tbruyelle.rxpermissions:rxpermissions:0.8.2@aar",
+        asimplecache: files('libs/asimplecache.jar'),
+        junit: "junit:junit:${junitVersion}"
+    ]
+}

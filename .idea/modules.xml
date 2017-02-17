@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SwiftAndroid.iml" filepath="$PROJECT_DIR$/SwiftAndroid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/apiservice/apiservice.iml" filepath="$PROJECT_DIR$/apiservice/apiservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eventposter/eventposter.iml" filepath="$PROJECT_DIR$/eventposter/eventposter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/feizhai/feizhai.iml" filepath="$PROJECT_DIR$/feizhai/feizhai.iml" />
+      <module fileurl="file://$PROJECT_DIR$/usermodule/usermodule.iml" filepath="$PROJECT_DIR$/usermodule/usermodule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/utils/utils.iml" filepath="$PROJECT_DIR$/utils/utils.iml" />
+    </modules>
+  </component>
+</project>
