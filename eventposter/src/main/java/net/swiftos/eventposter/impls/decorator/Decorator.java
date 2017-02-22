@@ -8,7 +8,6 @@ package net.swiftos.eventposter.impls.decorator;
 public class Decorator {
 
     public static <T> T invoke(Function<T> function, Object... pars) {
-
         return function.invoke(pars);
     }
 

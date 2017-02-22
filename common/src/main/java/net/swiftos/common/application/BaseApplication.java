@@ -23,9 +23,9 @@ public class BaseApplication extends Application {
         application = this;
     }
 
-    private static BaseApplication application;
+    private static Application application;
 
-    public static BaseApplication getApplication() {
+    public static Application getApplication() {
         return application;
     }
 
@@ -35,6 +35,17 @@ public class BaseApplication extends Application {
                 .appModule(new AppModule(this))
                 .build();
         EventPoster.init(this);
+        Presenter.establish();
+        Presenter.With(null).start(presenter);
+    }
+
+    public static void init(Class<? extends BasePresenter> presenter, Application app) {
+        application = app;
+        appComponent = DaggerAppComponent
+                .builder()
+                .appModule(new AppModule(app))
+                .build();
+        EventPoster.init(app);
         Presenter.establish();
         Presenter.With(null).start(presenter);
     }
