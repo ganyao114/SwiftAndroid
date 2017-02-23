@@ -11,6 +11,7 @@ buildscript {
 apply plugin: 'com.android.library'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'android-aspectjx'
 
 android {
 
@@ -74,6 +75,7 @@ dependencies {
     provided rootProject.ext.dependencies.dagger_compiler
     provided rootProject.ext.dependencies.butterknife
     provided rootProject.ext.dependencies.realm
+    provided rootProject.ext.dependencies.aspectj
     provided project(path: ':utils')
     provided project(path: ':eventposter')
 }

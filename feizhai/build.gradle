@@ -11,6 +11,7 @@ buildscript {
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'android-aspectjx'
 
 android {
 
@@ -86,6 +87,7 @@ dependencies {
         changing = true
     }
     compile rootProject.ext.dependencies.multidex
+    compile rootProject.ext.dependencies.aspectj
     compile project(':apiservice')
     compile project(':common')
     compile project(':usermodule')

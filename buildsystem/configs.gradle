@@ -19,6 +19,7 @@ ext {
     junitVersion = "4.12"
     tinkerVersion = "1.7.7"
     multidexVersion = "1.0.1"
+    aspectjVersion = "1.8.9"
 
     dependencies = [
         support_v4: "com.android.support:support-v4:${supportLibraryVersion}",
@@ -41,7 +42,8 @@ ext {
         junit: "junit:junit:${junitVersion}",
         tinker_lib: "com.tencent.tinker:tinker-android-lib:${tinkerVersion}",
         tinker_anno: "com.tencent.tinker:tinker-android-anno:${tinkerVersion}",
-        multidex: "com.android.support:multidex:${multidexVersion}"
+        multidex: "com.android.support:multidex:${multidexVersion}",
+        aspectj: "org.aspectj:aspectjrt:${aspectjVersion}"
     ]
 
     classpaths = [
