@@ -78,4 +78,5 @@ dependencies {
     provided rootProject.ext.dependencies.aspectj
     provided project(path: ':utils')
     provided project(path: ':eventposter')
+    provided project(path: ':common')
 }

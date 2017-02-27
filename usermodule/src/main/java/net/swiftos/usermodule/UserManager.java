@@ -5,4 +5,9 @@ package net.swiftos.usermodule;
  */
 
 public class UserManager {
+
+    public static boolean isLogin(){
+        return true;
+    }
+
 }
