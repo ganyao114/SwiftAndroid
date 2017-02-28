@@ -74,7 +74,7 @@ public class Hugo {
             builder.append(" [Thread:\"").append(Thread.currentThread().getName()).append("\"]");
         }
 
-        Log.v(asTag(cls), builder.toString());
+            Log.v(asTag(cls), builder.toString());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             final String section = builder.toString().substring(2);
