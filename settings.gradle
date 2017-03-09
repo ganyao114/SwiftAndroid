@@ -1,1 +1,1 @@
-include ':feizhai', ':eventposter', ':common', ':utils', ':apiservice', ':usermodule'
+include ':feizhai', ':eventposter', ':common', ':utils', ':apiservice', ':usermodule', ':widget'

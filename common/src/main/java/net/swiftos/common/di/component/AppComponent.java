@@ -3,9 +3,13 @@ package net.swiftos.common.di.component;
 import android.content.Context;
 import android.os.Handler;
 
+import net.swiftos.common.api.IAPIGenerator;
+import net.swiftos.common.cache.IKVDiskCache;
+import net.swiftos.common.cache.KVACacheImpl;
 import net.swiftos.common.di.module.AppModule;
-import net.swiftos.common.model.net.BaseModel;
+import net.swiftos.common.model.net.BaseRxModel;
 import net.swiftos.common.presenter.BasePresenter;
+import net.swiftos.common.presenter.IAsyncSubjectsQueue;
 import net.swiftos.common.view.activity.BaseActivity;
 
 import org.afinal.simplecache.ACache;
@@ -15,8 +19,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
 
 /**
  * App 全局依赖的容器
@@ -26,9 +28,11 @@ import retrofit2.Retrofit;
 @Component(modules = {AppModule.class})
 public interface AppComponent {
 
+    void inject(Object object);
+
     void inject(BaseActivity activity);
 
-    void inject(BaseModel model);
+    void inject(BaseRxModel model);
 
     void inject(BasePresenter presenter);
 
@@ -36,8 +40,14 @@ public interface AppComponent {
 
     ConcurrentHashMap globalData();
 
-    ACache diskCache();
+    IAPIGenerator apiGenerator();
+
+    IKVDiskCache kvDiskCache();
+
+    ACache aCache();
 
     Handler mainHandler();
+
+    IAsyncSubjectsQueue generateSubscriber();
 
 }

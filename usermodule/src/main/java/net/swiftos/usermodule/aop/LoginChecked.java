@@ -20,7 +20,7 @@ public class LoginChecked {
         this.result = result;
     }
 
-    enum LoginCheckedResult {
+    public enum LoginCheckedResult {
         Login,
         UnLogin
     }

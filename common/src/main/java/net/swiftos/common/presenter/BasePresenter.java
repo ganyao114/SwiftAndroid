@@ -1,10 +1,8 @@
 package net.swiftos.common.presenter;
 
+import net.swiftos.common.application.BaseApplication;
 import net.swiftos.common.navigation.Navigater;
 import net.swiftos.eventposter.presenter.Presenter;
-
-import rx.Subscription;
-import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by ganyao on 2016/10/26.
@@ -12,21 +10,21 @@ import rx.subscriptions.CompositeSubscription;
 
 public abstract class BasePresenter extends Presenter implements Navigater.INavigate{
 
-    protected CompositeSubscription compositeSubscription;
+    protected IAsyncSubjectsQueue asyncSubjects;
 
-    //RXjava取消注册，以避免内存泄露
-    public void onUnsubscribe() {
-        if (compositeSubscription != null && compositeSubscription.hasSubscriptions()) {
-            compositeSubscription.unsubscribe();
+    //取消注册，以避免内存泄露
+    public void destorySubjectsQueue() {
+        if (asyncSubjects != null) {
+            asyncSubjects.destroy();
         }
     }
 
-    //RXjava注册
-    public void addSubscription(Subscription subscriber) {
-        if (compositeSubscription == null) {
-            compositeSubscription = new CompositeSubscription();
+    //注册观察者 callback
+    public void submitSubject(IAsyncSubject observer) {
+        if (asyncSubjects == null) {
+            asyncSubjects = BaseApplication.getAppComponent().generateSubscriber();
         }
-        compositeSubscription.add(subscriber);
+        asyncSubjects.addSubject(observer);
     }
 
     public void onViewInited() {
@@ -34,7 +32,7 @@ public abstract class BasePresenter extends Presenter implements Navigater.INavi
     }
 
     public void onViewDestoryed() {
-        onUnsubscribe();
+        destorySubjectsQueue();
     }
 
 

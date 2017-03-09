@@ -3,4 +3,32 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="gray">#8c8c8c</color>
+    <color name="white">#ffffff</color>
+    <color name="themeColor">#ffce3d3a</color>
+    <color name="toolbarTextColor">#ffffffff</color>
+    <color name="toolbarSubTextColor">#ffd4d4d4</color>
+    <color name="normalBackground">#fff2f4f5</color>
+    <color name="primary">#E43F3F</color>
+    <color name="primary_dark">#E12929</color>
+
+    <color name="black">#000000</color>
+
+    <color name="black_overlay">#66000000</color>
+
+    <color name="province_line_border">#C7C7C7</color>
+
+
+
+    <color name="divider">#E5E5E5</color>
+    <color name="shadow">#AAEBEBEB</color>
+    <color name="common_bg">#FAFAFA</color>
+    <color name="content_bg">#F3F3F3</color>
+    <color name="gray_deep">#5c5c5c</color>
+    <color name="alpha_gray">#CC646464</color>
+    <color name="theme_gray">#646464</color>
+
+    <color name="item_press">#F0F0F0</color>
+
+    <color name="user_color">#785447</color>
 </resources>

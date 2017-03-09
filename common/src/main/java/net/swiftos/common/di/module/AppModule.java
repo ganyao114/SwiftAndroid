@@ -5,6 +5,13 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 
+import net.swiftos.common.api.IAPIGenerator;
+import net.swiftos.common.api.RetrofitAPIGenerator;
+import net.swiftos.common.cache.IKVDiskCache;
+import net.swiftos.common.cache.KVACacheImpl;
+import net.swiftos.common.presenter.IAsyncSubjectsQueue;
+import net.swiftos.common.presenter.RxAsyncSubjectsQueue;
+
 import org.afinal.simplecache.ACache;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -48,6 +55,22 @@ public class AppModule {
     @Singleton
     public ACache provideACache() {
         return ACache.get(globalApp);
+    }
+
+    @Provides
+    @Singleton
+    public IKVDiskCache provideKVDiskCache() {
+        return new KVACacheImpl();
+    }
+
+    @Provides
+    public IAsyncSubjectsQueue provideSubscriber() {
+        return new RxAsyncSubjectsQueue();
+    }
+
+    @Provides
+    public IAPIGenerator provideAPIGenerator() {
+        return new RetrofitAPIGenerator();
     }
 
 }

@@ -10,7 +10,6 @@ public class APIServiceConfigs {
 
     private Integer connectTimeout = 5 * 1000;
     private Integer readTimeout = 5 * 1000;
-    private BasicParamsInterceptor.ICallback interceptor;
 
     public Integer getConnectTimeout() {
         return connectTimeout;
@@ -28,11 +27,4 @@ public class APIServiceConfigs {
         this.readTimeout = readTimeout;
     }
 
-    public BasicParamsInterceptor.ICallback getInterceptor() {
-        return interceptor;
-    }
-
-    public void setInterceptor(BasicParamsInterceptor.ICallback interceptor) {
-        this.interceptor = interceptor;
-    }
 }

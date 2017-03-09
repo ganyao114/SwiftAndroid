@@ -14,6 +14,9 @@ import com.tencent.tinker.loader.app.DefaultApplicationLike;
 import com.tencent.tinker.loader.app.TinkerApplication;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
 
+import net.swiftos.common.application.BaseApplication;
+import net.swiftos.feizhai.presenter.MainPresenter;
+
 /**
  * Created by swift_gan on 2017/2/22.
  */
@@ -30,13 +33,13 @@ public class SwiftTinkerApplication extends DefaultApplicationLike {
     @Override
     public void onCreate() {
         super.onCreate();
+        BaseApplication.init(MainPresenter.class, getApplication());
     }
 
     @Override
     public void onBaseContextAttached(Context base) {
         super.onBaseContextAttached(base);
         MultiDex.install(base);
-
         TinkerInstaller.install(this);
     }
 

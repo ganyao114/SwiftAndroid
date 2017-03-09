@@ -12,12 +12,21 @@ import rx.Observable;
  */
 
 public interface IUserAPI {
+
     /**
      * 登陆
      * @param loginName
      * @param pass
-     * @return
+     * @return UserInfo
      */
-    @POST()
+    @POST("/mobile/login")
     Observable<BaseResponse<UserInfo>> login(@Query("loginname")String loginName, @Query("pass")String pass);
+
+    /**
+     * 登出
+     * @return NULL
+     */
+    @POST("/mobile/logout")
+    Observable<BaseResponse<UserInfo>> logout();
+
 }

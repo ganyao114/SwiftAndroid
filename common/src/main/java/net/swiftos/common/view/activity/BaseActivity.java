@@ -10,12 +10,13 @@ import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
-
 import net.swiftos.common.R;
 import net.swiftos.common.application.BaseApplication;
 import net.swiftos.common.di.component.AppComponent;
 import net.swiftos.common.navigation.Navigater;
 import net.swiftos.common.presenter.BasePresenter;
+import net.swiftos.eventposter.core.EventPoster;
+import net.swiftos.eventposter.impls.customevent.handler.CustomEventHandler;
 import net.swiftos.utils.ValidateUtil;
 
 import butterknife.ButterKnife;
@@ -35,6 +36,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigate
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(getContentLayout());
+        EventPoster.RegistDeep(this);
         ButterKnife.bind(this);
         basePresenter = setupActivityComponent(BaseApplication.getAppComponent());
         initView();
@@ -51,6 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigate
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventPoster.UnRegistDeep(this);
         if (basePresenter != null) {
             basePresenter.onViewDestoryed();
         }
@@ -89,6 +92,10 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigate
         if (basePresenter != null) {
             basePresenter.onNavigate(par);
         }
+    }
+
+    public BasePresenter getPresenter() {
+        return basePresenter;
     }
 
     protected abstract void initData();
