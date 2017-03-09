@@ -11,7 +11,7 @@ import rx.Subscription;
  * Created by ganyao on 2017/3/9.
  */
 
-public class RxBaseModel implements IBaseModel<Subscription, Observable> {
+public class RxBaseHttpModel implements IBaseHttpModel<Subscription, Observable> {
 
     private static BaseRxModel baseRxModel = new BaseRxModel();
 

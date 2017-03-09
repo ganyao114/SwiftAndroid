@@ -9,6 +9,8 @@ import net.swiftos.common.api.IAPIGenerator;
 import net.swiftos.common.api.RetrofitAPIGenerator;
 import net.swiftos.common.cache.IKVDiskCache;
 import net.swiftos.common.cache.KVACacheImpl;
+import net.swiftos.common.model.net.IBaseHttpModel;
+import net.swiftos.common.model.net.RxBaseHttpModel;
 import net.swiftos.common.presenter.IAsyncSubjectsQueue;
 import net.swiftos.common.presenter.RxAsyncSubjectsQueue;
 
@@ -71,6 +73,12 @@ public class AppModule {
     @Provides
     public IAPIGenerator provideAPIGenerator() {
         return new RetrofitAPIGenerator();
+    }
+
+    @Provides
+    @Singleton
+    public IBaseHttpModel provideBaseHttpModel() {
+        return new RxBaseHttpModel();
     }
 
 }

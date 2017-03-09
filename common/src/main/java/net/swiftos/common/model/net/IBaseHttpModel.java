@@ -9,7 +9,7 @@ import net.swiftos.common.presenter.IAsyncSubject;
  * Created by ganyao on 2017/3/9.
  */
 
-public interface IBaseModel<O,A> {
+public interface IBaseHttpModel<O,A> {
 
     <M> IAsyncSubject<O> getAsyncObservable(A api, HttpCallback<M> callback);
 

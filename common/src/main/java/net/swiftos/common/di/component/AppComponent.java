@@ -8,6 +8,7 @@ import net.swiftos.common.cache.IKVDiskCache;
 import net.swiftos.common.cache.KVACacheImpl;
 import net.swiftos.common.di.module.AppModule;
 import net.swiftos.common.model.net.BaseRxModel;
+import net.swiftos.common.model.net.IBaseHttpModel;
 import net.swiftos.common.presenter.BasePresenter;
 import net.swiftos.common.presenter.IAsyncSubjectsQueue;
 import net.swiftos.common.view.activity.BaseActivity;
@@ -49,5 +50,7 @@ public interface AppComponent {
     Handler mainHandler();
 
     IAsyncSubjectsQueue generateSubscriber();
+
+    IBaseHttpModel getBaseHttpModel();
 
 }

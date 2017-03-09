@@ -8,14 +8,9 @@ import net.swiftos.common.exception.HttpServiceException;
 import net.swiftos.common.exception.IExceptionFactory;
 import net.swiftos.common.exception.NetworkException;
 import net.swiftos.common.model.bean.BaseResponse;
-import net.swiftos.common.model.bean.ErrorResponse;
-import net.swiftos.common.model.bean.IResponse;
 import net.swiftos.common.model.entity.HttpCallback;
 import net.swiftos.utils.StatusUtil;
 
-import org.json.JSONException;
-
-import retrofit2.adapter.rxjava.HttpException;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -60,7 +55,7 @@ public class BaseRxModel {
      * @param <T>
      * @return
      */
-    public <T> Observable<T> getAsyncObservableWithCache(IBaseModel.IGetFromCache<T> getFromCache, IBaseModel.ISaveToCache<T> saveToCache, Observable<BaseResponse<T>> observable) {
+    public <T> Observable<T> getAsyncObservableWithCache(IBaseHttpModel.IGetFromCache<T> getFromCache, IBaseHttpModel.ISaveToCache<T> saveToCache, Observable<BaseResponse<T>> observable) {
 
         Observable httpObservable = observable
                 .doOnSubscribe(this::checkNetwork)
