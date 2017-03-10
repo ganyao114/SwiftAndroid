@@ -17,18 +17,16 @@ public class BaseHttpModel {
 
     @Inject
     public IBaseHttpModel baseModel;
-
     @Inject
     public IAPIGenerator apiGenerator;
 
     public Map<String,String> headers = new HashMap<>();
     public Map<String,String> pars = new HashMap<>();
     public APIServiceConfigs configs = new APIServiceConfigs();
-    public String url = new String("www.ifanr.com");
+    public String url = new String("http://www.baidu.com");
 
     public BaseHttpModel() {
         BaseApplication.getAppComponent().inject(this);
-        apiGenerator = BaseApplication.getAppComponent().apiGenerator();
         apiGenerator.setConfigs(configs);
         apiGenerator.setUrl(url);
         apiGenerator.setHeaders(headers);

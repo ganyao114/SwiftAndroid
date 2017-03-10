@@ -77,6 +77,8 @@ dependencies {
     }
     compile rootProject.ext.dependencies.butterknife
     compile rootProject.ext.dependencies.realm
+    compile rootProject.ext.dependencies.aspectj
     compile project(path: ':utils')
     compile project(path: ':eventposter')
+    compile rootProject.ext.dependencies.sysbartink
 }

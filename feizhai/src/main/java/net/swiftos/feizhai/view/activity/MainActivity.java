@@ -1,8 +1,11 @@
 package net.swiftos.feizhai.view.activity;
 
+import android.Manifest;
+import android.support.annotation.IdRes;
 import android.widget.Toast;
 
 import net.swiftos.common.di.component.AppComponent;
+import net.swiftos.common.ospermission.PermissionCheck;
 import net.swiftos.common.presenter.BasePresenter;
 import net.swiftos.common.view.activity.BaseActivity;
 import net.swiftos.eventposter.impls.customevent.annotation.InjectEvent;
@@ -31,10 +34,16 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
+    protected @IdRes int barColor() {
+        return R.color.themeColor;
+    }
+
+    @Override
     protected BasePresenter setupActivityComponent(AppComponent appComponent) {
         return null;
     }
 
+    @PermissionCheck(Manifest.permission.ACCESS_FINE_LOCATION)
     @LoginRequired
     public void test(String str) {
         Toast.makeText(this, str , Toast.LENGTH_LONG).show();

@@ -7,6 +7,7 @@ import net.swiftos.common.api.IAPIGenerator;
 import net.swiftos.common.cache.IKVDiskCache;
 import net.swiftos.common.cache.KVACacheImpl;
 import net.swiftos.common.di.module.AppModule;
+import net.swiftos.common.model.net.BaseHttpModel;
 import net.swiftos.common.model.net.BaseRxModel;
 import net.swiftos.common.model.net.IBaseHttpModel;
 import net.swiftos.common.presenter.BasePresenter;
@@ -33,7 +34,7 @@ public interface AppComponent {
 
     void inject(BaseActivity activity);
 
-    void inject(BaseRxModel model);
+    void inject(BaseHttpModel model);
 
     void inject(BasePresenter presenter);
 

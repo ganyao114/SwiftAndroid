@@ -20,6 +20,7 @@ ext {
     tinkerVersion = "1.7.7"
     multidexVersion = "1.0.1"
     aspectjVersion = "1.8.9"
+    cranimelibVersion = "0.3.4"
 
     dependencies = [
         support_v4: "com.android.support:support-v4:${supportLibraryVersion}",
@@ -43,7 +44,9 @@ ext {
         tinker_lib: "com.tencent.tinker:tinker-android-lib:${tinkerVersion}",
         tinker_anno: "com.tencent.tinker:tinker-android-anno:${tinkerVersion}",
         multidex: "com.android.support:multidex:${multidexVersion}",
-        aspectj: "org.aspectj:aspectjrt:${aspectjVersion}"
+        aspectj: "org.aspectj:aspectjrt:${aspectjVersion}",
+        cranime_lib: "com.github.XunMengWinter:CircularAnim:${cranimelibVersion}",
+        sysbartink: "com.readystatesoftware.systembartint:systembartint:1.0.4"
     ]
 
     classpaths = [

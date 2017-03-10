@@ -3,12 +3,16 @@ package net.swiftos.common.view.activity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import net.swiftos.common.R;
 import net.swiftos.common.application.BaseApplication;
@@ -28,10 +32,18 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigate
 
     private BasePresenter basePresenter;
 
+    private boolean isFront = false;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //设置竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintEnabled(true);
+            //此处可以重新指定状态栏颜色
+            tintManager.setStatusBarTintResource(barColor());
+        }
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -51,12 +63,28 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigate
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        isFront = true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isFront = false;
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         EventPoster.UnRegistDeep(this);
         if (basePresenter != null) {
             basePresenter.onViewDestoryed();
         }
+    }
+
+    public boolean isFront() {
+        return isFront;
     }
 
     protected void showProgressDialog(ProgressDialog dialog) {
@@ -99,6 +127,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigate
     }
 
     protected abstract void initData();
+
+    protected abstract @IdRes int barColor();
 
     protected abstract BasePresenter setupActivityComponent(AppComponent appComponent);
 

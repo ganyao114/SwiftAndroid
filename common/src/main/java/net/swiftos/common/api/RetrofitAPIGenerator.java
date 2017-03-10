@@ -51,7 +51,7 @@ public class RetrofitAPIGenerator implements IAPIGenerator {
 
     @Override
     public void setUrl(String url) {
-        BASE_URL = HttpUrl.parse(url);;
+        BASE_URL = HttpUrl.parse(url);
     }
 
     @Override
