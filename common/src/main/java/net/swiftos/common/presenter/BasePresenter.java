@@ -8,7 +8,7 @@ import net.swiftos.eventposter.presenter.Presenter;
  * Created by ganyao on 2016/10/26.
  */
 
-public abstract class BasePresenter extends Presenter implements Navigater.INavigate{
+public abstract class BasePresenter extends Presenter implements Navigater.INavigate {
 
     protected IAsyncSubjectsQueue asyncSubjects;
 
@@ -31,7 +31,7 @@ public abstract class BasePresenter extends Presenter implements Navigater.INavi
 
     }
 
-    public void onViewDestoryed() {
+    public void onViewDestroyed() {
         destorySubjectsQueue();
     }
 

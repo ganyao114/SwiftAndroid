@@ -1,12 +1,13 @@
 package net.swiftos.usermodule;
 
 import net.swiftos.common.di.module.BaseAPIModule;
+import net.swiftos.common.model.entity.Session;
 
 /**
  * Created by gy on 2017/2/28.
  */
 
 public interface IUser {
-    BaseAPIModule.Session getSession();
-    void setSession(BaseAPIModule.Session session);
+    Session getSession();
+    void setSession(Session session);
 }

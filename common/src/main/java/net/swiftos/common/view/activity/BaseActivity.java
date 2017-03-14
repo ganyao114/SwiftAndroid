@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
@@ -26,13 +27,16 @@ import net.swiftos.utils.ValidateUtil;
 import butterknife.ButterKnife;
 
 /**
+ * T = component type
  * Created by ganyao on 2016/10/26.
  */
-public abstract class BaseActivity extends AppCompatActivity implements Navigater.INavigate {
+public abstract class BaseActivity<T> extends AppCompatActivity implements Navigater.INavigate {
 
-    private BasePresenter basePresenter;
+    public BasePresenter basePresenter;
 
     private boolean isFront = false;
+
+    public T component;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +54,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigate
         setContentView(getContentLayout());
         EventPoster.RegistDeep(this);
         ButterKnife.bind(this);
-        basePresenter = setupActivityComponent(BaseApplication.getAppComponent());
+        component = setupActivityComponent();
+        basePresenter = setPresenter();
         initView();
         if (basePresenter != null) {
             basePresenter.onViewInited();
@@ -79,7 +84,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigate
         super.onDestroy();
         EventPoster.UnRegistDeep(this);
         if (basePresenter != null) {
-            basePresenter.onViewDestoryed();
+            basePresenter.onViewDestroyed();
         }
     }
 
@@ -97,6 +102,18 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigate
         if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();
         }
+    }
+
+    public void lockUI() {
+
+    }
+
+    public void unLockUI() {
+
+    }
+
+    public void showMessage(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -130,6 +147,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigate
 
     protected abstract @IdRes int barColor();
 
-    protected abstract BasePresenter setupActivityComponent(AppComponent appComponent);
+    protected abstract T setupActivityComponent();
+
+    protected abstract BasePresenter setPresenter();
 
 }

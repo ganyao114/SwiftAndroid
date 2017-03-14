@@ -10,6 +10,7 @@ import net.swiftos.common.di.module.AppModule;
 import net.swiftos.common.model.net.BaseHttpModel;
 import net.swiftos.common.model.net.BaseRxModel;
 import net.swiftos.common.model.net.IBaseHttpModel;
+import net.swiftos.common.model.net.IImageLoader;
 import net.swiftos.common.presenter.BasePresenter;
 import net.swiftos.common.presenter.IAsyncSubjectsQueue;
 import net.swiftos.common.view.activity.BaseActivity;
@@ -32,8 +33,6 @@ public interface AppComponent {
 
     void inject(Object object);
 
-    void inject(BaseActivity activity);
-
     void inject(BaseHttpModel model);
 
     void inject(BasePresenter presenter);
@@ -53,5 +52,7 @@ public interface AppComponent {
     IAsyncSubjectsQueue generateSubscriber();
 
     IBaseHttpModel getBaseHttpModel();
+
+    IImageLoader imageLoader();
 
 }

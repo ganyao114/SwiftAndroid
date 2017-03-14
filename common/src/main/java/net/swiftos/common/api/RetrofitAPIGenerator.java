@@ -22,7 +22,7 @@ public class RetrofitAPIGenerator implements IAPIGenerator {
 
     private HttpUrl BASE_URL;
     private Map<String,String> headers, pars;
-    private APIServiceConfigs configs;
+    private APIServiceConfigs configs = new APIServiceConfigs();
 
     protected OkHttpClient getOkHttpClient() {
         if (okHttpClient == null) {

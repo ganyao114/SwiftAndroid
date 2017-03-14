@@ -16,7 +16,7 @@ public class RxBaseHttpModel implements IBaseHttpModel<Subscription, Observable>
     private static BaseRxModel baseRxModel = new BaseRxModel();
 
     @Override
-    public <M> IAsyncSubject<Subscription> getAsyncObservable(Observable api, HttpCallback<M> callback) {
+    public <M> IAsyncSubject<Subscription> getAsyncSubject(Observable api, HttpCallback<M> callback) {
         Subscription subscription = baseRxModel
                 .getAsyncObservable(api)
                 .subscribe(baseRxModel.getSubscriber(callback));
@@ -24,7 +24,7 @@ public class RxBaseHttpModel implements IBaseHttpModel<Subscription, Observable>
     }
 
     @Override
-    public <M> IAsyncSubject<Subscription> getAsyncObservableWithCache(Observable api, IGetFromCache<M> getFromCache
+    public <M> IAsyncSubject<Subscription> getAsyncSUbjectWithCache(Observable api, IGetFromCache<M> getFromCache
             , ISaveToCache<M> saveToCache, HttpCallback<M> callback) {
         Subscription subscription = baseRxModel
                 .getAsyncObservableWithCache(getFromCache, saveToCache, api)

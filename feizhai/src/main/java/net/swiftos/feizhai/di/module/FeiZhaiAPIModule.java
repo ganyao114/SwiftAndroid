@@ -1,9 +1,10 @@
-package net.swiftos.apiservice.di.module;
+package net.swiftos.feizhai.di.module;
 
-import net.swiftos.apiservice.api.ICommonAPI;
 import net.swiftos.common.di.module.BaseAPIModule;
 import net.swiftos.common.di.scope.ServiceScope;
 import net.swiftos.common.model.entity.Session;
+import net.swiftos.feizhai.api.IFeiZhaiAPI;
+import net.swiftos.feizhai.application.Constant;
 
 import javax.inject.Singleton;
 
@@ -11,20 +12,23 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * Created by ganyao on 2017/3/9.
+ * Created by ganyao on 2017/3/14.
  */
-@Module
-public class CommonAPIModule extends BaseAPIModule {
 
-    public CommonAPIModule(String url) {
-        init(url);
+@Module
+public class FeiZhaiAPIModule extends BaseAPIModule {
+
+
+    public FeiZhaiAPIModule() {
+        init(Constant.FEIZHAI_URL);
     }
 
     @Provides
     @ServiceScope
-    public ICommonAPI provideCommonAPI() {
-        return getAPIService(ICommonAPI.class);
+    public IFeiZhaiAPI provideFeizhaiAPI() {
+        return apiGenerator.getAPI(IFeiZhaiAPI.class);
     }
+
 
     @Provides
     @ServiceScope

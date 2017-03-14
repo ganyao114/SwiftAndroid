@@ -1,6 +1,7 @@
 package net.swiftos.feizhai.view.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
         test("nihhao");
+        startActivity(new Intent(this, LoginActivity.class));
     }
 
     @Override
@@ -39,7 +41,12 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected BasePresenter setupActivityComponent(AppComponent appComponent) {
+    protected Object setupActivityComponent() {
+        return null;
+    }
+
+    @Override
+    protected BasePresenter setPresenter() {
         return null;
     }
 

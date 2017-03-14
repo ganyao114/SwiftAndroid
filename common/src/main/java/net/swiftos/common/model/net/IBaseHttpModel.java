@@ -11,9 +11,9 @@ import net.swiftos.common.presenter.IAsyncSubject;
 
 public interface IBaseHttpModel<O,A> {
 
-    <M> IAsyncSubject<O> getAsyncObservable(A api, HttpCallback<M> callback);
+    <M> IAsyncSubject<O> getAsyncSubject(A api, HttpCallback<M> callback);
 
-    <M> IAsyncSubject<O> getAsyncObservableWithCache(A api, IGetFromCache<M> getFromCache, ISaveToCache<M> saveToCache, HttpCallback<M> callback);
+    <M> IAsyncSubject<O> getAsyncSUbjectWithCache(A api, IGetFromCache<M> getFromCache, ISaveToCache<M> saveToCache, HttpCallback<M> callback);
 
     interface IGetFromCache<T> {
         T fromCache();

@@ -3,14 +3,18 @@ package net.swiftos.apiservice.model.source;
 import android.widget.Toast;
 
 import net.swiftos.apiservice.api.ICommonAPI;
-import net.swiftos.common.api.IAPIGenerator;
+import net.swiftos.apiservice.di.component.CommonAPIComponent;
+import net.swiftos.apiservice.di.component.DaggerCommonAPIComponent;
+import net.swiftos.apiservice.di.module.CommonAPIModule;
 import net.swiftos.common.application.BaseApplication;
-import net.swiftos.common.model.bean.BaseResponse;
 import net.swiftos.common.model.bean.ErrorResponse;
 import net.swiftos.common.model.bean.FailureEntity;
 import net.swiftos.common.model.entity.HttpCallback;
+import net.swiftos.common.model.entity.Session;
 import net.swiftos.common.model.net.BaseHttpModel;
 import net.swiftos.common.presenter.IAsyncSubject;
+
+import javax.inject.Inject;
 
 /**
  * Created by ganyao on 2017/3/9.
@@ -18,15 +22,23 @@ import net.swiftos.common.presenter.IAsyncSubject;
 
 public class CommonHttpModel extends BaseHttpModel {
 
-    ICommonAPI api;
+    public ICommonAPI api;
+    @Inject
+    public Session session;
 
     public CommonHttpModel() {
         super();
-        api = apiGenerator.getAPI(ICommonAPI.class);
+        CommonAPIComponent component = DaggerCommonAPIComponent.builder()
+                .appComponent(BaseApplication.getAppComponent())
+                .commonAPIModule(new CommonAPIModule("http://www.baidu.com"))
+                .build();
+
+        component.inject(this);
+        api = component.getAPI();
     }
 
     public IAsyncSubject sessionStart() {
-        return baseModel.<String>getAsyncObservable(api.sessionStart().cache(), new HttpCallback<String>() {
+        return baseModel.<String>getAsyncSubject(api.sessionStart().cache(), new HttpCallback<String>() {
             @Override
             public Object getTag() {
                 return null;

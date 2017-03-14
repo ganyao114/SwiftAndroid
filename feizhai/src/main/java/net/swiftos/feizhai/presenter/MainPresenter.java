@@ -4,6 +4,7 @@ import android.widget.Toast;
 
 import net.swiftos.apiservice.model.source.CommonHttpModel;
 import net.swiftos.common.application.BaseApplication;
+import net.swiftos.common.navigation.Navigater;
 import net.swiftos.common.presenter.BasePresenter;
 import net.swiftos.eventposter.presenter.IPresenter;
 

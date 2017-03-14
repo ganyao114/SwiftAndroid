@@ -152,4 +152,8 @@
     <string name="title_activity_staff_mng">员工管理</string>
     <string name="title_activity_activator">激活界面</string>
 
+
+    <string name="login_name_tip" >用户名</string>
+    <string name="login_pass_tip" >密码</string>
+
 </resources>
