@@ -9,6 +9,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -37,6 +38,8 @@ public abstract class BaseActivity<T> extends AppCompatActivity implements Navig
     private boolean isFront = false;
 
     public T component;
+
+    protected View[] viewsNeedLock;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,11 +108,17 @@ public abstract class BaseActivity<T> extends AppCompatActivity implements Navig
     }
 
     public void lockUI() {
-
+        if (viewsNeedLock == null) return;
+        for (View view:viewsNeedLock) {
+            view.setEnabled(false);
+        }
     }
 
     public void unLockUI() {
-
+        if (viewsNeedLock == null) return;
+        for (View view:viewsNeedLock) {
+            view.setEnabled(true);
+        }
     }
 
     public void showMessage(String msg) {

@@ -13,7 +13,10 @@ import net.swiftos.feizhai.model.bean.User;
 public interface LoginProtocol {
 
     interface View extends BaseProtocol.View {
-
+        void showProgress();
+        void dismissProgress();
+        void showLoginSuccess();
+        void showLoginFailure(String msg);
     }
 
     interface Model {

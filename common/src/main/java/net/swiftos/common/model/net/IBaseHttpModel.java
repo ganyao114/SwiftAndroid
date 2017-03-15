@@ -11,6 +11,8 @@ import net.swiftos.common.presenter.IAsyncSubject;
 
 public interface IBaseHttpModel<O,A> {
 
+    void setBaseResponse(IResponseAdapter baseResponse);
+
     <M> IAsyncSubject<O> getAsyncSubject(A api, HttpCallback<M> callback);
 
     <M> IAsyncSubject<O> getAsyncSUbjectWithCache(A api, IGetFromCache<M> getFromCache, ISaveToCache<M> saveToCache, HttpCallback<M> callback);

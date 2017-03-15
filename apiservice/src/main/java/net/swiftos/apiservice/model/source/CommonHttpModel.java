@@ -12,6 +12,8 @@ import net.swiftos.common.model.bean.FailureEntity;
 import net.swiftos.common.model.entity.HttpCallback;
 import net.swiftos.common.model.entity.Session;
 import net.swiftos.common.model.net.BaseHttpModel;
+import net.swiftos.common.model.net.CommonResponseAdapter;
+import net.swiftos.common.model.net.IResponseAdapter;
 import net.swiftos.common.presenter.IAsyncSubject;
 
 import javax.inject.Inject;
@@ -37,6 +39,11 @@ public class CommonHttpModel extends BaseHttpModel {
         api = component.getAPI();
     }
 
+    @Override
+    protected IResponseAdapter setBaseReponse() {
+        return new CommonResponseAdapter();
+    }
+
     public IAsyncSubject sessionStart() {
         return baseModel.<String>getAsyncSubject(api.sessionStart().cache(), new HttpCallback<String>() {
             @Override
@@ -57,6 +64,7 @@ public class CommonHttpModel extends BaseHttpModel {
             @Override
             public void onError(ErrorResponse error) {
                 Toast.makeText(BaseApplication.getApplication(), "falure", Toast.LENGTH_LONG).show();
+
             }
 
             @Override

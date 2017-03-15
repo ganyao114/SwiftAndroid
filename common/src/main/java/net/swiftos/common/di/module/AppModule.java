@@ -29,12 +29,20 @@ import dagger.Provides;
  * Created by ganyao on 2016/10/26.
  */
 @Module
-public class AppModule {
+public class AppModule implements IAppModule {
 
     private Application globalApp;
 
+    private IAppModule appModule;
+
+    public AppModule(IAppModule appModule, Application globalApp) {
+        this.appModule = appModule;
+        this.globalApp = globalApp;
+    }
+
     public AppModule(Application globalApp) {
         this.globalApp = globalApp;
+        this.appModule = new DefaultAppModule();
     }
 
     @Provides
@@ -64,29 +72,28 @@ public class AppModule {
     @Provides
     @Singleton
     public IKVDiskCache provideKVDiskCache() {
-        return new KVACacheImpl();
+        return appModule.provideKVDiskCache();
     }
 
     @Provides
     public IAsyncSubjectsQueue provideSubscriber() {
-        return new RxAsyncSubjectsQueue();
+        return appModule.provideSubscriber();
     }
 
     @Provides
     public IAPIGenerator provideAPIGenerator() {
-        return new RetrofitAPIGenerator();
+        return appModule.provideAPIGenerator();
     }
 
     @Provides
-    @Singleton
     public IBaseHttpModel provideBaseHttpModel() {
-        return new RxBaseHttpModel();
+        return appModule.provideBaseHttpModel();
     }
 
     @Provides
     @Singleton
     public IImageLoader provideImageLoader() {
-        return new PicassoLoader();
+        return appModule.provideImageLoader();
     }
 
 }

@@ -8,7 +8,7 @@ import net.swiftos.common.model.bean.FailureEntity;
  */
 
 public interface IExceptionFactory {
-    boolean isError(Throwable throwable);
+    boolean isFailure(Throwable throwable);
     FailureEntity onFailure(Throwable throwable, Object tag);
     ErrorResponse onError(Throwable throwable, Object tag);
 }

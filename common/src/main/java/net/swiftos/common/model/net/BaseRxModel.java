@@ -4,7 +4,6 @@ package net.swiftos.common.model.net;
 import net.swiftos.common.application.BaseApplication;
 import net.swiftos.common.exception.CommonExceptionFactory;
 import net.swiftos.common.exception.ExceptionAdapter;
-import net.swiftos.common.exception.HttpServiceException;
 import net.swiftos.common.exception.IExceptionFactory;
 import net.swiftos.common.exception.NetworkException;
 import net.swiftos.common.model.bean.BaseResponse;
@@ -38,10 +37,10 @@ public class BaseRxModel {
         BaseApplication.getAppComponent().inject(this);
     }
 
-    public <T> Observable<T> getAsyncObservable(Observable<BaseResponse<T>> observable) {
+    public <T> Observable<T> getAsyncObservable(Observable<BaseResponse<T>> observable, IResponseAdapter baseResponse) {
         return observable
                 .doOnSubscribe(this::checkNetwork)
-                .map(new BaseHttpFunc<T>())
+                .map(new BaseHttpFunc<Object,T>(baseResponse))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .onErrorResumeNext(new ExceptionAdapter<T>());
@@ -55,11 +54,11 @@ public class BaseRxModel {
      * @param <T>
      * @return
      */
-    public <T> Observable<T> getAsyncObservableWithCache(IBaseHttpModel.IGetFromCache<T> getFromCache, IBaseHttpModel.ISaveToCache<T> saveToCache, Observable<BaseResponse<T>> observable) {
+    public <T> Observable<T> getAsyncObservableWithCache(IBaseHttpModel.IGetFromCache<T> getFromCache, IBaseHttpModel.ISaveToCache<T> saveToCache, Observable<BaseResponse<T>> observable, IResponseAdapter baseResponse) {
 
         Observable httpObservable = observable
                 .doOnSubscribe(this::checkNetwork)
-                .map(new BaseHttpFunc<T>())
+                .map(new BaseHttpFunc<Object,T>(baseResponse))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .onErrorResumeNext(new ExceptionAdapter<T>())
@@ -86,12 +85,13 @@ public class BaseRxModel {
         return new Subscriber<T>() {
             @Override
             public void onCompleted() {
-                callback.onComplete();
+
             }
 
             @Override
             public void onError(Throwable e) {
-                if (exceptionFactory.isError(e)) {
+                callback.onComplete();
+                if (!exceptionFactory.isFailure(e)) {
                     callback.onError(exceptionFactory.onError(e, callback.getTag()));
                 } else {
                     callback.onFailure(exceptionFactory.onFailure(e, callback.getTag()));
@@ -100,6 +100,7 @@ public class BaseRxModel {
 
             @Override
             public void onNext(T t) {
+                callback.onComplete();
                 callback.onSuccess(t);
             }
         };
@@ -113,19 +114,20 @@ public class BaseRxModel {
 
     /**
      * 返回值公共字段的处理，包括业务异常的抛出
-     * @param <T>
+     * @param <I,O>
      */
-    public class BaseHttpFunc<T> implements Func1<BaseResponse<T>, T> {
+    public class BaseHttpFunc<I,O> implements Func1<I,O> {
+
+        private IResponseAdapter<I,O> responseAdapter;
+
+
+        public BaseHttpFunc(IResponseAdapter<I,O> responseAdapter) {
+            this.responseAdapter = responseAdapter;
+        }
 
         @Override
-        public T call(BaseResponse<T> baseResponse) {
-            int status = baseResponse.getStatus();
-            String msg = baseResponse.getMessage();
-            T data = baseResponse.getData();
-            if (status != 1) {
-                throw new HttpServiceException(msg);
-            }
-            return data;
+        public O call(I baseResponse) {
+            return responseAdapter.adapter(baseResponse);
         }
     }
 

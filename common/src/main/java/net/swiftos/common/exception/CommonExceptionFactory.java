@@ -3,14 +3,28 @@ package net.swiftos.common.exception;
 import net.swiftos.common.model.bean.ErrorResponse;
 import net.swiftos.common.model.bean.FailureEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by gy939 on 2017/1/15.
  */
 
 public class CommonExceptionFactory implements IExceptionFactory {
+
+    private List<Class<? extends Throwable>> failureTypes = new ArrayList();
+
+    public CommonExceptionFactory() {
+        failureTypes.add(HttpServiceException.class);
+    }
+
     @Override
-    public boolean isError(Throwable throwable) {
-        return false;
+    public boolean isFailure(Throwable throwable) {
+        if (failureTypes.contains(throwable.getClass())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override

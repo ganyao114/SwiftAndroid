@@ -7,6 +7,8 @@ package net.swiftos.common.protocol;
 public class BaseProtocol {
     public interface View {
         void showMessage(String string);
+        void lockUI();
+        void unLockUI();
     }
     public interface Presenter{
 

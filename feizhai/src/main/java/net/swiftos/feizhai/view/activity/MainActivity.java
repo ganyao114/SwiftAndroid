@@ -50,7 +50,6 @@ public class MainActivity extends BaseActivity {
         return null;
     }
 
-    @PermissionCheck(Manifest.permission.ACCESS_FINE_LOCATION)
     @LoginRequired
     public void test(String str) {
         Toast.makeText(this, str , Toast.LENGTH_LONG).show();

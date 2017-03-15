@@ -1,6 +1,7 @@
 package net.swiftos.common.navigation;
 
 import android.content.Intent;
+import android.support.annotation.UiThread;
 
 import net.swiftos.utils.IDFactory;
 
@@ -17,11 +18,13 @@ public class Navigater {
 
     public static Map<String,Object> dataStack = new HashMap<>();
 
+    @UiThread
     public static <T> T navigateIn(String key) {
         return (T) dataStack.remove(key);
     }
 
-    public static void navigateOut(Intent intent, Object data) {
+    @UiThread
+    public static <T> void navigateOut(Intent intent, T data) {
         String key = "navi_key" + IDFactory.getId();
         dataStack.put(key, data);
         intent.putExtra(NAVI_CODE, key);

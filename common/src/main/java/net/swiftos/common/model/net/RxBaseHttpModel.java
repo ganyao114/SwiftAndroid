@@ -14,11 +14,17 @@ import rx.Subscription;
 public class RxBaseHttpModel implements IBaseHttpModel<Subscription, Observable> {
 
     private static BaseRxModel baseRxModel = new BaseRxModel();
+    private IResponseAdapter baseResponse;
+
+    @Override
+    public void setBaseResponse(IResponseAdapter baseResponse) {
+        this.baseResponse = baseResponse;
+    }
 
     @Override
     public <M> IAsyncSubject<Subscription> getAsyncSubject(Observable api, HttpCallback<M> callback) {
         Subscription subscription = baseRxModel
-                .getAsyncObservable(api)
+                .getAsyncObservable(api, baseResponse)
                 .subscribe(baseRxModel.getSubscriber(callback));
         return new RxSubject(subscription);
     }
@@ -27,9 +33,8 @@ public class RxBaseHttpModel implements IBaseHttpModel<Subscription, Observable>
     public <M> IAsyncSubject<Subscription> getAsyncSUbjectWithCache(Observable api, IGetFromCache<M> getFromCache
             , ISaveToCache<M> saveToCache, HttpCallback<M> callback) {
         Subscription subscription = baseRxModel
-                .getAsyncObservableWithCache(getFromCache, saveToCache, api)
+                .getAsyncObservableWithCache(getFromCache, saveToCache, api, baseResponse)
                 .subscribe(baseRxModel.getSubscriber(callback));
         return new RxSubject(subscription);
     }
-    
 }
