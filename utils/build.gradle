@@ -57,21 +57,5 @@ android {
 }
 
 dependencies {
-    provided rootProject.ext.dependencies.support_v4
-    provided rootProject.ext.dependencies.support_v7
-    provided rootProject.ext.dependencies.support_design
-    provided rootProject.ext.dependencies.retrofit_main
-    provided rootProject.ext.dependencies.retrofit_gson
-    provided rootProject.ext.dependencies.retrofit_rxjava
-    provided rootProject.ext.dependencies.rxjava
-    provided rootProject.ext.dependencies.rxandroid
-    //https://github.com/tbruyelle/RxPermissions 权限检测工具 6.0 + 需要动态权限检测
-    provided rootProject.ext.dependencies.rxpermission
-    provided rootProject.ext.dependencies.nineold
-    provided rootProject.ext.dependencies.picasso
-    provided rootProject.ext.dependencies.javaxapi
-    provided rootProject.ext.dependencies.dagger_lib
-    provided rootProject.ext.dependencies.dagger_compiler
-    provided rootProject.ext.dependencies.butterknife
-    provided rootProject.ext.dependencies.realm
+    provided project(path: ':library')
 }

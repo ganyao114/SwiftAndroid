@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
       <module fileurl="file://$PROJECT_DIR$/eventposter/eventposter.iml" filepath="$PROJECT_DIR$/eventposter/eventposter.iml" />
       <module fileurl="file://$PROJECT_DIR$/feizhai/feizhai.iml" filepath="$PROJECT_DIR$/feizhai/feizhai.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
       <module fileurl="file://$PROJECT_DIR$/usermodule/usermodule.iml" filepath="$PROJECT_DIR$/usermodule/usermodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/utils/utils.iml" filepath="$PROJECT_DIR$/utils/utils.iml" />
       <module fileurl="file://$PROJECT_DIR$/widget/widget.iml" filepath="$PROJECT_DIR$/widget/widget.iml" />
