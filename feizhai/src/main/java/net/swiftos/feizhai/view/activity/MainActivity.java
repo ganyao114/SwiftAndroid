@@ -26,7 +26,6 @@ public class MainActivity extends BaseActivity {
     @DebugLog
     @Override
     protected void initView() {
-        test("nihhao");
         startActivity(new Intent(this, LoginActivity.class));
     }
 

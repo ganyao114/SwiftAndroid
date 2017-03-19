@@ -4,7 +4,6 @@ import android.widget.Toast;
 
 import net.swiftos.apiservice.model.source.CommonHttpModel;
 import net.swiftos.common.application.BaseApplication;
-import net.swiftos.common.navigation.Navigater;
 import net.swiftos.common.presenter.BasePresenter;
 import net.swiftos.eventposter.presenter.IPresenter;
 
@@ -20,7 +19,7 @@ public class MainPresenter extends BasePresenter {
         Toast.makeText(BaseApplication.getApplication(), BaseApplication.getAppComponent().generateSubscriber().hashCode() + "", Toast.LENGTH_LONG).show();
         Toast.makeText(BaseApplication.getApplication(), BaseApplication.getAppComponent().generateSubscriber().hashCode() + "", Toast.LENGTH_LONG).show();
         CommonHttpModel model = new CommonHttpModel();
-        submitSubject(model.sessionStart());
+        addSubject(model.sessionStart());
     }
 
     @Override

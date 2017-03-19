@@ -75,7 +75,7 @@
             android:text="忘记密码?"
             android:gravity="center"
             android:clickable="true"
-            android:textSize="16dip"/>
+            style="@style/TextDefault"/>
 
         <TextView android:id="@+id/link_regist"
             android:layout_width="fill_parent"
@@ -84,7 +84,7 @@
             android:text="注册账号"
             android:gravity="center"
             android:clickable="true"
-            android:textSize="16dip"/>
+            style="@style/TextDefault"/>
 
     </LinearLayout>
 </ScrollView>

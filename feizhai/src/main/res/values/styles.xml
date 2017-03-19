@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.Design">
+    <style name="AppTheme" parent="Theme.Design.NoActionBar">
         <!-- Customize your theme here. -->
 
 
@@ -17,7 +17,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
-    <style name="ImageTranslucentTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="ImageTranslucentTheme" parent="AppTheme">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@drawable/login_splash</item>
         <item name="android:launchMode">singleTask</item>
@@ -26,7 +26,7 @@
         <!--在Android 4.4之前的版本上运行，直接跟随系统主题-->
     </style>
 
-    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="SplashTheme" parent="AppTheme">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowBackground">@drawable/login_splash</item>

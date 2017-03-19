@@ -8,13 +8,13 @@
     </style>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.Design.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
 
     </style>
 
-    <style name="ImageTranslucentTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="ImageTranslucentTheme" parent="AppTheme">
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
         <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
@@ -24,7 +24,7 @@
         <item name="android:screenOrientation">portrait</item>
     </style>
 
-    <style name="ColorTranslucentTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="ColorTranslucentTheme" parent="AppTheme">
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
@@ -35,7 +35,7 @@
     <!--&lt;!&ndash;<item name="android:windowTranslucentNavigation">true</item>&ndash;&gt;-->
     <!--<item name="android:statusBarColor">@android:color/transparent</item>-->
     <!--</style>-->
-    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="SplashTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/login_splash</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowFullscreen">false</item>

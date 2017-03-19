@@ -27,7 +27,7 @@ public class RxAsyncSubjectsQueue implements IAsyncSubjectsQueue<Subscription> {
     }
 
     @Override
-    public void destroy() {
+    public void destroyQueue() {
         if (compositeSubscription != null && compositeSubscription.hasSubscriptions()) {
             compositeSubscription.unsubscribe();
         }

@@ -8,5 +8,5 @@ package net.swiftos.common.presenter;
 public interface IAsyncSubjectsQueue<T> {
     void addSubject(IAsyncSubject<T> observer);
     void removeSubject(IAsyncSubject<T> observer);
-    void destroy();
+    void destroyQueue();
 }

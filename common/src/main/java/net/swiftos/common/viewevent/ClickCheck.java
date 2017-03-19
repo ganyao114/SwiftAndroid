@@ -11,5 +11,5 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target({TYPE, METHOD, CONSTRUCTOR})
 @Retention(RUNTIME)
 public @interface ClickCheck {
-    String[] value();
+    String[] value() default {};
 }
