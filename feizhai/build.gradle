@@ -85,9 +85,6 @@ dependencies {
     provided(rootProject.ext.dependencies.tinker_anno) {
         changing = true
     }
-
-    compile rootProject.ext.dependencies.multidex
-    provided rootProject.ext.dependencies.aspectj
     compile project(':apiservice')
     compile project(':common')
     compile project(':usermodule')
