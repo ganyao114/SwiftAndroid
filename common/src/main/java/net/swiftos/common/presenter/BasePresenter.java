@@ -2,6 +2,7 @@ package net.swiftos.common.presenter;
 
 import net.swiftos.common.application.BaseApplication;
 import net.swiftos.common.navigation.Navigater;
+import net.swiftos.eventposter.core.EventPoster;
 import net.swiftos.eventposter.presenter.Presenter;
 
 /**
@@ -11,6 +12,10 @@ import net.swiftos.eventposter.presenter.Presenter;
 public abstract class BasePresenter extends Presenter implements Navigater.INavigate, IAsyncSubjectsQueue {
 
     protected IAsyncSubjectsQueue asyncSubjects;
+
+    public BasePresenter() {
+        EventPoster.registDeep(this);
+    }
 
     //取消注册，以避免内存泄露
     @Override
@@ -42,6 +47,7 @@ public abstract class BasePresenter extends Presenter implements Navigater.INavi
 
     public void onViewDestroyed() {
         destroyQueue();
+        EventPoster.unRegistDeep(this);
     }
 
 

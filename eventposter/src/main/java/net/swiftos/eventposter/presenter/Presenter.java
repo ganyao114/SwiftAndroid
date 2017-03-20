@@ -62,12 +62,12 @@ public abstract class Presenter implements IPresenter{
 
     @Override
     public void onPresenterInit(IPresenter context) {
-        EventPoster.Regist(this);
+        EventPoster.regist(this);
     }
 
     @Override
     public void onPresenterDestory(IPresenter context) {
-        EventPoster.UnRegist(this);
+        EventPoster.unRegist(this);
     }
 
     public void notifyChildDestory(Presenter presenter){

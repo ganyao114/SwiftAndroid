@@ -10,8 +10,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * Created by gy on 2017/2/27.
  */
@@ -35,7 +33,7 @@ public class LoginCheckAspect {
     @Around("method() || constructor()")
     public Object loginAndExecute(ProceedingJoinPoint joinPoint) throws Throwable {
 
-        EventPoster.With(CustomEventHandler.class).broadcast(new LoginChecked(UserManager.isLogin() ? LoginChecked.LoginCheckedResult.Login : LoginChecked.LoginCheckedResult.UnLogin));
+        EventPoster.with(CustomEventHandler.class).broadcast(new LoginChecked(UserManager.isLogin() ? LoginChecked.LoginCheckedResult.Login : LoginChecked.LoginCheckedResult.UnLogin));
 
         if (UserManager.isLogin()) {
             return joinPoint.proceed();

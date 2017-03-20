@@ -9,6 +9,7 @@ import net.swiftos.common.api.IAPIGenerator;
 import net.swiftos.common.api.RetrofitAPIGenerator;
 import net.swiftos.common.cache.IKVDiskCache;
 import net.swiftos.common.cache.KVACacheImpl;
+import net.swiftos.common.event.IEventHub;
 import net.swiftos.common.model.net.IBaseHttpModel;
 import net.swiftos.common.model.net.IImageLoader;
 import net.swiftos.common.model.net.PicassoLoader;
@@ -94,6 +95,11 @@ public class AppModule implements IAppModule {
     @Singleton
     public IImageLoader provideImageLoader() {
         return appModule.provideImageLoader();
+    }
+
+    @Override
+    public IEventHub provideEventHub() {
+        return null;
     }
 
 }

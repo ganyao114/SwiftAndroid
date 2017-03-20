@@ -136,7 +136,7 @@ public class CustomEventHandler implements IHandler<CustomEventEntity>{
         }
     }
 
-    public void broadCastSticky(Object object){
+    public void broadcaststicky(Object object){
         stickyMap.put(object.getClass(),object);
         broadcast(object);
     }
@@ -166,7 +166,7 @@ public class CustomEventHandler implements IHandler<CustomEventEntity>{
         }
 
         public void BroadCastSticky(){
-            broadCastSticky(object);
+            broadcaststicky(object);
         }
 
         public void PostSticky(String name){

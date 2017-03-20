@@ -20,6 +20,11 @@ public class KVACacheImpl implements IKVDiskCache<String,Serializable> {
     }
 
     @Override
+    public void save(String key, Serializable value, Integer time) {
+        aCache.put(key, value, time);
+    }
+
+    @Override
     public Serializable get(String s) {
         return (Serializable) aCache.getAsObject(s);
     }

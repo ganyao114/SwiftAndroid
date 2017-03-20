@@ -1,6 +1,5 @@
 package net.swiftos.common.view.activity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
@@ -10,19 +9,14 @@ import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import net.swiftos.common.R;
-import net.swiftos.common.application.BaseApplication;
-import net.swiftos.common.di.component.AppComponent;
 import net.swiftos.common.navigation.Navigater;
 import net.swiftos.common.presenter.BasePresenter;
 import net.swiftos.eventposter.core.EventPoster;
-import net.swiftos.eventposter.impls.customevent.handler.CustomEventHandler;
 import net.swiftos.utils.ValidateUtil;
 
 import butterknife.ButterKnife;
@@ -55,7 +49,7 @@ public abstract class BaseActivity<T> extends AppCompatActivity implements Navig
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(getContentLayout());
-        EventPoster.RegistDeep(this);
+        EventPoster.registDeep(this);
         ButterKnife.bind(this);
         component = setupActivityComponent();
         basePresenter = setPresenter();
@@ -85,7 +79,7 @@ public abstract class BaseActivity<T> extends AppCompatActivity implements Navig
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventPoster.UnRegistDeep(this);
+        EventPoster.unRegistDeep(this);
         if (basePresenter != null) {
             basePresenter.onViewDestroyed();
         }
