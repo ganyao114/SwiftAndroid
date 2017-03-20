@@ -13,25 +13,25 @@ public class EventPoster {
 
     private static Application app;
 
-    public static <T extends IHandler> T With(Class<T> handlerType){
+    public static <T extends IHandler> T with(Class<T> handlerType){
         IHandler handler = HandlerFactory.getHandler(handlerType);
         if (handler == null) return null;
         return (T) handler;
     }
 
-    public static void Regist(Object object){
+    public static void regist(Object object){
         Injecter.inject(object);
     }
 
-    public static void UnRegist(Object object){
+    public static void unRegist(Object object){
         Injecter.remove(object);
     }
 
-    public static void RegistDeep(Object object){
+    public static void registDeep(Object object){
         Injecter.injectDeep(object);
     }
 
-    public static void UnRegistDeep(Object object){
+    public static void unRegistDeep(Object object){
         Injecter.removeDeep(object);
     }
 
@@ -49,7 +49,7 @@ public class EventPoster {
         return app;
     }
 
-    public static void PreLoad(final Class[] classes){
+    public static void preLoad(final Class[] classes){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -60,7 +60,7 @@ public class EventPoster {
         }).start();
     }
 
-    public static void PreLoadDeep(final Class[] classes){
+    public static void preLoadDeep(final Class[] classes){
         new Thread(new Runnable() {
             @Override
             public void run() {

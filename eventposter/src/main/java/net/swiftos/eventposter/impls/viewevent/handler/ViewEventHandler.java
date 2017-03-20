@@ -31,6 +31,8 @@ public class ViewEventHandler implements IHandler<ViewEventEntity>,OnViewAttachL
 
     private Map<String,SyncWeakList<OnViewAttachListener>> attachlsMap = new ConcurrentHashMap<>();
 
+    public final static String DEFAULT_CONTEXT = "default_context";
+
     @Override
     public void init(Object... objects) {
         LOG.e("ViewEvent --- init");
@@ -169,7 +171,7 @@ public class ViewEventHandler implements IHandler<ViewEventEntity>,OnViewAttachL
         }
     }
 
-    private void doRegistView(String context,int id){
+    private void doRegistView(String context, int id){
         Map<Integer,SyncWeakList<View>> views = viewMap.get(context);
         if (views == null){
             LOG.e("未注册Context");
@@ -194,10 +196,14 @@ public class ViewEventHandler implements IHandler<ViewEventEntity>,OnViewAttachL
 
     @Override
     public void remove(Object object) {
-
     }
 
-    public void addView(String context,View view){
+    public void addView(View view) {
+        addView(DEFAULT_CONTEXT, view);
+    }
+
+
+    public void addView(String context,View view) {
         Map<Integer,SyncWeakList<View>> views = viewMap.get(context);
         if (views == null){
             views = new ConcurrentHashMap<>();
@@ -240,6 +246,10 @@ public class ViewEventHandler implements IHandler<ViewEventEntity>,OnViewAttachL
         }
         onViewDettached(context,view);
         viewList.remove(view);
+    }
+
+    public void removeView(View view) {
+        removeView(DEFAULT_CONTEXT, view);
     }
 
     public void removeViews(String context){

@@ -4,6 +4,8 @@ import net.swiftos.common.api.IAPIGenerator;
 import net.swiftos.common.api.RetrofitAPIGenerator;
 import net.swiftos.common.cache.IKVDiskCache;
 import net.swiftos.common.cache.KVACacheImpl;
+import net.swiftos.common.event.EventPosterHub;
+import net.swiftos.common.event.IEventHub;
 import net.swiftos.common.model.net.IBaseHttpModel;
 import net.swiftos.common.model.net.IImageLoader;
 import net.swiftos.common.model.net.PicassoLoader;
@@ -20,6 +22,7 @@ import dagger.Provides;
  */
 
 public class DefaultAppModule implements IAppModule {
+
     @Override
     public IKVDiskCache provideKVDiskCache() {
         return new KVACacheImpl();
@@ -41,5 +44,10 @@ public class DefaultAppModule implements IAppModule {
     @Override
     public IImageLoader provideImageLoader() {
         return new PicassoLoader();
+    }
+
+    @Override
+    public IEventHub provideEventHub() {
+        return new EventPosterHub();
     }
 }

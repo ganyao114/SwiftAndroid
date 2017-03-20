@@ -4,11 +4,13 @@ import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
-import net.swiftos.common.di.component.AppComponent;
 import net.swiftos.common.presenter.BasePresenter;
 import net.swiftos.common.view.activity.BaseActivity;
-import net.swiftos.common.viewevent.ClickCheck;
+import net.swiftos.eventposter.core.EventPoster;
+import net.swiftos.eventposter.impls.viewevent.annotation.OnClick;
+import net.swiftos.eventposter.impls.viewevent.handler.ViewEventHandler;
 import net.swiftos.feizhai.R;
 import net.swiftos.feizhai.buss.ServiceManager;
 import net.swiftos.feizhai.di.component.DaggerLoginComponent;
@@ -16,8 +18,6 @@ import net.swiftos.feizhai.di.component.LoginComponent;
 import net.swiftos.feizhai.di.module.LoginModule;
 import net.swiftos.feizhai.protocol.LoginProtocol;
 import net.swiftos.view.anime.CircularAnim;
-
-import javax.inject.Inject;
 
 import butterknife.Bind;
 
@@ -93,5 +93,10 @@ public class LoginActivity extends BaseActivity<LoginComponent> implements Login
     @Override
     public void showLoginFailure(String msg) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

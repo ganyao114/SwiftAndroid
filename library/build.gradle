@@ -79,5 +79,6 @@ dependencies {
     compile rootProject.ext.dependencies.realm
     compile rootProject.ext.dependencies.aspectj
     compile rootProject.ext.dependencies.sysbartink
+    compile rootProject.ext.dependencies.eventbus
     compile project(path: ':eventposter')
 }
