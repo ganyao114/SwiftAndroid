@@ -98,8 +98,9 @@ public class AppModule implements IAppModule {
     }
 
     @Override
+    @Singleton
     public IEventHub provideEventHub() {
-        return null;
+        return appModule.provideEventHub();
     }
 
 }
