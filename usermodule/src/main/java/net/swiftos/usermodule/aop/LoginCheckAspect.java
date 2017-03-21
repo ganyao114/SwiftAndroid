@@ -1,5 +1,6 @@
 package net.swiftos.usermodule.aop;
 
+import net.swiftos.common.application.BaseApplication;
 import net.swiftos.common.log.SwiftLog;
 import net.swiftos.eventposter.core.EventPoster;
 import net.swiftos.eventposter.impls.customevent.handler.CustomEventHandler;
@@ -15,6 +16,7 @@ import org.aspectj.lang.annotation.Pointcut;
  */
 @Aspect
 public class LoginCheckAspect {
+
     @Pointcut("within(@net.swiftos.usermodule.aop.LoginRequired *)")
     public void withinAnnotatedClass() {}
 
@@ -33,7 +35,7 @@ public class LoginCheckAspect {
     @Around("method() || constructor()")
     public Object loginAndExecute(ProceedingJoinPoint joinPoint) throws Throwable {
 
-        EventPoster.with(CustomEventHandler.class).broadcast(new LoginChecked(UserManager.isLogin() ? LoginChecked.LoginCheckedResult.Login : LoginChecked.LoginCheckedResult.UnLogin));
+        BaseApplication.getAppComponent().eventHub().post(new LoginChecked(UserManager.isLogin() ? LoginChecked.LoginCheckedResult.Login : LoginChecked.LoginCheckedResult.UnLogin));
 
         if (UserManager.isLogin()) {
             return joinPoint.proceed();

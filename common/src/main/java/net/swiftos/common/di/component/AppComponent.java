@@ -7,6 +7,7 @@ import net.swiftos.common.api.IAPIGenerator;
 import net.swiftos.common.cache.IKVDiskCache;
 import net.swiftos.common.cache.KVACacheImpl;
 import net.swiftos.common.di.module.AppModule;
+import net.swiftos.common.event.IEventHub;
 import net.swiftos.common.model.net.BaseHttpModel;
 import net.swiftos.common.model.net.BaseRxModel;
 import net.swiftos.common.model.net.IBaseHttpModel;
@@ -54,5 +55,7 @@ public interface AppComponent {
     IBaseHttpModel getBaseHttpModel();
 
     IImageLoader imageLoader();
+
+    IEventHub eventHub();
 
 }
