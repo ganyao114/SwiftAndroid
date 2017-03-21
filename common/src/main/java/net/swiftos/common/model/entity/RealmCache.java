@@ -8,7 +8,7 @@ import io.realm.annotations.PrimaryKey;
  * Created by ganyao on 2016/11/4.
  */
 
-public class RealmCache extends RealmObject {
+public class RealmCache {
 
     @PrimaryKey
     private String key;

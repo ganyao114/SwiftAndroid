@@ -76,7 +76,7 @@ dependencies {
         exclude group: 'com.google.guava'
     }
     compile rootProject.ext.dependencies.butterknife
-    compile rootProject.ext.dependencies.realm
+//    compile rootProject.ext.dependencies.realm
     compile rootProject.ext.dependencies.aspectj
     compile rootProject.ext.dependencies.sysbartink
     compile rootProject.ext.dependencies.eventbus

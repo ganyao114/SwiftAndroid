@@ -3,9 +3,9 @@ ext {
     javaSDKVersion = JavaVersion.VERSION_1_8
 
     minSdkVersion = 15
-    targetSdkVersion = 24
-    compileSdkVersion = 24
-    buildToolsVersion = '24.0.2'
+    targetSdkVersion = 25
+    compileSdkVersion = 25
+    buildToolsVersion = '25.0.0'
 
     // library_version
     supportLibraryVersion = '24.2.1'

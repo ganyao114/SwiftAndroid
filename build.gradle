@@ -4,11 +4,16 @@ buildscript {
         jcenter()
         mavenLocal()
     }
+    configurations.all {
+        resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+    }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-        classpath 'com.tencent.tinker:tinker-patch-gradle-plugin:1.7.7'
+        classpath "io.realm:realm-gradle-plugin:3.0.0"
+//        classpath 'com.tencent.tinker:tinker-patch-gradle-plugin:1.7.7'
         classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:1.0.8'
+        classpath "com.taobao.android:atlasplugin:2.3.0.alpha4"
         // NOTE: Do not place your application configs here; they belong
         // in the individual module build.gradle files
     }
