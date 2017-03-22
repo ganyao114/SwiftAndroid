@@ -97,7 +97,7 @@ public class AppModule implements IAppModule {
         return appModule.provideImageLoader();
     }
 
-    @Override
+    @Provides
     @Singleton
     public IEventHub provideEventHub() {
         return appModule.provideEventHub();

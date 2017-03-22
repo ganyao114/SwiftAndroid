@@ -154,10 +154,10 @@ publishing {
 
 publishing {
     publications {
-//        maven(MavenPublication) {
-//            Artifact "${project.buildDir}/outputs/apk/${project.name}-debug.ap"
-//            artifactId "AP-debug"
-//        }
+        maven(MavenPublication) {
+            artifact "${project.buildDir}/outputs/apk/${project.name}-debug.ap"
+            artifactId "AP-debug"
+        }
     }
 }
 
