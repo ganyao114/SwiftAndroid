@@ -1,5 +1,8 @@
 package net.swiftos.feizhai.view.activity;
 
+import android.os.Looper;
+import android.support.annotation.UiThread;
+import android.support.annotation.WorkerThread;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.EditText;
@@ -7,6 +10,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import net.swiftos.common.presenter.BasePresenter;
+import net.swiftos.common.thread.Async;
+import net.swiftos.common.thread.AsyncSuccessCallback;
 import net.swiftos.common.view.activity.BaseActivity;
 import net.swiftos.eventposter.core.EventPoster;
 import net.swiftos.eventposter.impls.viewevent.annotation.OnClick;
@@ -48,12 +53,21 @@ public class LoginActivity extends BaseActivity<LoginComponent> implements Login
     @Override
     protected void initView() {
         viewsNeedLock = new View[]{loginBtn, loginName, loginPass};
-        loginBtn.setOnClickListener( v -> presenter.login(loginName.getText().toString(), loginPass.getText().toString()));
+//        loginBtn.setOnClickListener( v -> presenter.login(loginName.getText().toString(), loginPass.getText().toString()));
+        loginBtn.setOnClickListener( v -> {
+            new Thread( () -> {
+                try {
+                    loginBtn.setText("更新了 UI");
+                } catch (Throwable e) {
+
+                }
+            }).start();
+        });
     }
 
     @Override
     protected void initData() {
-
+        asyncTest(this::doShow);
     }
 
     @Override
@@ -78,6 +92,20 @@ public class LoginActivity extends BaseActivity<LoginComponent> implements Login
     @Override
     public void showProgress() {
         CircularAnim.hide(loginBtn).go( () -> loginProgress.setVisibility(View.VISIBLE));
+    }
+
+    @WorkerThread
+    public String asyncTest(AsyncSuccessCallback<String> successCallback) {
+        try {
+            Thread.currentThread().sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "你好";
+    }
+
+    public void doShow(String str){
+        loginBtn.setText(str);
     }
 
     @Override
