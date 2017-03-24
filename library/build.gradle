@@ -80,5 +80,6 @@ dependencies {
     compile rootProject.ext.dependencies.aspectj
     compile rootProject.ext.dependencies.sysbartink
     compile rootProject.ext.dependencies.eventbus
+    compile rootProject.ext.dependencies.emoji_lib
     compile project(path: ':eventposter')
 }

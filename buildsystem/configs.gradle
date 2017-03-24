@@ -22,6 +22,7 @@ ext {
     aspectjVersion = "1.8.9"
     cranimelibVersion = "0.3.4"
     eventbusVersion = "3.0.0"
+    emojilibVersion = "1.4.1"
 
     dependencies = [
         support_v4: "com.android.support:support-v4:${supportLibraryVersion}",
@@ -48,7 +49,8 @@ ext {
         aspectj: "org.aspectj:aspectjrt:${aspectjVersion}",
         cranime_lib: "com.github.XunMengWinter:CircularAnim:${cranimelibVersion}",
         sysbartink: "com.readystatesoftware.systembartint:systembartint:1.0.4",
-        eventbus: "org.greenrobot:eventbus:${eventbusVersion}"
+        eventbus: "org.greenrobot:eventbus:${eventbusVersion}",
+        emoji_lib: "io.github.rockerhieu:emojicon:${emojilibVersion}"
     ]
 
     classpaths = [

@@ -1,13 +1,25 @@
 package net.swiftos.common.application;
 
+import android.Manifest;
 import android.app.Application;
+
+import com.squareup.picasso.LruCache;
+import com.squareup.picasso.Picasso;
 
 import net.swiftos.common.di.component.AppComponent;
 import net.swiftos.common.di.component.DaggerAppComponent;
 import net.swiftos.common.di.module.AppModule;
+import net.swiftos.common.log.SwiftLog;
+import net.swiftos.common.model.net.OkHttpDownLoader;
+import net.swiftos.common.ospermission.PermissionCheck;
 import net.swiftos.common.presenter.BasePresenter;
 import net.swiftos.eventposter.core.EventPoster;
 import net.swiftos.eventposter.presenter.Presenter;
+
+import java.io.File;
+
+import okhttp3.Cache;
+import okhttp3.OkHttpClient;
 
 /**
  * Created by gy939 on 2017/1/11.
@@ -16,6 +28,8 @@ import net.swiftos.eventposter.presenter.Presenter;
 public class BaseApplication extends Application {
 
     private static AppComponent appComponent;
+
+    private static boolean inited = false;
 
     @Override
     public void onCreate() {
@@ -30,6 +44,8 @@ public class BaseApplication extends Application {
     }
 
     protected void init(Class<? extends BasePresenter> presenter) {
+        if (inited) return;
+        inited = true;
         appComponent = DaggerAppComponent
                 .builder()
                 .appModule(new AppModule(this))
@@ -40,6 +56,8 @@ public class BaseApplication extends Application {
     }
 
     public static void init(Class<? extends BasePresenter> presenter, Application app) {
+        if (inited) return;
+        inited = true;
         application = app;
         appComponent = DaggerAppComponent
                 .builder()
@@ -52,5 +70,24 @@ public class BaseApplication extends Application {
 
     public static AppComponent getAppComponent() {
         return appComponent;
+    }
+
+
+    //初始化 Picasso
+    private static void initPicasso() {
+        Picasso.Builder picassoBuilder = new Picasso.Builder(BaseApplication.getApplication());
+        Cache cache = new Cache(new File(BaseApplication.getApplication().getCacheDir(), "picasso"), 64 * 1024 * 1024);
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .cache(cache)
+                .build();
+        picassoBuilder.downloader(new OkHttpDownLoader(okHttpClient));
+        picassoBuilder.memoryCache(new LruCache(15 * 1024 * 1024));
+        try {
+            Picasso picasso = picassoBuilder.build();
+            //该方法只能调用一次
+            Picasso.setSingletonInstance(picasso);
+        } catch (Exception e) {
+            SwiftLog.LOGE("PicassoLoader", "picasso init error");
+        }
     }
 }

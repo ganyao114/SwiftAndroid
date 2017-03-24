@@ -4,15 +4,24 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Callback;
+import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
 
+import net.swiftos.common.application.BaseApplication;
+import net.swiftos.common.log.SwiftLog;
+
 import java.io.File;
+
+import okhttp3.Cache;
+import okhttp3.OkHttpClient;
 
 /**
  * Created by ganyao on 2017/3/13.
  */
 
 public class PicassoLoader implements IImageLoader {
+
+
     @Override
     public IInstance context(Context context) {
         return new IInstance() {

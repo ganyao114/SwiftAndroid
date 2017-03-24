@@ -56,4 +56,6 @@ android {
 
 }
 dependencies {
+    provided project(':library')
+    provided project(':common')
 }

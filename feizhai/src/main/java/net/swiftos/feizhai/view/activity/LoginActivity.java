@@ -53,16 +53,7 @@ public class LoginActivity extends BaseActivity<LoginComponent> implements Login
     @Override
     protected void initView() {
         viewsNeedLock = new View[]{loginBtn, loginName, loginPass};
-//        loginBtn.setOnClickListener( v -> presenter.login(loginName.getText().toString(), loginPass.getText().toString()));
-        loginBtn.setOnClickListener( v -> {
-            new Thread( () -> {
-                try {
-                    loginBtn.setText("更新了 UI");
-                } catch (Throwable e) {
-
-                }
-            }).start();
-        });
+        loginBtn.setOnClickListener( v -> presenter.login(loginName.getText().toString(), loginPass.getText().toString()));
     }
 
     @Override
@@ -104,6 +95,7 @@ public class LoginActivity extends BaseActivity<LoginComponent> implements Login
         return "你好";
     }
 
+    @UiThread
     public void doShow(String str){
         loginBtn.setText(str);
     }
