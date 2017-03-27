@@ -82,7 +82,7 @@ public class LoginActivity extends BaseActivity<LoginComponent> implements Login
 
     @Override
     public void showProgress() {
-        CircularAnim.hide(loginBtn).go( () -> loginProgress.setVisibility(View.VISIBLE));
+        CircularAnim.hide(loginBtn).go(() -> loginProgress.setVisibility(View.VISIBLE));
     }
 
     @WorkerThread

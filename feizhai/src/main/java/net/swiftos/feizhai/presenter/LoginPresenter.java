@@ -3,6 +3,7 @@ package net.swiftos.feizhai.presenter;
 import android.view.View;
 import android.widget.Toast;
 
+import net.swiftos.apiservice.model.UserInfo;
 import net.swiftos.common.model.bean.ErrorResponse;
 import net.swiftos.common.model.bean.FailureEntity;
 import net.swiftos.common.model.entity.HttpCallback;
@@ -44,15 +45,15 @@ public class LoginPresenter extends BasePresenter implements LoginProtocol.Prese
     @ClickCheck
     @Override
     public void login(String name, String pass) {
-        addSubject(model.login(name, pass, new HttpCallback<User>() {
+        addSubject(model.login(name, pass, new HttpCallback<UserInfo>() {
             @Override
             public Object getTag() {
                 return name;
             }
 
             @Override
-            public void onSuccess(User user) {
-                UserManager.login(user);
+            public void onSuccess(UserInfo userInfo) {
+                UserManager.login(new User());
             }
 
             @Override

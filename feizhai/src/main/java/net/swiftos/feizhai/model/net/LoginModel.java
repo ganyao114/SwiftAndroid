@@ -1,5 +1,6 @@
 package net.swiftos.feizhai.model.net;
 
+import net.swiftos.apiservice.model.UserInfo;
 import net.swiftos.common.model.entity.HttpCallback;
 import net.swiftos.common.presenter.IAsyncSubject;
 import net.swiftos.feizhai.model.bean.User;
@@ -15,11 +16,10 @@ public class LoginModel extends FeiZhaiHttpModel implements LoginProtocol.Model 
 
     public LoginModel() {
         super();
-
     }
 
     @Override
-    public IAsyncSubject login(String name, String pass, HttpCallback<User> callback) {
+    public IAsyncSubject login(String name, String pass, HttpCallback<UserInfo> callback) {
         return baseModel.getAsyncSubject(api.login(name, pass).cache(), callback);
     }
 

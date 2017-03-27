@@ -4,6 +4,7 @@ import net.swiftos.apiservice.model.UserInfo;
 import net.swiftos.common.model.bean.BaseResponse;
 import net.swiftos.feizhai.application.Constant;
 
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -20,7 +21,7 @@ public interface IFeiZhaiAPI {
      * @param pass
      * @return
      */
-    @POST("/login")
-    Observable<BaseResponse<UserInfo>> login(@Query("name")String name, @Query("pass")String pass);
+    @GET("user/login")
+    Observable<BaseResponse<UserInfo>> login(@Query("loginname")String name, @Query("pass")String pass);
 
 }

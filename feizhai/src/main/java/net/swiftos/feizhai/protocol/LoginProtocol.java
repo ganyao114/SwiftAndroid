@@ -20,7 +20,7 @@ public interface LoginProtocol {
     }
 
     interface Model {
-        IAsyncSubject login(String name, String pass, HttpCallback<User> callback);
+        IAsyncSubject login(String name, String pass, HttpCallback<UserInfo> callback);
     }
 
     interface Presenter {

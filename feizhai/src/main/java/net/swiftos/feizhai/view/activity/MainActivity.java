@@ -49,36 +49,37 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        String test = "http://www.baidu.com dadawd  \uD83D\uDE31\uD83D\uDE31\uD83D\uDE31\uD83D\uDE31\uD83D\uDE2B\uD83D\uDE2B\uD83D\uDE2B\uD83D\uDE22\uD83D\uDE22\uD83D\uDE22\uD83D\uDE23\uD83D\uDC73\uD83D\uDE21\uD83D\uDE2D\uD83D\uDE22\uD83D\uDE31\uD83D\uDE31\uD83D\uDE2D\uD83D\uDE21\uD83D\uDC73\uD83D\uDE1D\uD83D\uDE1CI \uE32D emojicon\ndadwawd";
-        articleTextView.showText("http://www.baidu.com dadawd  \uD83D\uDE31\uD83D\uDE31\uD83D\uDE31\uD83D\uDE31\uD83D\uDE2B\uD83D\uDE2B\uD83D\uDE2B\uD83D\uDE22\uD83D\uDE22\uD83D\uDE22\uD83D\uDE23\uD83D\uDC73\uD83D\uDE21\uD83D\uDE2D\uD83D\uDE22\uD83D\uDE31\uD83D\uDE31\uD83D\uDE2D\uD83D\uDE21\uD83D\uDC73\uD83D\uDE1D\uD83D\uDE1CI \uE32D emojicon\ndadwawd");
-        BaseApplication.getAppComponent()
-                .imageLoader()
-                .context(this)
-                .load("http://img3.imgtn.bdimg.com/it/u=2969619028,981992831&fm=214&gp=0.jpg", imageView);
-        List<IArticleViewAdapter> article = new ArrayList<>();
-        article.add(new IArticleViewAdapter() {
-            @Override
-            public ContentType getType() {
-                return ContentType.Img;
-            }
-
-            @Override
-            public String getContent() {
-                return "http://up.qqjia.com/z/17/tu17742_2.jpg";
-            }
-        });
-        article.add(new IArticleViewAdapter() {
-            @Override
-            public ContentType getType() {
-                return ContentType.String;
-            }
-
-            @Override
-            public String getContent() {
-                return test;
-            }
-        });
-        articleView.setArticle(article);
+//        String test = "http://www.baidu.com dadawd  \uD83D\uDE31\uD83D\uDE31\uD83D\uDE31\uD83D\uDE31\uD83D\uDE2B\uD83D\uDE2B\uD83D\uDE2B\uD83D\uDE22\uD83D\uDE22\uD83D\uDE22\uD83D\uDE23\uD83D\uDC73\uD83D\uDE21\uD83D\uDE2D\uD83D\uDE22\uD83D\uDE31\uD83D\uDE31\uD83D\uDE2D\uD83D\uDE21\uD83D\uDC73\uD83D\uDE1D\uD83D\uDE1CI \uE32D emojicon\ndadwawd";
+//        articleTextView.showText("http://www.baidu.com dadawd  \uD83D\uDE31\uD83D\uDE31\uD83D\uDE31\uD83D\uDE31\uD83D\uDE2B\uD83D\uDE2B\uD83D\uDE2B\uD83D\uDE22\uD83D\uDE22\uD83D\uDE22\uD83D\uDE23\uD83D\uDC73\uD83D\uDE21\uD83D\uDE2D\uD83D\uDE22\uD83D\uDE31\uD83D\uDE31\uD83D\uDE2D\uD83D\uDE21\uD83D\uDC73\uD83D\uDE1D\uD83D\uDE1CI \uE32D emojicon\ndadwawd");
+//        BaseApplication.getAppComponent()
+//                .imageLoader()
+//                .context(this)
+//                .load("http://img3.imgtn.bdimg.com/it/u=2969619028,981992831&fm=214&gp=0.jpg", imageView);
+//        List<IArticleViewAdapter> article = new ArrayList<>();
+//        article.add(new IArticleViewAdapter() {
+//            @Override
+//            public ContentType getType() {
+//                return ContentType.Img;
+//            }
+//
+//            @Override
+//            public String getContent() {
+//                return "http://up.qqjia.com/z/17/tu17742_2.jpg";
+//            }
+//        });
+//        article.add(new IArticleViewAdapter() {
+//            @Override
+//            public ContentType getType() {
+//                return ContentType.String;
+//            }
+//
+//            @Override
+//            public String getContent() {
+//                return test;
+//            }
+//        });
+//        articleView.setArticle(article);
+//        articleView.setUrlClickListener(this::test);
     }
 
     @Override

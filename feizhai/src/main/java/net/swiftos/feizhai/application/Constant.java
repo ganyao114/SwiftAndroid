@@ -5,5 +5,5 @@ package net.swiftos.feizhai.application;
  */
 
 public class Constant {
-    public static String FEIZHAI_URL = "http://www.tuladin.com/feizhai/api/mobile/v1/";
+    public static String FEIZHAI_URL = "http://192.168.101.86:8080/mobile/api/v1/";
 }

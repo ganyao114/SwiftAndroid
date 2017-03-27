@@ -212,7 +212,9 @@ public class HttpTextView extends TextView {
         }
     }
 
+    @FunctionalInterface
     public interface UrlClickListener {
         void onUrlClick(String url);
     }
+
 }

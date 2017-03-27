@@ -83,7 +83,7 @@ public class ArticleView extends LinearLayout implements IArticleView, ArticleTe
                     imageView.setLayoutParams(layoutParams);
                     imageView.setMaxWidth(width);
                     imageView.setMaxHeight(width * 3);// 这里其实可以根据需求而定，我这里测试为最大宽度的5倍
-                    imageView.setTag(10086, item.getContent());
+                    imageView.setTag(item.getContent());
                     imageView.setOnClickListener(this);
                     imageView.setOnLongClickListener(this);
                     addView(imageView);
@@ -121,12 +121,12 @@ public class ArticleView extends LinearLayout implements IArticleView, ArticleTe
 
     @Override
     public void onClick(View v) {
-        onImageClick((String) v.getTag(10086));
+        onImageClick((String) v.getTag());
     }
 
     @Override
     public boolean onLongClick(View v) {
-        onImageLongClick((String) v.getTag(10086));
+        onImageLongClick((String) v.getTag());
         return false;
     }
 }
