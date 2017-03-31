@@ -8,6 +8,7 @@ public class FailureEntity<T> {
 
     private Object tag;
     private T data;
+    private Throwable cause;
 
     public Object getTag() {
         return tag;
@@ -23,5 +24,13 @@ public class FailureEntity<T> {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    public Throwable getCause() {
+        return cause;
+    }
+
+    public void setCause(Throwable cause) {
+        this.cause = cause;
     }
 }

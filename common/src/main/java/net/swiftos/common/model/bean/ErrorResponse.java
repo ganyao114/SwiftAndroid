@@ -9,6 +9,7 @@ public class ErrorResponse {
     private Object tag;
     private int code;
     private String msg;
+    private Throwable cause;
 
     public Object getTag() {
         return tag;
@@ -32,5 +33,13 @@ public class ErrorResponse {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public Throwable getCause() {
+        return cause;
+    }
+
+    public void setCause(Throwable cause) {
+        this.cause = cause;
     }
 }

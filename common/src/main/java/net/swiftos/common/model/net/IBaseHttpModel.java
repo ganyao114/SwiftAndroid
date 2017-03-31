@@ -1,6 +1,6 @@
 package net.swiftos.common.model.net;
 
-import net.swiftos.common.model.entity.HttpCallback;
+import net.swiftos.common.model.entity.AsyncCallback;
 import net.swiftos.common.presenter.IAsyncSubject;
 
 /**
@@ -13,9 +13,13 @@ public interface IBaseHttpModel<O,A> {
 
     void setBaseResponse(IResponseAdapter baseResponse);
 
-    <M> IAsyncSubject<O> getAsyncSubject(A api, HttpCallback<M> callback);
+    <M> IAsyncSubject<O> getAsyncSubject(A api, AsyncCallback<M> callback);
 
-    <M> IAsyncSubject<O> getAsyncSUbjectWithCache(A api, IGetFromCache<M> getFromCache, ISaveToCache<M> saveToCache, HttpCallback<M> callback);
+    <M> IAsyncSubject<O> getAsyncSubjectWithCache(A api, IGetFromCache<M> getFromCache, ISaveToCache<M> saveToCache, AsyncCallback<M> callback);
+
+    <M> IAsyncSubject<O> mergeSubjects(AsyncCallback<M> callback, A... subjects);
+
+    <M> IAsyncSubject<O> concatSubjects(AsyncCallback<M> callback, A... subjects);
 
     interface IGetFromCache<T> {
         T fromCache();

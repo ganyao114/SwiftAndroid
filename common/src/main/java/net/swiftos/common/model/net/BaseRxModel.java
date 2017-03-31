@@ -7,7 +7,7 @@ import net.swiftos.common.exception.ExceptionAdapter;
 import net.swiftos.common.exception.IExceptionFactory;
 import net.swiftos.common.exception.NetworkException;
 import net.swiftos.common.model.bean.BaseResponse;
-import net.swiftos.common.model.entity.HttpCallback;
+import net.swiftos.common.model.entity.AsyncCallback;
 import net.swiftos.utils.StatusUtil;
 
 import rx.Observable;
@@ -81,16 +81,15 @@ public class BaseRxModel {
           .autoConnect();
     }
 
-    public <T> Subscriber<T> getSubscriber(HttpCallback<T> callback) {
+    public <T> Subscriber<T> getSubscriber(AsyncCallback<T> callback) {
         return new Subscriber<T>() {
             @Override
             public void onCompleted() {
-
+                callback.onComplete();
             }
 
             @Override
             public void onError(Throwable e) {
-                callback.onComplete();
                 if (!exceptionFactory.isFailure(e)) {
                     callback.onError(exceptionFactory.onError(e, callback.getTag()));
                 } else {
@@ -100,13 +99,12 @@ public class BaseRxModel {
 
             @Override
             public void onNext(T t) {
-                callback.onComplete();
                 callback.onSuccess(t);
             }
         };
     }
 
-    protected void checkNetwork() throws NetworkException {
+    public void checkNetwork() throws NetworkException {
         if (!StatusUtil.checkNetWorkStatus(BaseApplication.getApplication())) {
             throw new NetworkException("no network");
         }
@@ -116,7 +114,7 @@ public class BaseRxModel {
      * 返回值公共字段的处理，包括业务异常的抛出
      * @param <I,O>
      */
-    public class BaseHttpFunc<I,O> implements Func1<I,O> {
+    public static class BaseHttpFunc<I,O> implements Func1<I,O> {
 
         private IResponseAdapter<I,O> responseAdapter;
 
