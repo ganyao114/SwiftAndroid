@@ -23,6 +23,8 @@ ext {
     cranimelibVersion = "0.3.4"
     eventbusVersion = "3.0.0"
     emojilibVersion = "1.4.1"
+    richtextVersion = "2.4.6"
+    filedownloaderVersion = "1.4.2"
 
     dependencies = [
         support_v4: "com.android.support:support-v4:${supportLibraryVersion}",
@@ -50,7 +52,9 @@ ext {
         cranime_lib: "com.github.XunMengWinter:CircularAnim:${cranimelibVersion}",
         sysbartink: "com.readystatesoftware.systembartint:systembartint:1.0.4",
         eventbus: "org.greenrobot:eventbus:${eventbusVersion}",
-        emoji_lib: "io.github.rockerhieu:emojicon:${emojilibVersion}"
+        emoji_lib: "io.github.rockerhieu:emojicon:${emojilibVersion}",
+        richtext: "com.zzhoujay.richtext:richtext:${richtextVersion}",
+        filedownloader: "com.liulishuo.filedownloader:library:${filedownloaderVersion}"
     ]
 
     classpaths = [

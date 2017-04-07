@@ -76,10 +76,11 @@ dependencies {
         exclude group: 'com.google.guava'
     }
     compile rootProject.ext.dependencies.butterknife
-//    compile rootProject.ext.dependencies.realm
     compile rootProject.ext.dependencies.aspectj
     compile rootProject.ext.dependencies.sysbartink
     compile rootProject.ext.dependencies.eventbus
     compile rootProject.ext.dependencies.emoji_lib
+    compile rootProject.ext.dependencies.richtext
+    compile rootProject.ext.dependencies.filedownloader
     compile project(path: ':eventposter')
 }

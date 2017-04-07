@@ -58,7 +58,7 @@ public class PermissionCheckAspect {
                             LOG.e("permission check invoke error!");
                         }
                     } else {
-                        Toast.makeText(BaseApplication.getApplication(), "请授予权限！", Toast.LENGTH_LONG).show();
+                        BaseApplication.getAppComponent().eventHub().post(new PermissionDenyEvent(permissionCheck.value(), joinPoint.getSignature()));
                     }
                 });
 
