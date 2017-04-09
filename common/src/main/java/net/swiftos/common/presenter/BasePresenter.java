@@ -2,6 +2,7 @@ package net.swiftos.common.presenter;
 
 import net.swiftos.common.application.BaseApplication;
 import net.swiftos.common.navigation.Navigater;
+import net.swiftos.common.protocol.BaseProtocol;
 import net.swiftos.eventposter.core.EventPoster;
 import net.swiftos.eventposter.presenter.Presenter;
 
@@ -9,7 +10,7 @@ import net.swiftos.eventposter.presenter.Presenter;
  * Created by ganyao on 2016/10/26.
  */
 
-public abstract class BasePresenter extends Presenter implements Navigater.INavigate, IAsyncSubjectsQueue {
+public abstract class BasePresenter extends Presenter implements Navigater.INavigate, BaseProtocol.Presenter {
 
     protected IAsyncSubjectsQueue asyncSubjects;
 
@@ -41,10 +42,12 @@ public abstract class BasePresenter extends Presenter implements Navigater.INavi
         asyncSubjects.addSubject(observer);
     }
 
+    @Override
     public void onViewInited() {
 
     }
 
+    @Override
     public void onViewDestroyed() {
         destroyQueue();
         EventPoster.unRegistDeep(this);

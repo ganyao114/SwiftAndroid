@@ -1,5 +1,6 @@
 package net.swiftos.eventposter.impls.viewevent.entity;
 
+import net.swiftos.eventposter.cache.EventCache;
 import net.swiftos.eventposter.exception.EventInvokeException;
 import net.swiftos.eventposter.template.IEventEntity;
 
@@ -19,6 +20,10 @@ public class ViewEventEntity implements IEventEntity{
     private Class inter;
     private Annotation annotation;
     private Class clazz;
+
+    public String getKey() {
+        return EventCache.getKey(callMethod, annotation);
+    }
 
     public Class getClazz() {
         return clazz;

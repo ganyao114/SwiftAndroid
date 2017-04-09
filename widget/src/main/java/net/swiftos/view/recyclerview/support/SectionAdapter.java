@@ -3,9 +3,10 @@ package net.swiftos.view.recyclerview.support;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
-import com.ifanr.android.view.widget.recyclerview.MultiItemCommonAdapter;
-import com.ifanr.android.view.widget.recyclerview.MultiItemTypeSupport;
-import com.ifanr.android.view.widget.recyclerview.ViewHolder;
+
+import net.swiftos.view.recyclerview.MultiItemCommonAdapter;
+import net.swiftos.view.recyclerview.MultiItemTypeSupport;
+import net.swiftos.view.recyclerview.ViewHolder;
 
 import java.util.LinkedHashMap;
 import java.util.List;

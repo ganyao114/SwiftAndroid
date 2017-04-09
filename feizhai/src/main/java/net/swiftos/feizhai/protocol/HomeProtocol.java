@@ -11,7 +11,7 @@ public interface HomeProtocol {
     interface View extends BaseProtocol.View {
 
     }
-    interface Presenter extends IAsyncSubjectsQueue {
+    interface Presenter extends BaseProtocol.Presenter {
 
     }
     interface Model {

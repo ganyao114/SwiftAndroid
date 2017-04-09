@@ -94,7 +94,7 @@ public class Injecter {
             if (infos == null) continue;
             for (EventAnnoInfo eventAnnoInfo:infos){
                 IHandler handler = HandlerFactory.getHandler(eventAnnoInfo.getHandler());
-                IEventEntity eventEntity = EventCache.getEventEntity(eventAnnoInfo.getAnnotation());
+                IEventEntity eventEntity = EventCache.getEventEntity(method, eventAnnoInfo.getAnnotation());
                 if (handler == null) continue;
                 handler.unload(eventEntity,object);
                 if (!handlerMap.containsKey(eventAnnoInfo.getHandler()))
@@ -175,14 +175,14 @@ public class Injecter {
                 EventAnnoInfo[] eventAnnoInfos = ReflectionCache.getAnnoInfo(method);
                 if (eventAnnoInfos == null || eventAnnoInfos.length == 0) continue;
                 for (EventAnnoInfo eventAnnoInfo : eventAnnoInfos) {
-                    IEventEntity eventEntity = EventCache.getEventEntity(eventAnnoInfo.getAnnotation());
+                    IEventEntity eventEntity = EventCache.getEventEntity(method, eventAnnoInfo.getAnnotation());
                     Class<? extends IHandler> handlerType = eventAnnoInfo.getHandler();
                     IHandler handler = HandlerFactory.getHandler(handlerType);
                     if (eventEntity == null){
                         if (handler == null) continue;
                         eventEntity = handler.parse(eventAnnoInfo);
                         if (eventEntity == null) continue;
-                        EventCache.addEventEntity(eventAnnoInfo.getAnnotation(), eventEntity);
+                        EventCache.addEventEntity(method, eventAnnoInfo.getAnnotation(), eventEntity);
                     }
                     if (object == null) continue;
                     handler.load(eventEntity,object);

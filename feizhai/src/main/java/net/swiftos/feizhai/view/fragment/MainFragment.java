@@ -8,6 +8,7 @@ import net.swiftos.common.view.fragment.BaseNestFragment;
 import net.swiftos.feizhai.di.component.HomeComponent;
 import net.swiftos.feizhai.protocol.HomeProtocol;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,12 +45,16 @@ public class MainFragment extends BaseNestFragment<HomeProtocol.Presenter> {
 
     @Override
     protected List<BaseFragment<HomeProtocol.Presenter>> setFragments() {
+
         return null;
     }
 
     @Override
     protected List<String> setTitles() {
-        return null;
+        List<String> list = new ArrayList<>();
+        list.add("主页");
+        list.add("消息");
+        return list;
     }
 
     @Override

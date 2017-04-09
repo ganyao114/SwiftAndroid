@@ -3,6 +3,7 @@ package net.swiftos.feizhai.view.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.support.annotation.IdRes;
+import android.support.annotation.MainThread;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -12,6 +13,7 @@ import net.swiftos.common.ospermission.PermissionCheck;
 import net.swiftos.common.presenter.BasePresenter;
 import net.swiftos.common.view.activity.BaseActivity;
 import net.swiftos.eventposter.impls.customevent.annotation.InjectEvent;
+import net.swiftos.eventposter.impls.customevent.entity.RunContextType;
 import net.swiftos.feizhai.R;
 import net.swiftos.usermodule.aop.DebugLog;
 import net.swiftos.usermodule.aop.LoginChecked;
@@ -102,7 +104,7 @@ public class MainActivity extends BaseActivity {
         Toast.makeText(this, str , Toast.LENGTH_LONG).show();
     }
 
-    @InjectEvent
+    @InjectEvent(runType = RunContextType.MainThread)
     public void unlogined(LoginChecked event) {
         Toast.makeText(this, event.getResult().toString() , Toast.LENGTH_LONG).show();
     }

@@ -140,8 +140,20 @@ public class CustomEventHandler implements IHandler<CustomEventEntity>{
         }
     }
 
-    public void post(Object object,String name){
-        Map<String,CustomEventEntity> map = eventMap.get(object.getClass());
+    public void post(Object object, String name){
+        post(object, object.getClass(), name);
+    }
+
+    public void postAll(Object object, String name) {
+        for (Class<?> clazz:eventMap.keySet()) {
+            if (clazz.isInstance(object)) {
+                post(object, clazz, name);
+            }
+        }
+    }
+
+    private void post(Object object, Class clazz, String name) {
+        Map<String,CustomEventEntity> map = eventMap.get(clazz);
         if (map == null)
             return;
         CustomEventEntity entity = map.get(name);

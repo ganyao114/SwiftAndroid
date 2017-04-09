@@ -3,6 +3,8 @@ package net.swiftos.feizhai.model.bean;
 import net.swiftos.common.model.entity.Session;
 import net.swiftos.usermodule.IUser;
 
+import java.io.Serializable;
+
 /**
  * Created by ganyao on 2017/3/14.
  */

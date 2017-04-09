@@ -26,8 +26,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ViewEventHandler implements IHandler<ViewEventEntity>,OnViewAttachListener{
 
     private Map<String,Map<Integer,SyncWeakList<View>>> viewMap = new ConcurrentHashMap<>();
-    private Map<String,Map<Integer,Vector<Annotation>>> viewEventMap = new ConcurrentHashMap<>();
-    private Map<Annotation,DynamicHandler> viewProxyMap = new ConcurrentHashMap<>();
+    private Map<String,Map<Integer,Vector<String>>> viewEventMap = new ConcurrentHashMap<>();
+    private Map<String,DynamicHandler> viewProxyMap = new ConcurrentHashMap<>();
 
     private Map<String,SyncWeakList<OnViewAttachListener>> attachlsMap = new ConcurrentHashMap<>();
 
@@ -76,20 +76,20 @@ public class ViewEventHandler implements IHandler<ViewEventEntity>,OnViewAttachL
     @Override
     public void load(ViewEventEntity eventEntity, Object invoker) {
         String context = eventEntity.getContext();
-        Map<Integer,Vector<Annotation>> eventMap = viewEventMap.get(eventEntity.getAnnotation());
+        Map<Integer,Vector<String>> eventMap = viewEventMap.get(eventEntity.getKey());
         if (eventMap == null){
             eventMap = new ConcurrentHashMap<>();
             viewEventMap.put(context,eventMap);
         }
         int[] ids = eventEntity.getIds();
         for (int id:ids){
-            Vector<Annotation> events = eventMap.get(id);
+            Vector<String> events = eventMap.get(id);
             if (events == null){
                 events = new Vector<>();
-                eventMap.put(id,events);
+                eventMap.put(id, events);
             }
-            if (!events.contains(eventEntity.getAnnotation())){
-                events.add(eventEntity.getAnnotation());
+            if (!events.contains(eventEntity.getKey())){
+                events.add(eventEntity.getKey());
             }
             doRegistView(context,id);
         }
@@ -134,7 +134,7 @@ public class ViewEventHandler implements IHandler<ViewEventEntity>,OnViewAttachL
     }
 
     private void doRegistView(String context,View view){
-        Map<Integer,Vector<Annotation>> viewEvents = viewEventMap.get(context);
+        Map<Integer,Vector<String>> viewEvents = viewEventMap.get(context);
         if (viewEvents == null){
             LOG.e("未注册Context");
             return;
@@ -144,19 +144,19 @@ public class ViewEventHandler implements IHandler<ViewEventEntity>,OnViewAttachL
             LOG.e("View没有ID");
             return;
         }
-        Vector<Annotation> annos = viewEvents.get(id);
-        if (annos == null){
+        Vector<String> keys = viewEvents.get(id);
+        if (keys == null){
             LOG.e("没有此ID");
             return;
         }
-        for (Annotation annotation:annos){
-            IEventEntity et = EventCache.getEventEntity(annotation);
+        for (String key:keys){
+            IEventEntity et = EventCache.getEventEntity(key);
             if (et == null) continue;
             ViewEventEntity entity = (ViewEventEntity) et;
-            DynamicHandler handler = viewProxyMap.get(annotation);
+            DynamicHandler handler = viewProxyMap.get(key);
             if (handler == null){
                 handler = generateDymHandler(entity);
-                viewProxyMap.put(annotation,handler);
+                viewProxyMap.put(key,handler);
             }else {
                 handler.addHandler(entity.getClazz());
             }
