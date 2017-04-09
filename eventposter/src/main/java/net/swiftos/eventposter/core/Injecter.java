@@ -126,7 +126,12 @@ public class Injecter {
     }
 
     public static Vector getAllInsts(Class clazz){
-        List<Class> children = classTree.getAllChildren(clazz,null);
+        List<Class> children = null;
+        if (clazz.isInterface()) {
+            children = classTree.getAllImpls(clazz);
+        } else {
+            children = classTree.getAllChildren(clazz);
+        }
         Vector insts = new Vector();
         Vector directInsts = instMap.get(clazz);
         if (directInsts != null)

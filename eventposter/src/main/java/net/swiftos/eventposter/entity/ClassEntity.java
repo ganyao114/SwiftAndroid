@@ -11,7 +11,9 @@ public class ClassEntity implements Cloneable{
 
     private Class self;
     private Class parent;
-    private List<Class> children;
+    private boolean isInterface = false;
+    private Class[] interfaces;
+    private List<Class> children = new CopyOnWriteArrayList<>();;
 
     public Class getSelf() {
         return self;
@@ -27,6 +29,22 @@ public class ClassEntity implements Cloneable{
 
     public void setParent(Class parent) {
         this.parent = parent;
+    }
+
+    public boolean isInterface() {
+        return isInterface;
+    }
+
+    public void setInterface(boolean anInterface) {
+        isInterface = anInterface;
+    }
+
+    public Class[] getInterfaces() {
+        return interfaces;
+    }
+
+    public void setInterfaces(Class[] interfaces) {
+        this.interfaces = interfaces;
     }
 
     public List<Class> getChildren() {
@@ -46,9 +64,7 @@ public class ClassEntity implements Cloneable{
         return entity;
     }
 
-    public synchronized void addChild(Class clazz) {
-        if (children == null)
-            children = new CopyOnWriteArrayList<>();
+    public void addChild(Class clazz) {
         children.add(clazz);
     }
 }

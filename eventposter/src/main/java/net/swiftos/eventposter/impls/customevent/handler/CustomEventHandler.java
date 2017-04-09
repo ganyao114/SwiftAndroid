@@ -51,6 +51,7 @@ public class CustomEventHandler implements IHandler<CustomEventEntity>{
         entity.setParType(parType);
         entity.setInvokeType(annoInfo.getClazz());
         entity.setSticky(eventAnno.sticky());
+        Injecter.getClassTree().insertDeep(parType);
         return entity;
     }
 
@@ -98,8 +99,30 @@ public class CustomEventHandler implements IHandler<CustomEventEntity>{
 
     }
 
+    /**
+     * 直系 Event 广播
+     * @param object
+     */
     public void broadcast(Object object){
-        Map<String,CustomEventEntity> map = eventMap.get(object.getClass());
+        broadcast(object, object.getClass());
+    }
+
+    /**
+     * 直系 + 支系
+     * @param object
+     */
+    public void broadcastAll(Object object) {
+        for (Class<?> clazz:eventMap.keySet()) {
+            if (clazz.isInstance(object)) {
+                broadcast(object, clazz);
+            }
+        }
+    }
+
+
+
+    private void broadcast(Object object, Class clazz) {
+        Map<String,CustomEventEntity> map = eventMap.get(clazz);
         if (map == null||map.size() == 0)
             return;
         for (Map.Entry<String,CustomEventEntity> entry:map.entrySet()){

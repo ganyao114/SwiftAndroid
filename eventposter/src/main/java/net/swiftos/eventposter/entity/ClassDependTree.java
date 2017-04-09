@@ -3,9 +3,12 @@ package net.swiftos.eventposter.entity;
 import net.swiftos.eventposter.presenter.Presenter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -68,9 +71,19 @@ public class ClassDependTree {
             tree.put(clazz,entity);
             entity.setSelf(clazz);
             entity.setParent(clazz.getSuperclass());
+            entity.setInterface(clazz.isInterface());
+            entity.setInterfaces(clazz.getInterfaces());
             if (child != null)
                 entity.addChild(child);
-            insertDeep(clazz.getSuperclass(),clazz);
+            if (entity.isInterface()) {
+                if (entity.getInterfaces() != null && entity.getInterfaces().length > 0) {
+                    for (Class inter : entity.getInterfaces()) {
+                        insertDeep(inter, clazz);
+                    }
+                }
+            } else {
+                insertDeep(clazz.getSuperclass(), clazz);
+            }
         } else {
             if (child != null)
                 entity.addChild(child);
@@ -95,11 +108,53 @@ public class ClassDependTree {
             List<Class> directChildren = entity.getChildren();
             if (directChildren == null) return allchild;
             allchild.addAll(directChildren);
-            for (Class ddirectChild:directChildren){
-                getAllChildren(ddirectChild,allchild);
+            for (Class directChild:directChildren){
+                getAllChildren(directChild,allchild);
             }
             return allchild;
         }
+    }
+
+    public List<Class> getAllChildren(Class clazz){
+        return getAllChildren(clazz, new ArrayList<>());
+    }
+
+    public List<Class> getAllImpls(Class clazz) {
+        if (!clazz.isInterface())
+            return null;
+        List<Class> childrenInter = getAllChildren(clazz);
+        List<Class> inters = new ArrayList<>();
+        inters.add(clazz);
+        if (childrenInter != null) {
+            inters.addAll(childrenInter);
+        }
+
+        Set<Class> rawClasses = new HashSet<>();
+        for (ClassEntity entity:tree.values()) {
+            if (entity.isInterface())
+                continue;
+            if (entity.getInterfaces() == null || entity.getInterfaces().length == 0)
+                continue;
+            for (Class inter:entity.getInterfaces()) {
+                if (inters.contains(inter)) {
+                    rawClasses.add(entity.getSelf());
+                    break;
+                }
+            }
+        }
+
+        Set<Class> tarClasses = new HashSet<>();
+
+        tarClasses.addAll(rawClasses);
+
+        for (Class raw:rawClasses) {
+            List<Class> children = getAllChildren(raw);
+            if (children == null || children.size() == 0)
+                continue;
+            tarClasses.addAll(children);
+        }
+
+        return new ArrayList<>(tarClasses);
     }
 
     private void insert(Class clazz){
