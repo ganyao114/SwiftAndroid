@@ -11,6 +11,8 @@ public interface IWorkQueue<T> {
     boolean taskStart();
     void taskEnd(T t);
     boolean addTask(T t);
+    void disableQueue();
+    void enableQueue();
     Vector<T> getTasksInQueue();
     Vector<T> getTasksProcessing();
 }

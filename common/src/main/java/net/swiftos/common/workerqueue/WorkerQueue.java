@@ -2,7 +2,6 @@ package net.swiftos.common.workerqueue;
 
 import java.util.Vector;
 import java.util.concurrent.BlockingDeque;
-import java.util.concurrent.Exchanger;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -13,7 +12,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class WorkerQueue<T> implements IWorkQueue<T>, Runnable {
 
-    private BlockingDeque<T> blockingDeque = new LinkedBlockingDeque<T>();
+    private BlockingDeque blockingQueue = new LinkedBlockingDeque();
 
     private Vector<T> tasksInQueue = new Vector<T>();
     private Vector<T> tasksProcessing = new Vector<T>();
@@ -21,6 +20,7 @@ public class WorkerQueue<T> implements IWorkQueue<T>, Runnable {
     private Semaphore semaphore;
     private ITask<T> task;
     private AtomicBoolean running = new AtomicBoolean(false);
+    private AtomicBoolean enabled = new AtomicBoolean(true);
 
     /**
      *
@@ -29,6 +29,17 @@ public class WorkerQueue<T> implements IWorkQueue<T>, Runnable {
      */
     public WorkerQueue(int thread, ITask<T> task) {
         semaphore = new Semaphore(thread);
+        this.task = task;
+    }
+
+    /**
+     * @param thread
+     */
+    public WorkerQueue(int thread) {
+        semaphore = new Semaphore(thread);
+    }
+
+    public void setTask(ITask<T> task) {
         this.task = task;
     }
 
@@ -55,8 +66,14 @@ public class WorkerQueue<T> implements IWorkQueue<T>, Runnable {
     }
 
     public boolean addTask(T t) {
+        if (t == null) {
+            return false;
+        }
+        if (tasksInQueue.contains(t) || tasksProcessing.contains(t) || !enabled.get()) {
+            return false;
+        }
         tasksInQueue.add(t);
-        if (blockingDeque.offer(t)) {
+        if (blockingQueue.offer(t)) {
             return true;
         } else {
             tasksInQueue.remove(t);
@@ -64,12 +81,34 @@ public class WorkerQueue<T> implements IWorkQueue<T>, Runnable {
         }
     }
 
+    @Override
+    public void disableQueue() {
+        enabled.set(false);
+        if (blockingQueue.size() == 0) {
+            stop();
+        }
+    }
+
+    @Override
+    public void enableQueue() {
+        enabled.set(true);
+    }
+
     private void looper() {
         while (running.get()) {
             T t = null;
+            Object object = null;
             try {
-                t = blockingDeque.take();
+                //队列关闭 当无数据时结束循环
+                if (!enabled.get() && blockingQueue.size() == 0) {
+                    break;
+                }
+                object = blockingQueue.take();
+                if (!running.get()) {
+                    break;
+                }
                 if (taskStart()) {
+                    t = (T) object;
                     tasksInQueue.remove(t);
                     tasksProcessing.add(t);
                     task.runTask(t, this::taskEnd);
@@ -79,7 +118,6 @@ public class WorkerQueue<T> implements IWorkQueue<T>, Runnable {
             } finally {
                 if (t != null) {
                     tasksInQueue.remove(t);
-                    tasksProcessing.remove(t);
                 }
             }
         }
@@ -104,6 +142,9 @@ public class WorkerQueue<T> implements IWorkQueue<T>, Runnable {
      * @return
      */
     public synchronized boolean start() {
+        if (task == null) {
+            return false;
+        }
         if (running.get()) {
             return false;
         } else {
@@ -113,9 +154,14 @@ public class WorkerQueue<T> implements IWorkQueue<T>, Runnable {
         }
     }
 
-    public synchronized boolean stop() {
+    public boolean stop() {
         if (running.get()) {
             running.set(false);
+            synchronized (blockingQueue) {
+                if (blockingQueue.size() == 0) {
+                    blockingQueue.offer(new Object());
+                }
+            }
             return true;
         } else {
             return false;

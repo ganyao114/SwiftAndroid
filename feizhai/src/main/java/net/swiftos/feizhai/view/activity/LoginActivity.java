@@ -111,6 +111,8 @@ public class LoginActivity extends BaseActivity<LoginComponent> implements Login
     public void doShow(String str){
         loginBtn.setText(str);
         EventPoster.with(CustomEventHandler.class).broadcastAll(new TestEvent());
+        ITestEvent testEvent = new TestEvent();
+        testEvent.dosth();
     }
 
     @Override
