@@ -25,7 +25,13 @@ public abstract class BaseFragment<T> extends Fragment {
     private boolean isLazyLoaded;
     private boolean isPrepared;
     protected View view;
-    private String name;
+    protected String name;
+
+    //自己的 presenter
+    protected T presenter;
+    protected Object component;
+
+    protected boolean isOwnPresenter = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,6 +39,17 @@ public abstract class BaseFragment<T> extends Fragment {
             view = inflater.inflate(setLayoutId(), null);
             ButterKnife.bind(this, view);
             initView(inflater, container);
+            component = setComponent();
+            presenter = setPresenter();
+            if (presenter == null) {
+                presenter = (T) getActivityPresenter();
+            } else {
+                isOwnPresenter = true;
+                if (presenter instanceof BasePresenter) {
+                    BasePresenter ownPresenter = (BasePresenter) presenter;
+                    ownPresenter.onViewInited();
+                }
+            }
         }
         return view;
     }
@@ -69,8 +86,24 @@ public abstract class BaseFragment<T> extends Fragment {
         return name;
     }
 
+    protected BasePresenter getActivityPresenter() {
+        if (getActivity() instanceof  BaseActivity) {
+            return ((BaseActivity) getActivity()).getPresenter();
+        } else {
+            return null;
+        }
+    }
+
     protected T getPresenter() {
-        return (T) ((BaseActivity)getActivity()).getPresenter();
+        return (T) presenter;
+    }
+
+    protected BasePresenter getBasePresenter() {
+        if (presenter == null || !(presenter instanceof BasePresenter)) {
+            return null;
+        } else {
+            return (BasePresenter) presenter;
+        }
     }
 
     protected void onLazyLoad(){
@@ -81,10 +114,22 @@ public abstract class BaseFragment<T> extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(view);
+        if (isOwnPresenter && presenter instanceof BasePresenter) {
+            BasePresenter ownPresenter = (BasePresenter) presenter;
+            ownPresenter.destroyQueue();
+        }
     }
 
     protected abstract @IdRes int setLayoutId();
 
     protected abstract void initView(LayoutInflater inflater, ViewGroup container);
+
+    protected Object setComponent() {
+        return null;
+    }
+
+    protected T setPresenter() {
+        return null;
+    }
 
 }

@@ -82,5 +82,6 @@ dependencies {
     compile rootProject.ext.dependencies.emoji_lib
     compile rootProject.ext.dependencies.richtext
     compile rootProject.ext.dependencies.filedownloader
+    compile rootProject.ext.dependencies.utils
     compile project(path: ':eventposter')
 }

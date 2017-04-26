@@ -29,7 +29,7 @@ import java.util.List;
 import butterknife.Bind;
 
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseFeizhaiActivity {
 
     @Bind(R.id.article_text)
     ArticleTextView articleTextView;
@@ -46,7 +46,7 @@ public class MainActivity extends BaseActivity {
     @DebugLog
     @Override
     protected void initView() {
-        startActivity(new Intent(this, LoginActivity.class));
+        startActivity(new Intent(this, HomeActivity.class));
     }
 
     @Override

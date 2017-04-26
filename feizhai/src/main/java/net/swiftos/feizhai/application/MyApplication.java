@@ -15,5 +15,6 @@ public class MyApplication extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         init(MainPresenter.class);
+
     }
 }

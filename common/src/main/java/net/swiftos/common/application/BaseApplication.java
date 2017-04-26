@@ -3,6 +3,8 @@ package net.swiftos.common.application;
 import android.Manifest;
 import android.app.Application;
 
+import com.jude.utils.JActivityManager;
+import com.jude.utils.JUtils;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
 
@@ -53,6 +55,8 @@ public class BaseApplication extends Application {
         EventPoster.init(this);
         Presenter.establish();
         Presenter.With(null).start(presenter);
+        JUtils.initialize(this);
+        registerActivityLifecycleCallbacks(JActivityManager.getActivityLifecycleCallbacks());
     }
 
     public static void init(Class<? extends BasePresenter> presenter, Application app) {
@@ -66,6 +70,8 @@ public class BaseApplication extends Application {
         EventPoster.init(app);
         Presenter.establish();
         Presenter.With(null).start(presenter);
+        JUtils.initialize(app);
+        app.registerActivityLifecycleCallbacks(JActivityManager.getActivityLifecycleCallbacks());
     }
 
     public static AppComponent getAppComponent() {

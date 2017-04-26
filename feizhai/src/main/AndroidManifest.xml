@@ -30,6 +30,11 @@
             android:theme="@style/ImageTranslucentTheme">
 
         </activity>
+
+        <activity android:name=".view.activity.HomeActivity"
+            android:theme="@style/ImageTranslucentTheme">
+
+        </activity>
     </application>
 
 </manifest>

@@ -25,6 +25,7 @@ ext {
     emojilibVersion = "1.4.1"
     richtextVersion = "2.4.6"
     filedownloaderVersion = "1.4.2"
+    utilsVersion = "1.2.1"
 
     dependencies = [
         support_v4: "com.android.support:support-v4:${supportLibraryVersion}",
@@ -54,7 +55,8 @@ ext {
         eventbus: "org.greenrobot:eventbus:${eventbusVersion}",
         emoji_lib: "io.github.rockerhieu:emojicon:${emojilibVersion}",
         richtext: "com.zzhoujay.richtext:richtext:${richtextVersion}",
-        filedownloader: "com.liulishuo.filedownloader:library:${filedownloaderVersion}"
+        filedownloader: "com.liulishuo.filedownloader:library:${filedownloaderVersion}",
+        utils: "com.jude:utils:${utilsVersion}"
     ]
 
     classpaths = [

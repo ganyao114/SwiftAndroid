@@ -40,6 +40,16 @@ public class LoginCheckAspect {
         if (UserManager.isLogin()) {
             return joinPoint.proceed();
         } else {
+            Object[] pars = joinPoint.getArgs();
+            if (pars != null && pars.length > 0) {
+                for (Object par:pars) {
+                    if (par != null && par instanceof UnLoginCallback) {
+                        UnLoginCallback callback = (UnLoginCallback) par;
+                        callback.onUnLogined();
+                        break;
+                    }
+                }
+            }
             SwiftLog.LOGV("LoginManager", "please login first");
             return null;
         }

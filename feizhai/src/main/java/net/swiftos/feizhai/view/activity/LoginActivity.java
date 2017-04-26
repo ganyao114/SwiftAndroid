@@ -37,7 +37,7 @@ import butterknife.Bind;
  * Created by ganyao on 2017/3/10.
  */
 
-public class LoginActivity extends BaseActivity<LoginComponent> implements LoginProtocol.View {
+public class LoginActivity extends BaseFeizhaiActivity<LoginComponent> implements LoginProtocol.View {
 
     public LoginProtocol.Presenter presenter;
 

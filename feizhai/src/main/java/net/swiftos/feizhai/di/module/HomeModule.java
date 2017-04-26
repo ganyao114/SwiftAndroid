@@ -1,6 +1,8 @@
 package net.swiftos.feizhai.di.module;
 
 import net.swiftos.common.di.scope.ActivityScope;
+import net.swiftos.feizhai.model.net.HomeModel;
+import net.swiftos.feizhai.presenter.HomePresenter;
 import net.swiftos.feizhai.protocol.HomeProtocol;
 
 import dagger.Module;
@@ -18,6 +20,8 @@ public class HomeModule {
 
     public HomeModule(HomeProtocol.View view) {
         this.view = view;
+        this.model = new HomeModel();
+        this.presenter = new HomePresenter(model, view);
     }
 
     @Provides

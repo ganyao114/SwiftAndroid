@@ -17,96 +17,92 @@
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:fitsSystemWindows="true">
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
 
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/tool_bar"
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:background="@color/themeColor"
-            app:contentInsetStart="0.0dp"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:theme="@style/ToolbarStyle">
-
-            <RelativeLayout
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/tool_bar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center">
+                android:layout_height="?actionBarSize"
+                android:background="@color/themeColor"
+                app:contentInsetStart="0.0dp"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:theme="@style/ToolbarStyle">
 
-                <ImageView
-                    android:id="@+id/drawerIcon"
-                    android:layout_width="24dp"
-                    android:layout_height="44dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/toolbarItemBackground"
-                    android:scaleType="centerInside"
-                    android:src="@mipmap/actionbar_menu" />
-
-                <ImageView
-                    android:id="@+id/bar_home"
-                    android:layout_width="55dp"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="50dp"
-                    android:layout_toLeftOf="@+id/bar_mng"
-                    android:scaleX="0.5"
-                    android:scaleY="0.5"
-                    android:background="@drawable/actionbar_disco"
-                    android:clickable="true" />
+                    android:gravity="center">
 
-                <ImageView
-                    android:id="@+id/bar_mng"
-                    android:layout_width="55dp"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:scaleX="0.5"
-                    android:scaleY="0.5"
-                    android:background="@drawable/actionbar_music"
-                    android:clickable="true" />
+                    <ImageView
+                        android:id="@+id/drawerIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="44dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="20dp"
+                        android:background="@drawable/toolbarItemBackground"
+                        android:scaleType="centerInside"
+                        android:src="@mipmap/actionbar_menu" />
 
-                <ImageView
-                    android:id="@+id/bar_my"
-                    android:layout_width="55dp"
-                    android:scaleX="0.5"
-                    android:scaleY="0.5"
-                    android:layout_height="match_parent"
-                    android:layout_toRightOf="@+id/bar_mng"
-                    android:background="@drawable/actionbar_friends"
-                    android:clickable="true" />
+                    <ImageView
+                        android:id="@+id/bar_home"
+                        android:layout_width="55dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_toLeftOf="@+id/bar_article"
+                        android:background="@drawable/actionbar_disco"
+                        android:clickable="true"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5" />
 
-                <ImageView
-                    android:id="@+id/bar_search"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/actionbar_search" />
-            </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/bar_article"
+                        android:layout_width="55dp"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/actionbar_music"
+                        android:clickable="true"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5" />
+
+                    <ImageView
+                        android:id="@+id/bar_my"
+                        android:layout_width="55dp"
+                        android:layout_height="match_parent"
+                        android:layout_toRightOf="@+id/bar_article"
+                        android:background="@drawable/actionbar_friends"
+                        android:clickable="true"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5" />
+
+                    <ImageView
+                        android:id="@+id/bar_search"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/actionbar_search" />
+                </RelativeLayout>
 
 
-        </android.support.v7.widget.Toolbar>
+            </android.support.v7.widget.Toolbar>
 
             <!--<android.support.design.widget.TabLayout-->
-            <!--android:id="@+id/tabs"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="#ffffff"-->
-            <!--app:tabIndicatorColor="@color/themeColor"-->
-            <!--app:tabSelectedTextColor="@color/themeColor"-->
-            <!--app:tabTextColor="#7D7D7D">-->
-            <!--</android.support.design.widget.TabLayout>-->
+                <!--android:id="@+id/tabs"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="#ffffff"-->
+                <!--app:tabIndicatorColor="@color/themeColor"-->
+                <!--app:tabSelectedTextColor="@color/themeColor"-->
+                <!--app:tabTextColor="#7D7D7D"></android.support.design.widget.TabLayout>-->
 
         </android.support.design.widget.AppBarLayout>
-
-
-
 
 
         <android.support.v4.view.ViewPager
@@ -114,7 +110,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#ffffff"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </android.support.design.widget.CoordinatorLayout>
     <!--<include-->
@@ -128,9 +124,9 @@
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start">
-        <!--app:headerLayout="@layout/nav_header_main"-->
-        <!--app:menu="@menu/navigation_drawer_menu" >-->
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/navigation_drawer_menu" >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -155,14 +151,14 @@
                     android:layout_height="fill_parent"
                     android:layout_marginBottom="14.0dip"
                     android:layout_marginTop="14.0dip"
-                    android:background="#fff1f1f1"
-                     />
+                    android:background="#fff1f1f1" />
+
                 <Button
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="退出应用"
                     android:background="@drawable/bottom_btnback"
+                    android:text="退出应用"
                     android:textSize="16sp" />
             </LinearLayout>
         </RelativeLayout>

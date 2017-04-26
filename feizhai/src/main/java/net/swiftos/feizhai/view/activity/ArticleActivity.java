@@ -9,7 +9,7 @@ import net.swiftos.feizhai.protocol.ArticleProtocol;
  * Created by ganyao on 2017/3/24.
  */
 
-public class ArticleActivity extends BaseActivity<ArticleComponent> implements ArticleProtocol.View {
+public class ArticleActivity extends BaseFeizhaiActivity<ArticleComponent> implements ArticleProtocol.View {
 
 
     @Override
