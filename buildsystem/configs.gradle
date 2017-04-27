@@ -8,7 +8,7 @@ ext {
     buildToolsVersion = '25.0.0'
 
     // library_version
-    supportLibraryVersion = '24.2.1'
+    supportLibraryVersion = '25.3.0'
     retrofitVersion = "2.0.0"
     rxjavaVersion = "1.1.0"
     realmVersion = "0.84.1"
@@ -31,6 +31,7 @@ ext {
         support_v4: "com.android.support:support-v4:${supportLibraryVersion}",
         support_v7: "com.android.support:appcompat-v7:${supportLibraryVersion}",
         support_design: "com.android.support:design:${supportLibraryVersion}",
+        cardview: "com.android.support:cardview-v7:${supportLibraryVersion}",
         retrofit_main: "com.squareup.retrofit2:retrofit:${retrofitVersion}",
         retrofit_gson: "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
         retrofit_rxjava: "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",

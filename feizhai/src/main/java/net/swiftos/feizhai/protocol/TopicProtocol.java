@@ -9,19 +9,18 @@ import net.swiftos.common.protocol.BaseProtocol;
  * Created by ganyao on 2017/3/13.
  */
 
-public interface LoginProtocol {
+public interface TopicProtocol {
 
-    interface View extends BaseProtocol.View, BaseProtocol.ProgressView {
-        void showLoginSuccess();
-        void showLoginFailure(String msg);
+    interface View extends BaseProtocol.View {
+
     }
 
     interface Model {
-        IAsyncSubject login(String name, String pass, AsyncCallback<UserInfo> callback);
+
     }
 
     interface Presenter {
-        void login(String name, String pass);
+
     }
 
 }

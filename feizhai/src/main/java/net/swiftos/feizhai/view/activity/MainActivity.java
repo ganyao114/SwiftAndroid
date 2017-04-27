@@ -1,6 +1,7 @@
 package net.swiftos.feizhai.view.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.support.annotation.MainThread;
@@ -22,6 +23,8 @@ import net.swiftos.view.articleview.ArticleTextView;
 import net.swiftos.view.articleview.ArticleView;
 import net.swiftos.view.articleview.ContentType;
 import net.swiftos.view.articleview.IArticleViewAdapter;
+import net.swiftos.view.nineimagegroupview.NineImageAdapter;
+import net.swiftos.view.nineimagegroupview.NineImageGroupView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +40,8 @@ public class MainActivity extends BaseFeizhaiActivity {
     ArticleView articleView;
     @Bind(R.id.image_view)
     ImageView imageView;
+    @Bind(R.id.nine_pic)
+    NineImageGroupView ninePic;
 
     @Override
     protected int getContentLayout() {
@@ -46,7 +51,7 @@ public class MainActivity extends BaseFeizhaiActivity {
     @DebugLog
     @Override
     protected void initView() {
-        startActivity(new Intent(this, HomeActivity.class));
+        startActivity(new Intent(this, TopicActivity.class));
     }
 
     @Override
@@ -82,6 +87,20 @@ public class MainActivity extends BaseFeizhaiActivity {
 //        });
 //        articleView.setArticle(article);
 //        articleView.setUrlClickListener(this::test);
+//
+        ninePic.setAdapter(new NineImageAdapter() {
+            @Override
+            public void displayImageView(Context context, ImageView imageView, int position, String url) {
+                BaseApplication.getAppComponent()
+                        .imageLoader()
+                        .context(MainActivity.this)
+                        .load(url, imageView);
+            }
+        });
+
+        List<String> list = new ArrayList<>();
+        list.add("http://up.qqjia.com/z/17/tu17742_2.jpg");
+        ninePic.setDatas(list);
     }
 
     @Override

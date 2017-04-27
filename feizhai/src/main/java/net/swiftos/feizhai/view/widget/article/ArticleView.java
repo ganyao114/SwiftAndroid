@@ -1,4 +1,4 @@
-package net.swiftos.feizhai.view.widget;
+package net.swiftos.feizhai.view.widget.article;
 
 import android.content.Context;
 import android.util.AttributeSet;

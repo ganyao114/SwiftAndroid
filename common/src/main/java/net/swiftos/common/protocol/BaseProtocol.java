@@ -8,6 +8,12 @@ import net.swiftos.eventposter.core.EventPoster;
  */
 
 public class BaseProtocol {
+
+    public interface ProgressView {
+        void showProgress();
+        void dismissProgress();
+    }
+
     public interface View {
         void showMessage(String string);
         void lockUI();

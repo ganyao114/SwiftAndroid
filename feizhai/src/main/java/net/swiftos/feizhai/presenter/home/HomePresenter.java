@@ -1,4 +1,4 @@
-package net.swiftos.feizhai.presenter;
+package net.swiftos.feizhai.presenter.home;
 
 import net.swiftos.common.presenter.BasePresenter;
 import net.swiftos.feizhai.protocol.HomeProtocol;

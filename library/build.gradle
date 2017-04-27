@@ -59,6 +59,7 @@ android {
 dependencies {
     compile rootProject.ext.dependencies.support_v4
     compile rootProject.ext.dependencies.support_v7
+    compile rootProject.ext.dependencies.cardview
     compile rootProject.ext.dependencies.support_design
     compile rootProject.ext.dependencies.retrofit_main
     compile rootProject.ext.dependencies.retrofit_gson

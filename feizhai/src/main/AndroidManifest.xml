@@ -35,6 +35,13 @@
             android:theme="@style/ImageTranslucentTheme">
 
         </activity>
+
+        <activity android:name=".view.activity.TopicActivity"
+            android:theme="@style/ImageTranslucentTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="view.activity.HomeActivity" />
+        </activity>
     </application>
 
 </manifest>
