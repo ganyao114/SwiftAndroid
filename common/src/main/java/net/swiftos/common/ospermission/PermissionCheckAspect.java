@@ -58,11 +58,12 @@ public class PermissionCheckAspect {
                             LOG.e("permission check invoke error!");
                         }
                     } else {
-                        BaseApplication.getAppComponent().eventHub().post(new PermissionDenyEvent(permissionCheck.value(), joinPoint.getSignature()));
+                        BaseApplication.getAppComponent()
+                                .eventHub()
+                                .post(new PermissionDenyEvent(permissionCheck.value(), joinPoint.getSignature()));
                     }
                 });
 
         return null;
-
     }
 }

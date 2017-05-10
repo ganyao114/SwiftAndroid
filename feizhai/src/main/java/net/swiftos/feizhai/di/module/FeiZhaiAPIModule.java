@@ -18,7 +18,6 @@ import dagger.Provides;
 @Module
 public class FeiZhaiAPIModule extends BaseAPIModule {
 
-
     public FeiZhaiAPIModule() {
         init(Constant.FEIZHAI_URL);
     }

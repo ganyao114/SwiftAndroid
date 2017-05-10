@@ -11,6 +11,8 @@ import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Retrofit;
+
 /**
  * Created by gy939 on 2017/1/15.
  */
@@ -24,7 +26,6 @@ public class CommonExceptionFactory implements IExceptionFactory {
         failureTypes.add(JsonParseException.class);
         failureTypes.add(JsonIOException.class);
         failureTypes.add(JsonSyntaxException.class);
-
     }
 
     @Override

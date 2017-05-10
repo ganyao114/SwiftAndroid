@@ -1,14 +1,16 @@
 package net.swiftos.feizhai.presenter;
 
 import net.swiftos.apiservice.model.UserInfo;
+import net.swiftos.common.di.component.ComponentManager;
 import net.swiftos.common.model.bean.ErrorResponse;
 import net.swiftos.common.model.bean.FailureEntity;
 import net.swiftos.common.model.entity.AsyncCallback;
 import net.swiftos.common.presenter.BasePresenter;
+import net.swiftos.common.user.di.UserManagerComponent;
 import net.swiftos.common.viewevent.ClickCheck;
 import net.swiftos.feizhai.model.bean.User;
 import net.swiftos.feizhai.protocol.LoginProtocol;
-import net.swiftos.usermodule.UserManager;
+import net.swiftos.common.user.UserManager;
 
 /**
  * Created by ganyao on 2017/3/14.
@@ -46,7 +48,9 @@ public class LoginPresenter extends BasePresenter implements LoginProtocol.Prese
 
             @Override
             public void onSuccess(UserInfo userInfo) {
-                UserManager.login(new User());
+                ComponentManager.getStaticComponent(UserManagerComponent.class)
+                        .userManager()
+                        .login(new User());
             }
 
             @Override

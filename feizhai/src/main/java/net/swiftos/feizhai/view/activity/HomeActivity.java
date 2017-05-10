@@ -20,6 +20,7 @@ import net.swiftos.feizhai.di.component.DaggerHomeComponent;
 import net.swiftos.feizhai.di.component.HomeComponent;
 import net.swiftos.feizhai.di.module.HomeModule;
 import net.swiftos.feizhai.protocol.HomeProtocol;
+import net.swiftos.feizhai.view.fragment.MainFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +70,7 @@ public class HomeActivity extends BaseActivityWithDrawLayout<HomeComponent> impl
     }
 
     private void initFragments() {
+        fragments.add(new MainFragment());
         adapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(this);

@@ -99,3 +99,6 @@
 -keep class * implements android.os.Parcelable { public static final android.os.Parcelable$Creator *; }
 -keep class com.ifanr.android.wear.WearableContract$*{*;}
 -keepattributes InnerClasses
+# ARounter
+-keep public class com.alibaba.android.arouter.routes.**{*;}
+-keep class * implements com.alibaba.android.arouter.facade.template.ISyringe{*;}

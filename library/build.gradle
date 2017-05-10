@@ -84,5 +84,6 @@ dependencies {
     compile rootProject.ext.dependencies.richtext
     compile rootProject.ext.dependencies.filedownloader
     compile rootProject.ext.dependencies.utils
+    compile rootProject.ext.dependencies.arouter_api
     compile project(path: ':eventposter')
 }

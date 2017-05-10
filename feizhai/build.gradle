@@ -80,6 +80,12 @@ android {
 
 }
 
+apt {
+    arguments {
+        moduleName project.getName();
+    }
+}
+
 atlas {
 
     atlasEnabled true
@@ -119,6 +125,7 @@ dependencies {
         transitive = true
     }
     compile 'com.taobao.android:atlasupdate:1.1.4.7@aar'
+    apt rootProject.ext.dependencies.arouter_compiler
     compile project(':apiservice')
     compile project(':common')
     compile project(':usermodule')

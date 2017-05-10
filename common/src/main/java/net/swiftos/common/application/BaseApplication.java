@@ -9,12 +9,14 @@ import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
 
 import net.swiftos.common.di.component.AppComponent;
+import net.swiftos.common.di.component.ComponentManager;
 import net.swiftos.common.di.component.DaggerAppComponent;
 import net.swiftos.common.di.module.AppModule;
 import net.swiftos.common.log.SwiftLog;
 import net.swiftos.common.model.net.OkHttpDownLoader;
 import net.swiftos.common.ospermission.PermissionCheck;
 import net.swiftos.common.presenter.BasePresenter;
+import net.swiftos.common.user.di.UserManagerComponent;
 import net.swiftos.eventposter.core.EventPoster;
 import net.swiftos.eventposter.presenter.Presenter;
 
@@ -52,6 +54,7 @@ public class BaseApplication extends Application {
                 .builder()
                 .appModule(new AppModule(this))
                 .build();
+        ComponentManager.registerStaticComponent(AppComponent.class, appComponent);
         EventPoster.init(this);
         Presenter.establish();
         Presenter.With(null).start(presenter);
@@ -67,6 +70,7 @@ public class BaseApplication extends Application {
                 .builder()
                 .appModule(new AppModule(app))
                 .build();
+        ComponentManager.registerStaticComponent(AppComponent.class, appComponent);
         EventPoster.init(app);
         Presenter.establish();
         Presenter.With(null).start(presenter);

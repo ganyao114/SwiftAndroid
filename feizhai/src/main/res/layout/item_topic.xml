@@ -19,12 +19,12 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="64dp">
+            android:layout_height="56dp">
 
             <net.swiftos.view.cirlleimageview.CircleImageView
                 android:id="@+id/writer_icon"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="4dp"
@@ -33,7 +33,7 @@
             <TextView
                 android:id="@+id/writer_name"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="24dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="18dp"
                 android:layout_marginStart="18dp"
@@ -42,21 +42,21 @@
                 android:layout_toRightOf="@+id/writer_icon"
                 android:text="作者名字"
                 android:textColor="@color/black"
-                android:textSize="22dp" />
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/write_time"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="6dp"
+                android:layout_marginBottom="4dp"
                 android:layout_marginLeft="18dp"
                 android:layout_marginStart="18dp"
                 android:layout_toEndOf="@+id/writer_icon"
                 android:layout_toRightOf="@+id/writer_icon"
                 android:text="1小时前"
                 android:textColor="@color/gray"
-                android:textSize="16dp" />
+                android:textSize="14dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -80,7 +80,7 @@
                     android:layout_marginLeft="4dp"
                     android:text="阅读人数:1000"
                     android:textColor="@color/alpha_gray"
-                    android:textSize="16dp" />
+                    android:textSize="14dp" />
 
             </LinearLayout>
 
@@ -95,20 +95,30 @@
             android:layout_marginRight="4dp"
             android:maxLines="1"
             android:textColor="@color/black"
-            android:textSize="22dp"
-            android:text="开箱爽大麻"/>
+            android:textSize="20dp"
+            android:text="这是标题"/>
 
-        <TextView
+        <net.swiftos.view.articleview.ArticleTextView
             android:id="@+id/article_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-            android:maxLines="1"
+            android:maxLines="2"
             android:textColor="@color/gray_deep"
-            android:textSize="18dp"
-            android:text="开箱爽大麻"/>
+            android:textSize="16dp"
+            android:text="这是内容预览，这是内容预览，这是内容预览，这是内容预览，这是内容预览，这是内容预览。"/>
+
+        <net.swiftos.view.multipicture.MultyPicView
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/topic_article_preicon">
+
+        </net.swiftos.view.multipicture.MultyPicView>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -130,6 +140,7 @@
                     android:src="@drawable/ic_place_24dp"/>
 
                 <TextView
+                    android:id="@+id/article_position"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14dp"

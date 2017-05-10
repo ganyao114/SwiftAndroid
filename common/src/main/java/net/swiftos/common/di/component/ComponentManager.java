@@ -1,5 +1,8 @@
 package net.swiftos.common.di.component;
 
+import net.swiftos.common.user.UserManager;
+import net.swiftos.common.user.di.UserManagerComponent;
+
 import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -11,42 +14,62 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ComponentManager {
 
+    private static Map<Class, Wrapper> wrappers = new ConcurrentHashMap<>();
     /**
      * lifecycle: static
      */
-    private static Map<String,Object> components = new ConcurrentHashMap<>();
+    private static Map<Class,Object> components = new ConcurrentHashMap<>();
 
     /**
      * 不影响 Dagger2 生命周期管理
      */
-    private static Map<String,WeakReference> weakComponents = new ConcurrentHashMap<>();
-
-    public static <T> void addStaticComponent(String name, T instance) {
-        components.put(name, instance);
+    private static Map<Class,WeakReference> weakComponents = new ConcurrentHashMap<>();
+    static {
+        wrappers.put(UserManagerComponent.class, new Wrapper(UserManagerComponent.class, UserManager::init));
     }
 
-    public static <T> T getStaticComponent(String name) {
-        return (T) components.get(name);
+    public static <T> void registerStaticComponent(Class type, T instance) {
+        components.put(type, instance);
     }
 
-    public static void removeStaticComponent(String name) {
-        components.remove(name);
+    public static <T> T getStaticComponent(Class<T> type) {
+        synchronized (type) {
+            T t = (T) components.get(type);
+            if (t == null && wrappers.containsKey(type)) {
+                t = (T) wrappers.get(type).initer.init();
+                components.put(type, t);
+            }
+            return t;
+        }
     }
 
-    public static <T> void addWeakComponent(String name, T instance) {
-        components.put(name, new WeakReference(instance));
+    public static void removeStaticComponent(Class type) {
+        components.remove(type);
     }
 
-    public static <T> T getWeakComponent(String name) {
-        T t = (T) components.get(name);
+    public static <T> void registerWeakComponent(Class type, T instance) {
+        components.put(type, new WeakReference(instance));
+    }
+
+    public static <T> T getWeakComponent(Class<T> type) {
+        T t = (T) components.get(type);
         if (t == null)
-            removeWeakComponent(name);
+            removeWeakComponent(type);
         return t;
     }
 
-    public static void removeWeakComponent(String name) {
-        components.remove(name);
+    public static void removeWeakComponent(Class type) {
+        components.remove(type);
     }
 
+    public static class Wrapper {
 
+        public Class type;
+        public ComponentIniter initer;
+
+        public Wrapper(Class type, ComponentIniter initer) {
+            this.type = type;
+            this.initer = initer;
+        }
+    }
 }

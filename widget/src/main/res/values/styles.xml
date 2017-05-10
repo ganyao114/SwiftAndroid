@@ -1,3 +1,28 @@
 <resources>
+    <style name="TextBody">
+        <item name="android:textColor">?attr/text_body</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 
+    <style name="TextTitle">
+        <item name="android:textColor">?attr/text_title</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextSubhead">
+        <item name="android:textColor">?attr/text_subhead</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextTitle.Inverse">
+        <item name="android:textColor">@color/text_100_inverse</item>
+    </style>
+
+    <style name="TextSubhead.Inverse">
+        <item name="android:textColor">@color/text_54_inverse</item>
+    </style>
+
+    <style name="TextBody.Inverse">
+        <item name="android:textColor">@color/text_87_inverse</item>
+    </style>
 </resources>

@@ -26,6 +26,7 @@ ext {
     richtextVersion = "2.4.6"
     filedownloaderVersion = "1.4.2"
     utilsVersion = "1.2.1"
+    arouterVersion = "1.2.1"
 
     dependencies = [
         support_v4: "com.android.support:support-v4:${supportLibraryVersion}",
@@ -57,7 +58,9 @@ ext {
         emoji_lib: "io.github.rockerhieu:emojicon:${emojilibVersion}",
         richtext: "com.zzhoujay.richtext:richtext:${richtextVersion}",
         filedownloader: "com.liulishuo.filedownloader:library:${filedownloaderVersion}",
-        utils: "com.jude:utils:${utilsVersion}"
+        utils: "com.jude:utils:${utilsVersion}",
+        arouter_api: "com.alibaba:arouter-api:${arouterVersion}",
+        arouter_compiler: "com.alibaba:arouter-compiler:1.1.2"
     ]
 
     classpaths = [

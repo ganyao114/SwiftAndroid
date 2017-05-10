@@ -32,7 +32,6 @@ public class UiThreadAspect {
 
     @Around("method() || constructor()")
     public Object asyncAndExecute(ProceedingJoinPoint joinPoint) throws Throwable {
-
         if (Looper.myLooper() == Looper.getMainLooper()) {
             return joinPoint.proceed();
         } else {

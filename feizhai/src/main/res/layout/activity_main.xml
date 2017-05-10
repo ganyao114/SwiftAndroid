@@ -30,12 +30,12 @@
 
     </net.swiftos.view.articleview.ArticleView>
 
-    <net.swiftos.view.nineimagegroupview.NineImageGroupView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/nine_pic">
+    <!--<net.swiftos.view.nineimagegroupview.NineImageGroupView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/nine_pic">-->
 
-    </net.swiftos.view.nineimagegroupview.NineImageGroupView>
+    <!--</net.swiftos.view.nineimagegroupview.NineImageGroupView>-->
 
 
 

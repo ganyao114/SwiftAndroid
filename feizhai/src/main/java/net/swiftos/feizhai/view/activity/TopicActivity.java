@@ -7,6 +7,7 @@ import net.swiftos.common.presenter.BasePresenter;
 import net.swiftos.feizhai.R;
 import net.swiftos.feizhai.di.component.TopicComponent;
 import net.swiftos.feizhai.protocol.TopicProtocol;
+import net.swiftos.view.recyclerview.LoadMoreRecyclerView;
 
 import butterknife.Bind;
 
@@ -19,6 +20,9 @@ public class TopicActivity extends BaseRefreshActivity<TopicComponent> {
     private TopicProtocol.Presenter presenter;
 
     Toolbar toolbar;
+
+    @Bind(R.id.article_list)
+    LoadMoreRecyclerView articleList;
 
     @Override
     protected void initView() {

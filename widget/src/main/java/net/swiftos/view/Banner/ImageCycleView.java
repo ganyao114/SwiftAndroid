@@ -325,7 +325,7 @@ public class ImageCycleView extends LinearLayout {
 		 * @param position
 		 * @param imageView
 		 */
-		public void onImageClick(ADInfo info, int postion, View imageView);
+		public void onImageClick(ADInfo info, int position, View imageView);
 	}
 
 }

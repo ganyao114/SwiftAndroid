@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -40,7 +41,7 @@
             android:theme="@style/ImageTranslucentTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="view.activity.HomeActivity" />
+                android:value=".view.activity.HomeActivity" />
         </activity>
     </application>
 

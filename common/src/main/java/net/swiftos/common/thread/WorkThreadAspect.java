@@ -30,13 +30,10 @@ public class WorkThreadAspect {
 
     @Around("method() || constructor()")
     public Object asyncAndExecute(ProceedingJoinPoint joinPoint) throws Throwable {
-
         new Thread( () -> {
             Object[] pars = joinPoint.getArgs();
-
             AsyncSuccessCallback successCallback = null;
             AsyncFailureCallback failureCallback = null;
-
             if (pars != null) {
                 for (Object par : pars) {
                     if (par instanceof AsyncSuccessCallback) {

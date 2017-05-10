@@ -31,7 +31,6 @@ public abstract class BaseAPIModule {
     private Map<String,String> headers, pars;
     private APIServiceConfigs configs;
 
-
     protected Session session;
 
     protected void init(String url) {
@@ -61,13 +60,9 @@ public abstract class BaseAPIModule {
         this.configs = configs;
         apiGenerator.setConfigs(configs);
     }
-
     protected <T> T getAPIService(Class<T> tClass) {
         return apiGenerator.getAPI(tClass);
     }
-
-
-
     protected Binder getBinder() {
         return new Binder();
     }

@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
 
@@ -30,6 +31,8 @@ import net.swiftos.view.R;
  * @blog http://blog.csdn.net/manymore13/
  */
 public class MultyPicView extends ViewGroup {
+
+    private static boolean isInit = false;
 
     /**
      * 单行最多图片数
@@ -136,10 +139,12 @@ public class MultyPicView extends ViewGroup {
 
     public MultyPicView(Context context) {
         super(context);
+        init();
     }
 
     public MultyPicView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init();
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs,
                 R.styleable.multy_pic_view, 0, 0);
 
@@ -160,6 +165,14 @@ public class MultyPicView extends ViewGroup {
         a.recycle();
     }
 
+    private void init() {
+        if (!isInit) {
+            ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getContext()).writeDebugLogs().build();
+            ImageLoader.getInstance().init(config);
+            isInit = true;
+        }
+    }
+
     /**
      * 初始化该控件
      *
@@ -174,7 +187,14 @@ public class MultyPicView extends ViewGroup {
             LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT,
                     LayoutParams.MATCH_PARENT);
             iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            iv.setOnClickListener(mClickListener);
+            if (mClickCallback != null) {
+                iv.setClickable(true);
+                iv.setFocusable(true);
+                iv.setOnClickListener(mClickListener);
+            } else {
+                iv.setClickable(false);
+                iv.setFocusable(false);
+            }
             iv.setTag(i);
             this.addView(iv, params);
         }
@@ -416,6 +436,6 @@ public class MultyPicView extends ViewGroup {
     }
 
     private void loadImg(String url, ImageSize imageSize, final ImageView chileIv) {
-        mLoader.displayImage(url,chileIv);
+        mLoader.displayImage(url,chileIv, mOptions);
     }
 }
