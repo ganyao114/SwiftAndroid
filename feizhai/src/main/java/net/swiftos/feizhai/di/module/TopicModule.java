@@ -1,6 +1,8 @@
 package net.swiftos.feizhai.di.module;
 
 import net.swiftos.common.di.scope.ActivityScope;
+import net.swiftos.feizhai.model.net.TopicModel;
+import net.swiftos.feizhai.presenter.TopicPresenter;
 import net.swiftos.feizhai.protocol.ArticleProtocol;
 import net.swiftos.feizhai.protocol.TopicProtocol;
 
@@ -19,6 +21,8 @@ public class TopicModule {
 
     public TopicModule(TopicProtocol.View view) {
         this.view = view;
+        this.model = new TopicModel();
+        this.presenter = new TopicPresenter(view, model);
     }
 
     @Provides
