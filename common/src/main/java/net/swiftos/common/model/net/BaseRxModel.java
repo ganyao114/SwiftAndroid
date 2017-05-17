@@ -92,6 +92,7 @@ public class BaseRxModel {
 
             @Override
             public void onError(Throwable e) {
+                callback.onDone(callback.getTag());
                 if (!exceptionFactory.isFailure(e)) {
                     callback.onError(exceptionFactory.onError(e, callback.getTag()));
                 } else {
@@ -101,6 +102,7 @@ public class BaseRxModel {
 
             @Override
             public void onNext(T t) {
+                callback.onDone(callback.getTag());
                 callback.onSuccess(t);
             }
         };

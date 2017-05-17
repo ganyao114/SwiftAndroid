@@ -259,7 +259,8 @@
         android:layout_margin="16dp"
         android:src="@drawable/add"
         app:layout_anchor="@id/topic_info"
-        app:layout_anchorGravity="bottom|center_horizontal" />
+        app:layout_anchorGravity="bottom|center_horizontal"
+        app:layout_behavior="net.swiftos.feizhai.view.behavior.FlatButtonBehavior"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_staff"

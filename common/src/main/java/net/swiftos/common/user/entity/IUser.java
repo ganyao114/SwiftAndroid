@@ -16,4 +16,6 @@ public interface IUser extends Serializable {
     String getKey();
     void onDestroy();
 
+    void processSession(Session session);
+
 }

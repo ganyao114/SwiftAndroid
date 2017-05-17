@@ -13,4 +13,5 @@ public interface AsyncCallback<T> {
     void onFailure(FailureEntity failure);
     void onError(ErrorResponse error);
     void onComplete();
+    void onDone(Object tag);
 }

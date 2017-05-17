@@ -30,6 +30,11 @@ public class ComponentManager {
 
     public static <T> void registerStaticComponent(Class type, T instance) {
         components.put(type, instance);
+        AppComponent appComponent = getStaticComponent(AppComponent.class);
+        if (appComponent != null) {
+            appComponent.eventHub()
+                    .post(new ComponentEvent(ComponentEvent.Type.Register));
+        }
     }
 
     public static <T> T getStaticComponent(Class<T> type) {
@@ -44,11 +49,23 @@ public class ComponentManager {
     }
 
     public static void removeStaticComponent(Class type) {
-        components.remove(type);
+        Object o = components.remove(type);
+        if (o != null) {
+            AppComponent appComponent = getStaticComponent(AppComponent.class);
+            if (appComponent != null) {
+                appComponent.eventHub()
+                        .post(new ComponentEvent(ComponentEvent.Type.Register));
+            }
+        }
     }
 
     public static <T> void registerWeakComponent(Class type, T instance) {
         components.put(type, new WeakReference(instance));
+        AppComponent appComponent = getStaticComponent(AppComponent.class);
+        if (appComponent != null) {
+            appComponent.eventHub()
+                    .post(new ComponentEvent(ComponentEvent.Type.Register));
+        }
     }
 
     public static <T> T getWeakComponent(Class<T> type) {

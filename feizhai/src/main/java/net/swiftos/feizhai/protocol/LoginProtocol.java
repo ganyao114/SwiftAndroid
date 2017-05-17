@@ -4,6 +4,7 @@ import net.swiftos.apiservice.model.UserInfo;
 import net.swiftos.common.model.entity.AsyncCallback;
 import net.swiftos.common.presenter.IAsyncSubject;
 import net.swiftos.common.protocol.BaseProtocol;
+import net.swiftos.feizhai.di.component.LoginComponent;
 
 /**
  * Created by ganyao on 2017/3/13.
@@ -11,7 +12,7 @@ import net.swiftos.common.protocol.BaseProtocol;
 
 public interface LoginProtocol {
 
-    interface View extends BaseProtocol.View, BaseProtocol.ProgressView {
+    interface View extends BaseProtocol.View<LoginComponent>, BaseProtocol.ProgressView {
         void showLoginSuccess();
         void showLoginFailure(String msg);
     }

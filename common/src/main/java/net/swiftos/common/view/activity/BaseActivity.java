@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import net.swiftos.common.R;
+import net.swiftos.common.application.BaseApplication;
+import net.swiftos.common.di.component.ComponentManager;
 import net.swiftos.common.navigation.Navigater;
 import net.swiftos.common.presenter.BasePresenter;
 import net.swiftos.eventposter.core.EventPoster;
@@ -50,11 +52,10 @@ public abstract class BaseActivity<T> extends AppCompatActivity implements Navig
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(getContentLayout());
-        EventPoster.registDeep(this);
+        BaseApplication.getAppComponent()
+                .eventHub()
+                .register(this);
         ButterKnife.bind(this);
         component = setupActivityComponent();
         basePresenter = setPresenter();
@@ -84,7 +85,9 @@ public abstract class BaseActivity<T> extends AppCompatActivity implements Navig
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventPoster.unRegistDeep(this);
+        BaseApplication.getAppComponent()
+                .eventHub()
+                .unRegister(this);
         if (basePresenter != null) {
             basePresenter.onViewDestroyed();
         }
@@ -145,6 +148,10 @@ public abstract class BaseActivity<T> extends AppCompatActivity implements Navig
         if (basePresenter != null) {
             basePresenter.onNavigate(par);
         }
+    }
+
+    public T getComponent() {
+        return component;
     }
 
     public BasePresenter getPresenter() {

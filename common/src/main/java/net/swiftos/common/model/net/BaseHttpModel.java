@@ -18,6 +18,8 @@ public abstract class BaseHttpModel {
         baseModel.setBaseResponse(setBaseReponse());
     }
 
-    protected abstract IResponseAdapter setBaseReponse();
+    protected IResponseAdapter setBaseReponse() {
+        return CommonResponseAdapter.getInstance();
+    }
 
 }

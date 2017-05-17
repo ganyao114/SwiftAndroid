@@ -12,7 +12,7 @@ public class ClickCheckManager {
 
     public static boolean enable = true;
     public static long lastClick = 0;
-    public static long clickInterval = (long) (1.5 * 1000); //ms
+    public static long clickInterval = (long) (1 * 1000); //ms
     public static ViewEventCallback callback;
 
 }

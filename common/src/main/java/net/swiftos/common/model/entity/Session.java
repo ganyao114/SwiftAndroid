@@ -1,5 +1,6 @@
 package net.swiftos.common.model.entity;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,7 +8,7 @@ import java.util.Map;
  * Created by ganyao on 2017/3/10.
  */
 
-public class Session {
+public class Session implements Serializable {
 
     private Map<String,String> pars, headers;
 

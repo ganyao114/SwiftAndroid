@@ -10,6 +10,7 @@ import net.swiftos.common.application.BaseApplication;
 import net.swiftos.common.model.bean.ErrorResponse;
 import net.swiftos.common.model.bean.FailureEntity;
 import net.swiftos.common.model.entity.AsyncCallback;
+import net.swiftos.common.model.entity.BaseAsyncCallback;
 import net.swiftos.common.model.entity.Session;
 import net.swiftos.common.model.net.BaseHttpModel;
 import net.swiftos.common.model.net.CommonResponseAdapter;
@@ -45,7 +46,7 @@ public class CommonHttpModel extends BaseHttpModel {
     }
 
     public IAsyncSubject sessionStart() {
-        return baseModel.<String>getAsyncSubject(api.sessionStart().cache(), new AsyncCallback<String>() {
+        return baseModel.<String>getAsyncSubject(api.sessionStart().cache(), new BaseAsyncCallback<String>() {
             @Override
             public Object getTag() {
                 return null;

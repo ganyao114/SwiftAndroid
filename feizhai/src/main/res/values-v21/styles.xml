@@ -20,9 +20,10 @@
         <item name="android:windowTranslucentNavigation">true</item>
         <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
         <item name="android:statusBarColor">@color/themeColor</item>
-        <!--<item name="android:windowBackground">@drawable/login_splash</item>-->
+        <item name="android:windowBackground">@drawable/login_splash</item>
         <item name="android:launchMode">singleTask</item>
         <item name="android:screenOrientation">portrait</item>
+        <item name="android:actionMenuTextColor">@color/gray_deep</item>
     </style>
 
     <style name="ColorTranslucentTheme" parent="AppTheme">

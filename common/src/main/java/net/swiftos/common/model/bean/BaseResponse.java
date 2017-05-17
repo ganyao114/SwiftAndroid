@@ -9,6 +9,11 @@ import java.io.Serializable;
 
 public class BaseResponse<T> implements Serializable {
 
+    public final transient static int SUCCESS = 0;
+    public final transient static int ERROR = 1;
+    public final transient static int SESSION_ERROR = 2;
+    public final transient static int UN_LOGIN = 3;
+
     private int status;
     private String message;
     private T data;

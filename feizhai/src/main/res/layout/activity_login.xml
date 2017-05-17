@@ -32,7 +32,7 @@
                 android:textSize="16sp"
                 style="@style/TextDefault"/>
             <EditText
-                android:id="@+id/email_et"
+                android:id="@+id/username_et"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

@@ -6,5 +6,5 @@ import net.swiftos.common.event.BaseCustomerEvent;
  * Created by gy on 2017/2/28.
  */
 
-public class Logined extends BaseCustomerEvent {
+public class RegisteredEvent extends BaseCustomerEvent {
 }

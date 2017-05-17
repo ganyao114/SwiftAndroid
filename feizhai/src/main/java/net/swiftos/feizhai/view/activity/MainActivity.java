@@ -47,7 +47,7 @@ public class MainActivity extends BaseFeizhaiActivity {
     @DebugLog
     @Override
     protected void initView() {
-        startActivity(new Intent(this, HomeActivity.class));
+        startActivity(new Intent(this, RegisterActivity.class));
     }
 
     @Override

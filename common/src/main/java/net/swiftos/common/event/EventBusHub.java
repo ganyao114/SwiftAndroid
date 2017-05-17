@@ -18,4 +18,19 @@ public class EventBusHub implements IEventHub {
     public void postSticky(Object event) {
         EventBus.getDefault().postSticky(event);
     }
+
+    @Override
+    public void register(Object object) {
+        EventBus.getDefault().register(object);
+    }
+
+    @Override
+    public void unRegister(Object object) {
+        EventBus.getDefault().unregister(object);
+    }
+
+    @Override
+    public void preLoad(Class[] classes) {
+
+    }
 }

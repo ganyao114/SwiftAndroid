@@ -20,11 +20,7 @@
         android:theme="@style/SplashTheme"
         android:name=".application.MyApplication">
         <activity android:name=".view.activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name=".view.activity.LoginActivity"
@@ -34,14 +30,18 @@
 
         <activity android:name=".view.activity.HomeActivity"
             android:theme="@style/ImageTranslucentTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".view.activity.TopicActivity"
             android:theme="@style/ImageTranslucentTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.activity.HomeActivity" />
+        </activity>
+        <activity android:name=".view.activity.RegisterActivity"
+            android:theme="@style/ImageTranslucentTheme">
         </activity>
     </application>
 

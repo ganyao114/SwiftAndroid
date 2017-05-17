@@ -15,7 +15,9 @@ public abstract class BasePresenter extends Presenter implements Navigater.INavi
     protected IAsyncSubjectsQueue asyncSubjects;
 
     public BasePresenter() {
-        EventPoster.registDeep(this);
+        BaseApplication.getAppComponent()
+                .eventHub()
+                .register(this);
     }
 
     //取消注册，以避免内存泄露
@@ -50,7 +52,9 @@ public abstract class BasePresenter extends Presenter implements Navigater.INavi
     @Override
     public void onViewDestroyed() {
         destroyQueue();
-        EventPoster.unRegistDeep(this);
+        BaseApplication.getAppComponent()
+                .eventHub()
+                .unRegister(this);
     }
 
 

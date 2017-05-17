@@ -3,6 +3,7 @@ package net.swiftos.common.user.aop;
 import net.swiftos.common.application.BaseApplication;
 import net.swiftos.common.di.component.ComponentManager;
 import net.swiftos.common.log.SwiftLog;
+import net.swiftos.common.ospermission.PermissionCheck;
 import net.swiftos.common.user.UserManager;
 import net.swiftos.common.user.di.UserManagerComponent;
 
@@ -32,12 +33,18 @@ public class LoginCheckAspect {
     @Pointcut("execution(@net.swiftos.common.user.aop.LoginRequired *.new(..)) || constructorInsideAnnotatedType()")
     public void constructor() {}
 
-    @Around("method() || constructor()")
-    public Object loginAndExecute(ProceedingJoinPoint joinPoint) throws Throwable {
+    @Pointcut("execution(@net.swiftos.common.user.aop.LoginRequired * *(..)) && @annotation(loginRequired)")
+    public void pointcutOnLoginCheckMethod(LoginRequired loginRequired) {
+
+    }
+
+    @Around("pointcutOnLoginCheckMethod(loginRequired)")
+    public Object loginAndExecute(ProceedingJoinPoint joinPoint, LoginRequired loginRequired) throws Throwable {
         UserManager userManager = ComponentManager.getStaticComponent(UserManagerComponent.class).userManager();
         BaseApplication.getAppComponent()
                 .eventHub()
-                .post(new LoginChecked(userManager.isLogin() ? LoginChecked.LoginCheckedResult.Login : LoginChecked.LoginCheckedResult.UnLogin));
+                .post(new LoginChecked(userManager.isLogin() ? LoginChecked.LoginCheckedResult.Login : LoginChecked.LoginCheckedResult.UnLogin
+                        , loginRequired.value()));
         if (userManager.isLogin()) {
             return joinPoint.proceed();
         } else {

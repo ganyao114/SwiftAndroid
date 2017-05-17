@@ -1,14 +1,23 @@
 package net.swiftos.feizhai.view.activity;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.widget.DrawerLayout;
+import android.util.AttributeSet;
+import android.view.InflateException;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import net.swiftos.common.view.activity.BaseActivity;
+import net.swiftos.feizhai.R;
 
 import java.util.List;
 

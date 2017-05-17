@@ -1,10 +1,12 @@
 package net.swiftos.feizhai.view.activity;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -14,6 +16,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.swiftos.common.presenter.BasePresenter;
+import net.swiftos.common.user.RegisteredEvent;
+import net.swiftos.common.user.aop.LoginChecked;
+import net.swiftos.common.user.aop.LoginRequired;
+import net.swiftos.eventposter.impls.customevent.annotation.InjectEvent;
+import net.swiftos.eventposter.impls.customevent.entity.RunContextType;
 import net.swiftos.feizhai.R;
 import net.swiftos.feizhai.buss.ServiceManager;
 import net.swiftos.feizhai.di.component.DaggerHomeComponent;
@@ -67,6 +74,7 @@ public class HomeActivity extends BaseActivityWithDrawLayout<HomeComponent> impl
         photo = (ImageView) header.findViewById(R.id.nav_photo);
         name = (TextView) header.findViewById(R.id.nav_name);
         tel = (TextView) header.findViewById(R.id.nav_tel);
+        header.setOnClickListener(this::navigateToUserPage);
     }
 
     private void initFragments() {
@@ -97,11 +105,6 @@ public class HomeActivity extends BaseActivityWithDrawLayout<HomeComponent> impl
     @Override
     protected int navigationViewId() {
         return R.id.navigation_view;
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
     }
 
     @Override
@@ -153,6 +156,37 @@ public class HomeActivity extends BaseActivityWithDrawLayout<HomeComponent> impl
                 break;
         }
     }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.nav_login:
+                break;
+            case R.id.nav_search:
+                break;
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @LoginRequired
+    public void navigateToUserPage(View view) {
+
+    }
+
+    @InjectEvent(runType = RunContextType.MainThread)
+    public void onRegistered(RegisteredEvent event) {
+        startActivity(new Intent(this, LoginActivity.class));
+    }
+
+    @InjectEvent(runType = RunContextType.MainThread)
+    public void onUnloginChecked(LoginChecked event) {
+        if (event.getResult() == LoginChecked.LoginCheckedResult.UnLogin) {
+            showMessage("尚未登陆!");
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+    }
+
 
     class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 

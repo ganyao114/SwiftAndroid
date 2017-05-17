@@ -1,5 +1,6 @@
 package net.swiftos.feizhai.view.activity;
 
+import android.content.Intent;
 import android.os.Looper;
 import android.support.annotation.MainThread;
 import android.support.annotation.UiThread;
@@ -8,6 +9,7 @@ import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.swiftos.common.application.BaseApplication;
@@ -50,12 +52,8 @@ public class LoginActivity extends BaseFeizhaiActivity<LoginComponent> implement
     EditText loginName;
     @Bind(R.id.login_pass)
     EditText loginPass;
-
-    @InjectEvent(runType = RunContextType.MainThread)
-    public void unLogineded(ITestEvent event) {
-        Toast.makeText(this, "unlogin", Toast.LENGTH_LONG).show();
-    }
-
+    @Bind(R.id.link_regist)
+    TextView registerPageLink;
 
     @Override
     protected int getContentLayout() {
@@ -66,11 +64,11 @@ public class LoginActivity extends BaseFeizhaiActivity<LoginComponent> implement
     protected void initView() {
         viewsNeedLock = new View[]{loginBtn, loginName, loginPass};
         loginBtn.setOnClickListener( v -> presenter.login(loginName.getText().toString(), loginPass.getText().toString()));
+        registerPageLink.setOnClickListener( v -> startActivity(new Intent(this, RegisterActivity.class)));
     }
 
     @Override
     protected void initData() {
-        asyncTest(this::doShow);
     }
 
     @Override
@@ -95,24 +93,6 @@ public class LoginActivity extends BaseFeizhaiActivity<LoginComponent> implement
     @Override
     public void showProgress() {
         CircularAnim.hide(loginBtn).go(() -> loginProgress.setVisibility(View.VISIBLE));
-    }
-
-    @WorkerThread
-    public String asyncTest(AsyncSuccessCallback<String> successCallback) {
-        try {
-            Thread.currentThread().sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return "你好";
-    }
-
-    @UiThread
-    public void doShow(String str){
-        loginBtn.setText(str);
-        EventPoster.with(CustomEventHandler.class).broadcastAll(new TestEvent());
-        ITestEvent testEvent = new TestEvent();
-        testEvent.dosth();
     }
 
     @Override

@@ -2,6 +2,7 @@ package net.swiftos.feizhai.di.component;
 
 import net.swiftos.common.di.component.AppComponent;
 import net.swiftos.common.di.scope.ActivityScope;
+import net.swiftos.common.model.entity.Session;
 import net.swiftos.feizhai.di.module.LoginModule;
 import net.swiftos.feizhai.protocol.LoginProtocol;
 
@@ -19,4 +20,6 @@ public interface LoginComponent {
     void inject(LoginProtocol.Model view);
 
     LoginProtocol.Presenter presenter();
+
+    Session session();
 }
