@@ -10,6 +10,7 @@ import net.swiftos.common.di.component.AppComponent;
 import net.swiftos.common.di.component.ComponentManager;
 import net.swiftos.common.view.fragment.BaseFragment;
 import net.swiftos.feizhai.R;
+import net.swiftos.feizhai.model.bean.Article;
 import net.swiftos.feizhai.model.bean.ArticleInfo;
 import net.swiftos.feizhai.protocol.HomeProtocol;
 import net.swiftos.feizhai.view.adapter.ArticleListAdapter;
@@ -29,7 +30,7 @@ import butterknife.Bind;
  * Created by ganyao on 2017/4/9.
  */
 
-public class FirstFragment extends BaseFragment<HomeProtocol.Presenter> implements LoadMoreRecyclerView.LoadMoreListener {
+public class FirstFragment extends BaseFragment<HomeProtocol.Presenter> implements LoadMoreRecyclerView.LoadMoreListener, HomeProtocol.View.SubViewFirst {
 
     @Bind(R.id.loop_view)
     ImageCycleView cycleView;
@@ -105,6 +106,11 @@ public class FirstFragment extends BaseFragment<HomeProtocol.Presenter> implemen
 
     @Override
     public void onLoadMore(View view) {
+
+    }
+
+    @Override
+    public void showHotArticles(int page, List<Article> articles) {
 
     }
 }

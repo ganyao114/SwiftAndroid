@@ -1,5 +1,7 @@
 package net.swiftos.common.di.component;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+
 import net.swiftos.common.user.UserManager;
 import net.swiftos.common.user.di.UserManagerComponent;
 
@@ -33,7 +35,7 @@ public class ComponentManager {
         AppComponent appComponent = getStaticComponent(AppComponent.class);
         if (appComponent != null) {
             appComponent.eventHub()
-                    .post(new ComponentEvent(ComponentEvent.Type.Register));
+                    .post(new ComponentEvent(ComponentEvent.Type.Register, type));
         }
     }
 
@@ -48,13 +50,23 @@ public class ComponentManager {
         }
     }
 
+    public static <T> T initComponent(Class<T> type) {
+        synchronized (type) {
+            return ARouter.getInstance().navigation(type);
+        }
+    }
+
+    public static <T> T initComponent(String name) {
+        return (T) ARouter.getInstance().build(name).navigation();
+    }
+
     public static void removeStaticComponent(Class type) {
         Object o = components.remove(type);
         if (o != null) {
             AppComponent appComponent = getStaticComponent(AppComponent.class);
             if (appComponent != null) {
                 appComponent.eventHub()
-                        .post(new ComponentEvent(ComponentEvent.Type.Register));
+                        .post(new ComponentEvent(ComponentEvent.Type.Register, type));
             }
         }
     }
@@ -64,7 +76,7 @@ public class ComponentManager {
         AppComponent appComponent = getStaticComponent(AppComponent.class);
         if (appComponent != null) {
             appComponent.eventHub()
-                    .post(new ComponentEvent(ComponentEvent.Type.Register));
+                    .post(new ComponentEvent(ComponentEvent.Type.Register, type));
         }
     }
 

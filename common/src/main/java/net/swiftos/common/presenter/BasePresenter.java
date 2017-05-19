@@ -6,6 +6,10 @@ import net.swiftos.common.protocol.BaseProtocol;
 import net.swiftos.eventposter.core.EventPoster;
 import net.swiftos.eventposter.presenter.Presenter;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * Created by ganyao on 2016/10/26.
  */
@@ -13,6 +17,8 @@ import net.swiftos.eventposter.presenter.Presenter;
 public abstract class BasePresenter extends Presenter implements Navigater.INavigate, BaseProtocol.Presenter {
 
     protected IAsyncSubjectsQueue asyncSubjects;
+
+    protected Map<Class,Object> views = new ConcurrentHashMap<>();
 
     public BasePresenter() {
         BaseApplication.getAppComponent()
@@ -57,5 +63,18 @@ public abstract class BasePresenter extends Presenter implements Navigater.INavi
                 .unRegister(this);
     }
 
+    @Override
+    public <T> void attachView(Class<T> viewType, T view) {
+        views.put(viewType, view);
+    }
+
+    @Override
+    public <T> void detachView(Class<T> viewType) {
+        views.remove(viewType);
+    }
+
+    public <T> T getAttachedView(Class<T> viewType) {
+        return (T) views.get(viewType);
+    }
 
 }

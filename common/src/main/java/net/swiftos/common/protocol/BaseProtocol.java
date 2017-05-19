@@ -23,6 +23,8 @@ public class BaseProtocol {
     public interface Presenter extends IAsyncSubjectsQueue {
         void onViewInited();
         void onViewDestroyed();
+        <T> void attachView(Class<T> viewType, T view);
+        <T> void detachView(Class<T> viewType);
     }
     public interface Model {
         void destroyRequests();

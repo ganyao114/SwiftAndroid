@@ -62,7 +62,7 @@ public class MainActivity extends BaseFeizhaiActivity {
 //        List<IArticleViewAdapter> article = new ArrayList<>();
 //        article.add(new IArticleViewAdapter() {
 //            @Override
-//            public ContentType getType() {
+//            public ContentType getEventType() {
 //                return ContentType.Img;
 //            }
 //
@@ -73,7 +73,7 @@ public class MainActivity extends BaseFeizhaiActivity {
 //        });
 //        article.add(new IArticleViewAdapter() {
 //            @Override
-//            public ContentType getType() {
+//            public ContentType getEventType() {
 //                return ContentType.String;
 //            }
 //

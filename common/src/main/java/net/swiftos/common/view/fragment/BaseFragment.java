@@ -7,7 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import net.swiftos.common.R;
 import net.swiftos.common.presenter.BasePresenter;
 import net.swiftos.common.view.activity.BaseActivity;
 
@@ -118,6 +120,25 @@ public abstract class BaseFragment<T> extends Fragment {
             BasePresenter ownPresenter = (BasePresenter) presenter;
             ownPresenter.destroyQueue();
         }
+    }
+
+    public Object getComponent() {
+        return component;
+    }
+
+    void showMessage(String string) {
+        Toast.makeText(getContext(), string, Toast.LENGTH_SHORT).show();
+    }
+
+    void lockUI() {
+
+    }
+    void unLockUI() {
+
+    }
+
+    void finish() {
+
     }
 
     protected abstract @IdRes int setLayoutId();

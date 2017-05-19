@@ -8,18 +8,28 @@ import net.swiftos.common.event.BaseCustomerEvent;
 
 public class ComponentEvent extends BaseCustomerEvent {
 
-    private Type type;
+    private Type eventType;
+    private Class<?> componentType;
 
-    public ComponentEvent(Type type) {
-        this.type = type;
+    public ComponentEvent(Type eventType, Class<?> componentType) {
+        this.eventType = eventType;
+        this.componentType = componentType;
     }
 
-    public Type getType() {
-        return type;
+    public Class<?> getComponentType() {
+        return componentType;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setComponentType(Class<?> componentType) {
+        this.componentType = componentType;
+    }
+
+    public Type getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(Type eventType) {
+        this.eventType = eventType;
     }
 
     public enum Type {

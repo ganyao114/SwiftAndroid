@@ -26,6 +26,7 @@ import net.swiftos.feizhai.buss.ServiceManager;
 import net.swiftos.feizhai.di.component.DaggerHomeComponent;
 import net.swiftos.feizhai.di.component.HomeComponent;
 import net.swiftos.feizhai.di.module.HomeModule;
+import net.swiftos.feizhai.model.bean.Article;
 import net.swiftos.feizhai.protocol.HomeProtocol;
 import net.swiftos.feizhai.view.fragment.MainFragment;
 
@@ -185,6 +186,11 @@ public class HomeActivity extends BaseActivityWithDrawLayout<HomeComponent> impl
             showMessage("尚未登陆!");
             startActivity(new Intent(this, LoginActivity.class));
         }
+    }
+
+    @Override
+    public void showHotArticles(int page, List<Article> articles) {
+
     }
 
 
