@@ -53,10 +53,7 @@ public class SecFragment extends BaseFragment<HomeProtocol.Presenter> implements
             LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
             topicsAdapter = new TopicListAdapter(getContext(), R.layout.item_topic_list, topics);
             topicsAdapter.setOnItemClickListener(this);
-            layoutManager.setAutoMeasureEnabled(true);
             topicList.setLayoutManager(layoutManager);
-            topicList.setHasFixedSize(true);
-            topicList.setNestedScrollingEnabled(false);
             topicList.setAutoLoadMoreEnable(true);
             topicList.setLoadMoreListener(this);
             topicList.setAdapter(topicsAdapter);
@@ -75,7 +72,8 @@ public class SecFragment extends BaseFragment<HomeProtocol.Presenter> implements
 
     @Override
     public void onLoadMore(View view) {
-
+        topicList.setLoadingMore(false);
+        topicList.getAdapter().notifyDataSetChanged();
     }
 
     @Override

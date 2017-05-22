@@ -17,7 +17,7 @@ public class Article implements Serializable {
 
     private String content;
 
-    private Date ctTime;
+    private long ctTime;
 
     private int ctId;
 
@@ -63,11 +63,11 @@ public class Article implements Serializable {
         this.content = content;
     }
 
-    public Date getCtTime() {
+    public long getCtTime() {
         return ctTime;
     }
 
-    public void setCtTime(Date ctTime) {
+    public void setCtTime(long ctTime) {
         this.ctTime = ctTime;
     }
 

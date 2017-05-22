@@ -39,7 +39,7 @@ public class ViewEventHandler implements IHandler<ViewEventEntity>,OnViewAttachL
     }
 
     @Override
-    public void destory(Object... objects) {
+    public void destroy(Object... objects) {
 
     }
 

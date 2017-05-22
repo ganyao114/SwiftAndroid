@@ -14,6 +14,7 @@ import net.swiftos.feizhai.model.bean.Article;
 import net.swiftos.feizhai.model.bean.ArticleInfo;
 import net.swiftos.feizhai.protocol.HomeProtocol;
 import net.swiftos.feizhai.view.adapter.ArticleListAdapter;
+import net.swiftos.utils.ValidateUtil;
 import net.swiftos.view.banner.ADInfo;
 import net.swiftos.view.banner.ImageCycleView;
 import net.swiftos.view.recyclerview.CommonAdapter;
@@ -24,24 +25,34 @@ import java.util.List;
 
 import android.support.v4.widget.NestedScrollView;
 
+import com.andview.refreshview.XRefreshView;
+import com.jcodecraeer.xrecyclerview.ProgressStyle;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
+
 import butterknife.Bind;
 
 /**
  * Created by ganyao on 2017/4/9.
  */
 
-public class FirstFragment extends BaseFragment<HomeProtocol.Presenter> implements LoadMoreRecyclerView.LoadMoreListener, HomeProtocol.View.SubViewFirst {
+public class FirstFragment extends BaseFragment<HomeProtocol.Presenter>
+        implements LoadMoreRecyclerView.LoadMoreListener
+        , HomeProtocol.View.SubViewFirst, XRecyclerView.LoadingListener {
 
     @Bind(R.id.loop_view)
     ImageCycleView cycleView;
     @Bind(R.id.main_article_list)
-    LoadMoreRecyclerView articleList;
+    XRecyclerView articleList;
     @Bind(R.id.home_main_scroll)
     NestedScrollView scrollView;
 
     private List<ArticleInfo> articleInfos;
 
+    private List<Article> articles = new ArrayList<>();
+
     private CommonAdapter<ArticleInfo> articlesAdapter;
+
+    private int page = 0;
 
     @Override
     protected void onLazyLoad() {
@@ -81,12 +92,14 @@ public class FirstFragment extends BaseFragment<HomeProtocol.Presenter> implemen
             }
             LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
             articlesAdapter = new ArticleListAdapter(getContext(), R.layout.item_topic, articleInfos);
-            layoutManager.setAutoMeasureEnabled(true);
+            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             articleList.setLayoutManager(layoutManager);
-            articleList.setHasFixedSize(true);
+            articleList.setHasFixedSize(false);
             articleList.setNestedScrollingEnabled(false);
-            articleList.setAutoLoadMoreEnable(true);
-            articleList.setLoadMoreListener(this);
+            articleList.setLoadingMoreEnabled(true);
+            articleList.setLoadingMoreProgressStyle(ProgressStyle.BallRotate);
+            articleList.setPullRefreshEnabled(false);
+            articleList.setLoadingListener(this);
             articleList.setAdapter(articlesAdapter);
             ComponentManager.getStaticComponent(AppComponent.class)
                     .mainHandler()
@@ -101,16 +114,45 @@ public class FirstFragment extends BaseFragment<HomeProtocol.Presenter> implemen
     }
 
     @Override
+    protected Class viewType() {
+        return HomeProtocol.View.SubViewFirst.class;
+    }
+
+    @Override
     protected void initView(LayoutInflater inflater, ViewGroup container) {
     }
 
     @Override
     public void onLoadMore(View view) {
-
+        int lastId = articles.size() == 0 ? 0
+                : articles.get(articles.size() - 1).getId();
+        presenter.hotArticles(page + 1, lastId);
     }
 
     @Override
     public void showHotArticles(int page, List<Article> articles) {
+        if (!ValidateUtil.isEmpty(articles)) {
+            this.page = page;
+            int size = this.articles.size();
+            int start = size == 0 ? 0 : size - 1;
+            this.articles.addAll(articles);
+            articleInfos.add(new ArticleInfo());
+            articleList.loadMoreComplete();
+            articleList.getAdapter().notifyDataSetChanged();
+        } else {
+            articleList.loadMoreComplete();
+            articleList.setLoadingMoreEnabled(false);
+            articleList.getAdapter().notifyDataSetChanged();
+        }
+    }
 
+    @Override
+    public void onRefresh() {
+
+    }
+
+    @Override
+    public void onLoadMore() {
+        onLoadMore(view);
     }
 }

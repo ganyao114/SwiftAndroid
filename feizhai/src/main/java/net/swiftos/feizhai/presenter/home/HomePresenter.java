@@ -26,7 +26,6 @@ public class HomePresenter extends BasePresenter implements HomeProtocol.Present
 
     @Override
     public void onViewInited() {
-        hotArticles(0, 0);
     }
 
     @Override
@@ -39,12 +38,18 @@ public class HomePresenter extends BasePresenter implements HomeProtocol.Present
         model.hotArticles(lastId, new BaseAsyncCallback<List<Article>>() {
             @Override
             public void onSuccess(List<Article> articles) {
-
+                HomeProtocol.View.SubViewFirst view = getAttachedView(HomeProtocol.View.SubViewFirst.class);
+                if (view != null) {
+                    view.showHotArticles((Integer) getTag(), articles);
+                }
             }
 
             @Override
             public void onDone(Object tag) {
-
+                HomeProtocol.View.SubViewFirst view = getAttachedView(HomeProtocol.View.SubViewFirst.class);
+                if (view != null) {
+                    view.dismissProgress();
+                }
             }
 
             @Override
@@ -54,12 +59,18 @@ public class HomePresenter extends BasePresenter implements HomeProtocol.Present
 
             @Override
             public void onError(ErrorResponse error) {
-
+                HomeProtocol.View.SubViewFirst view = getAttachedView(HomeProtocol.View.SubViewFirst.class);
+                if (view != null) {
+                    view.showMessage("error!");
+                }
             }
 
             @Override
             public void onFailure(FailureEntity failure) {
-
+                HomeProtocol.View.SubViewFirst view = getAttachedView(HomeProtocol.View.SubViewFirst.class);
+                if (view != null) {
+                    view.showMessage("failure!");
+                }
             }
         });
     }

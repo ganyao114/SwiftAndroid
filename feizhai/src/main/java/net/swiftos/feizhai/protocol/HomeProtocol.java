@@ -15,7 +15,7 @@ import java.util.List;
 public interface HomeProtocol {
     interface View extends BaseProtocol.View {
         void showHotArticles(int page, List<Article> articles);
-        interface SubViewFirst {
+        interface SubViewFirst extends BaseProtocol.View, BaseProtocol.ProgressView {
             void showHotArticles(int page, List<Article> articles);
         }
     }

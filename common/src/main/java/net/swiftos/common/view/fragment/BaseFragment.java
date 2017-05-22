@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import net.swiftos.common.R;
 import net.swiftos.common.presenter.BasePresenter;
+import net.swiftos.common.protocol.BaseProtocol;
 import net.swiftos.common.view.activity.BaseActivity;
 
 import butterknife.ButterKnife;
@@ -19,7 +20,7 @@ import butterknife.ButterKnife;
  * Created by ganyao on 2017/3/7.
  */
 
-public abstract class BaseFragment<T> extends Fragment {
+public abstract class BaseFragment<T> extends Fragment implements BaseProtocol.View, BaseProtocol.ProgressView {
 
     /**
      * 懒加载控制
@@ -45,6 +46,9 @@ public abstract class BaseFragment<T> extends Fragment {
             presenter = setPresenter();
             if (presenter == null) {
                 presenter = (T) getActivityPresenter();
+                if (presenter != null && presenter instanceof BasePresenter) {
+                    ((BasePresenter) presenter).attachView(viewType(), this);
+                }
             } else {
                 isOwnPresenter = true;
                 if (presenter instanceof BasePresenter) {
@@ -54,6 +58,10 @@ public abstract class BaseFragment<T> extends Fragment {
             }
         }
         return view;
+    }
+
+    protected Class viewType() {
+        return getClass();
     }
 
     @Override
@@ -119,6 +127,8 @@ public abstract class BaseFragment<T> extends Fragment {
         if (isOwnPresenter && presenter instanceof BasePresenter) {
             BasePresenter ownPresenter = (BasePresenter) presenter;
             ownPresenter.destroyQueue();
+        } else if (presenter instanceof BasePresenter) {
+            ((BasePresenter) presenter).detachView(viewType());
         }
     }
 
@@ -126,18 +136,33 @@ public abstract class BaseFragment<T> extends Fragment {
         return component;
     }
 
-    void showMessage(String string) {
+    @Override
+    public void showMessage(String string) {
         Toast.makeText(getContext(), string, Toast.LENGTH_SHORT).show();
     }
 
-    void lockUI() {
+    @Override
+    public void lockUI() {
 
     }
-    void unLockUI() {
+
+    @Override
+    public void unLockUI() {
 
     }
 
-    void finish() {
+    @Override
+    public void finish() {
+
+    }
+
+    @Override
+    public void dismissProgress() {
+
+    }
+
+    @Override
+    public void showProgress() {
 
     }
 

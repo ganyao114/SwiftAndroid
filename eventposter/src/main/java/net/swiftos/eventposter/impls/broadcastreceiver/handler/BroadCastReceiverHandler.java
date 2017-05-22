@@ -29,7 +29,7 @@ public class BroadCastReceiverHandler implements IHandler<BroadCastEntity> {
     }
 
     @Override
-    public void destory(Object... objects) {
+    public void destroy(Object... objects) {
 
     }
 

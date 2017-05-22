@@ -66,11 +66,20 @@ public abstract class BasePresenter extends Presenter implements Navigater.INavi
     @Override
     public <T> void attachView(Class<T> viewType, T view) {
         views.put(viewType, view);
+        onViewAttached(viewType, view);
+    }
+
+    protected  <T> void onViewAttached(Class<T> viewType, T view) {
+
     }
 
     @Override
     public <T> void detachView(Class<T> viewType) {
-        views.remove(viewType);
+        onViewDetached(viewType, views.remove(viewType));
+    }
+
+    protected  <T> void onViewDetached(Class<T> viewType, Object remove) {
+
     }
 
     public <T> T getAttachedView(Class<T> viewType) {

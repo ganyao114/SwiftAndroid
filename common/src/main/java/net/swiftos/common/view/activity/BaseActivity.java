@@ -61,6 +61,7 @@ public abstract class BaseActivity<T> extends AppCompatActivity implements Navig
         basePresenter = setPresenter();
         initView();
         if (basePresenter != null) {
+            basePresenter.attachView(viewType(), this);
             basePresenter.onViewInited();
         }
         String navigateKey = getIntent().getStringExtra(Navigater.NAVI_CODE);
@@ -68,6 +69,10 @@ public abstract class BaseActivity<T> extends AppCompatActivity implements Navig
             onNavigate(Navigater.navigateIn(navigateKey));
         }
         initData();
+    }
+
+    protected Class viewType() {
+        return getClass();
     }
 
     @Override
@@ -89,6 +94,7 @@ public abstract class BaseActivity<T> extends AppCompatActivity implements Navig
                 .eventHub()
                 .unRegister(this);
         if (basePresenter != null) {
+            basePresenter.detachView(viewType());
             basePresenter.onViewDestroyed();
         }
     }

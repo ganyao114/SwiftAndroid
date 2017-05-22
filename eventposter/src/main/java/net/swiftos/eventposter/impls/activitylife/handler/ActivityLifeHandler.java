@@ -41,7 +41,7 @@ public class ActivityLifeHandler implements IHandler,Application.ActivityLifecyc
     }
 
     @Override
-    public void destory(Object... objects) {
+    public void destroy(Object... objects) {
         Application application = (Application) objects[0];
         synchronized (this){
             if (!isRegist)

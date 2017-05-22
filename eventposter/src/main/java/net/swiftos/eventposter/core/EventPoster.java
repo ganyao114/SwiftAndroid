@@ -42,7 +42,7 @@ public class EventPoster {
 
     public static void destory(Application application){
         app = null;
-        HandlerFactory.getHandler(ActivityLifeHandler.class).destory(application);
+        HandlerFactory.getHandler(ActivityLifeHandler.class).destroy(application);
     }
 
     public static Application getApp(){

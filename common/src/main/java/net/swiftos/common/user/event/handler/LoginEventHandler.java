@@ -15,7 +15,7 @@ public class LoginEventHandler implements IHandler<LoginEventEntity> {
     }
 
     @Override
-    public void destory(Object... objects) {
+    public void destroy(Object... objects) {
 
     }
 

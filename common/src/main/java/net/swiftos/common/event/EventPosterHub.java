@@ -15,7 +15,7 @@ public class EventPosterHub implements IEventHub {
 
     @Override
     public void postSticky(Object event) {
-        EventPoster.with(CustomEventHandler.class).broadcaststicky(event);
+        EventPoster.with(CustomEventHandler.class).broadcastSticky(event);
     }
 
     @Override

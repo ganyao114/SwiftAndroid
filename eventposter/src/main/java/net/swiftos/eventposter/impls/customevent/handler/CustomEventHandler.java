@@ -28,7 +28,7 @@ public class CustomEventHandler implements IHandler<CustomEventEntity>{
     }
 
     @Override
-    public void destory(Object... objects) {
+    public void destroy(Object... objects) {
 
     }
 
@@ -171,7 +171,7 @@ public class CustomEventHandler implements IHandler<CustomEventEntity>{
         }
     }
 
-    public void broadcaststicky(Object object){
+    public void broadcastSticky(Object object){
         stickyMap.put(object.getClass(),object);
         broadcast(object);
     }
@@ -201,7 +201,7 @@ public class CustomEventHandler implements IHandler<CustomEventEntity>{
         }
 
         public void BroadCastSticky(){
-            broadcaststicky(object);
+            broadcastSticky(object);
         }
 
         public void PostSticky(String name){

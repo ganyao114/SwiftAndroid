@@ -1,7 +1,11 @@
 package net.swiftos.common.api;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import net.swiftos.common.model.entity.APIServiceConfigs;
 
+import java.text.DateFormat;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -40,9 +44,10 @@ public class RetrofitAPIGenerator implements IAPIGenerator {
 
     protected Retrofit getRetrofit() {
         if (retrofit == null) {
+            Gson gson = new GsonBuilder().setDateFormat(DateFormat.DEFAULT).create();
             retrofit = new Retrofit.Builder().client(getOkHttpClient())
                     .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .build();
         }

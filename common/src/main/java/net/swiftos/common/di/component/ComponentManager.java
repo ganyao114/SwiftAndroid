@@ -20,7 +20,7 @@ public class ComponentManager {
     /**
      * lifecycle: static
      */
-    private static Map<Class,Object> components = new ConcurrentHashMap<>();
+    private static Map<Object,Object> components = new ConcurrentHashMap<>();
 
     /**
      * 不影响 Dagger2 生命周期管理
@@ -35,7 +35,7 @@ public class ComponentManager {
         AppComponent appComponent = getStaticComponent(AppComponent.class);
         if (appComponent != null) {
             appComponent.eventHub()
-                    .post(new ComponentEvent(ComponentEvent.Type.Register, type));
+                    .postSticky(new ComponentEvent(ComponentEvent.Type.Register, type));
         }
     }
 
@@ -66,7 +66,7 @@ public class ComponentManager {
             AppComponent appComponent = getStaticComponent(AppComponent.class);
             if (appComponent != null) {
                 appComponent.eventHub()
-                        .post(new ComponentEvent(ComponentEvent.Type.Register, type));
+                        .postSticky(new ComponentEvent(ComponentEvent.Type.Register, type));
             }
         }
     }
@@ -76,7 +76,7 @@ public class ComponentManager {
         AppComponent appComponent = getStaticComponent(AppComponent.class);
         if (appComponent != null) {
             appComponent.eventHub()
-                    .post(new ComponentEvent(ComponentEvent.Type.Register, type));
+                    .postSticky(new ComponentEvent(ComponentEvent.Type.Register, type));
         }
     }
 
