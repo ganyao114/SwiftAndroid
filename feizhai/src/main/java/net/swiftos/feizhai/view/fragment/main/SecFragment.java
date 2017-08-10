@@ -1,28 +1,22 @@
 package net.swiftos.feizhai.view.fragment.main;
 
 import android.content.Intent;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.swiftos.common.di.component.AppComponent;
-import net.swiftos.common.di.component.ComponentManager;
 import net.swiftos.common.view.fragment.BaseFragment;
 import net.swiftos.feizhai.R;
-import net.swiftos.feizhai.model.bean.ArticleInfo;
 import net.swiftos.feizhai.model.bean.Topic;
 import net.swiftos.feizhai.protocol.HomeProtocol;
 import net.swiftos.feizhai.view.activity.TopicActivity;
-import net.swiftos.feizhai.view.adapter.ArticleListAdapter;
-import net.swiftos.feizhai.view.adapter.TopicListAdapter;
+import net.swiftos.feizhai.view.adapter.TopicListAdapterDemo;
 import net.swiftos.view.recyclerview.CommonAdapter;
 import net.swiftos.view.recyclerview.LoadMoreRecyclerView;
 import net.swiftos.view.recyclerview.OnItemClickListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 
@@ -51,7 +45,7 @@ public class SecFragment extends BaseFragment<HomeProtocol.Presenter> implements
                 topics.add(new Topic());
             }
             LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-            topicsAdapter = new TopicListAdapter(getContext(), R.layout.item_topic_list, topics);
+            topicsAdapter = new TopicListAdapterDemo(getContext(), R.layout.item_topic_list, topics);
             topicsAdapter.setOnItemClickListener(this);
             topicList.setLayoutManager(layoutManager);
             topicList.setAutoLoadMoreEnable(true);

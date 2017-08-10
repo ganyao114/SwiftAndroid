@@ -8,6 +8,7 @@ import com.jude.utils.JUtils;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
 
+import net.swiftos.common.di.builder.ComponentBuilder;
 import net.swiftos.common.di.component.AppComponent;
 import net.swiftos.common.di.component.ComponentManager;
 import net.swiftos.common.di.component.DaggerAppComponent;
@@ -39,6 +40,7 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         application = this;
+        init(setMainPresenter());
     }
 
     private static Application application;
@@ -56,10 +58,17 @@ public class BaseApplication extends Application {
                 .build();
         ComponentManager.registerStaticComponent(AppComponent.class, appComponent);
         EventPoster.init(this);
-        Presenter.establish();
-        Presenter.With(null).start(presenter);
+        if (presenter != null) {
+            Presenter.establish();
+            Presenter.With(null).start(presenter);
+        }
         JUtils.initialize(this);
         registerActivityLifecycleCallbacks(JActivityManager.getActivityLifecycleCallbacks());
+        if (setComponentsBuilderMap() != null) {
+            for (Class map:setComponentsBuilderMap()) {
+                ComponentBuilder.addBuildMap(map);
+            }
+        }
     }
 
     public static void init(Class<? extends BasePresenter> presenter, Application app) {
@@ -100,4 +109,13 @@ public class BaseApplication extends Application {
             SwiftLog.LOGE("PicassoLoader", "picasso init error");
         }
     }
+
+    protected Class[] setComponentsBuilderMap() {
+        return null;
+    }
+
+    protected Class<? extends BasePresenter> setMainPresenter() {
+        return null;
+    }
+
 }

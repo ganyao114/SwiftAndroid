@@ -1,24 +1,14 @@
 package net.swiftos.common.ospermission;
 
-import android.Manifest;
-import android.widget.Toast;
-
 import com.tbruyelle.rxpermissions.RxPermissions;
 
 import net.swiftos.common.application.BaseApplication;
-import net.swiftos.common.log.SwiftLog;
-import net.swiftos.eventposter.core.EventPoster;
-import net.swiftos.eventposter.impls.customevent.handler.CustomEventHandler;
 import net.swiftos.eventposter.utils.LOG;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.aspectj.lang.reflect.MethodSignature;
-
-import java.lang.reflect.Method;
 
 /**
  * Created by gy on 2017/2/27.

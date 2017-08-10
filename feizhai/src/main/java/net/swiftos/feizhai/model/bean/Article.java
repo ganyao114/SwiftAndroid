@@ -1,7 +1,9 @@
 package net.swiftos.feizhai.model.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by ganyao on 2017/5/17.
@@ -30,6 +32,8 @@ public class Article implements Serializable {
     private int comments;
 
     private int marks;
+
+    private String position;
 
     public Integer getId() {
         return id;
@@ -117,5 +121,17 @@ public class Article implements Serializable {
 
     public void setMarks(int marks) {
         this.marks = marks;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public List<String> getPics() {
+        return new ArrayList<>();
     }
 }

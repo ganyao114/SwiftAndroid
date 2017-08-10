@@ -16,10 +16,9 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import net.swiftos.common.R;
 import net.swiftos.common.application.BaseApplication;
-import net.swiftos.common.di.component.ComponentManager;
+import net.swiftos.common.di.builder.ComponentBuilder;
 import net.swiftos.common.navigation.Navigater;
 import net.swiftos.common.presenter.BasePresenter;
-import net.swiftos.eventposter.core.EventPoster;
 import net.swiftos.utils.ValidateUtil;
 
 import butterknife.ButterKnife;
@@ -168,7 +167,9 @@ public abstract class BaseActivity<T> extends AppCompatActivity implements Navig
 
     protected abstract @IdRes int barColor();
 
-    protected abstract T setupActivityComponent();
+    protected T setupActivityComponent() {
+        return (T) ComponentBuilder.inject(this);
+    }
 
     protected abstract BasePresenter setPresenter();
 

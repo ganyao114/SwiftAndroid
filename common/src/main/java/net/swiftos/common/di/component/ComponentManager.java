@@ -22,6 +22,8 @@ public class ComponentManager {
      */
     private static Map<Object,Object> components = new ConcurrentHashMap<>();
 
+    private static Map<String,Class> typeMap = new ConcurrentHashMap<>();
+
     /**
      * 不影响 Dagger2 生命周期管理
      */
@@ -39,6 +41,16 @@ public class ComponentManager {
         }
     }
 
+    public static <T> void registerStaticComponent(Class type, T instance, String key) {
+        components.put(type, instance);
+        typeMap.put(key, type);
+        AppComponent appComponent = getStaticComponent(AppComponent.class);
+        if (appComponent != null) {
+            appComponent.eventHub()
+                    .postSticky(new ComponentEvent(ComponentEvent.Type.Register, type));
+        }
+    }
+
     public static <T> T getStaticComponent(Class<T> type) {
         synchronized (type) {
             T t = (T) components.get(type);
@@ -48,6 +60,13 @@ public class ComponentManager {
             }
             return t;
         }
+    }
+
+    public static <T> T getStaticComponent(String key) {
+        Class type = typeMap.get(key);
+        if (type == null)
+            return null;
+        return (T) components.get(type);
     }
 
     public static <T> T initComponent(Class<T> type) {

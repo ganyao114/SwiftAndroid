@@ -18,4 +18,14 @@
     <dimen name="image_final_width">32dp</dimen>
     <dimen name="spacing_normal">16dp</dimen>
 
+
+    <dimen name="activity_margin_5">5dp</dimen>
+    <dimen name="activity_margin_10">10dp</dimen>
+    <dimen name="activity_margin_16">16dp</dimen>
+
+    <dimen name="text_size_14">14dp</dimen>
+    <dimen name="text_size_16">16dp</dimen>
+    <dimen name="text_size_18">18dp</dimen>
+    <dimen name="text_size_20">20dp</dimen>
+
 </resources>

@@ -1,6 +1,6 @@
 package net.swiftos.common.thread;
 
-import net.swiftos.eventposter.impls.customevent.entity.RunContextType;
+import net.swiftos.eventposter.modules.customevent.entity.RunContextType;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

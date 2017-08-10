@@ -1,36 +1,19 @@
 package net.swiftos.feizhai.view.activity;
 
 import android.content.Intent;
-import android.os.Looper;
-import android.support.annotation.MainThread;
-import android.support.annotation.UiThread;
-import android.support.annotation.WorkerThread;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import net.swiftos.common.application.BaseApplication;
 import net.swiftos.common.presenter.BasePresenter;
-import net.swiftos.common.thread.Async;
-import net.swiftos.common.thread.AsyncSuccessCallback;
-import net.swiftos.common.view.activity.BaseActivity;
-import net.swiftos.eventposter.core.EventPoster;
-import net.swiftos.eventposter.impls.customevent.annotation.InjectEvent;
-import net.swiftos.eventposter.impls.customevent.entity.RunContextType;
-import net.swiftos.eventposter.impls.customevent.handler.CustomEventHandler;
-import net.swiftos.eventposter.impls.viewevent.annotation.OnClick;
-import net.swiftos.eventposter.impls.viewevent.handler.ViewEventHandler;
 import net.swiftos.feizhai.R;
 import net.swiftos.feizhai.buss.ServiceManager;
 import net.swiftos.feizhai.di.component.DaggerLoginComponent;
 import net.swiftos.feizhai.di.component.LoginComponent;
 import net.swiftos.feizhai.di.module.LoginModule;
 import net.swiftos.feizhai.protocol.LoginProtocol;
-import net.swiftos.feizhai.test.ITestEvent;
-import net.swiftos.feizhai.test.TestEvent;
 import net.swiftos.view.anime.CircularAnim;
 
 import butterknife.Bind;

@@ -8,6 +8,7 @@ import android.os.Looper;
 import net.swiftos.common.api.IAPIGenerator;
 import net.swiftos.common.api.RetrofitAPIGenerator;
 import net.swiftos.common.cache.IKVDiskCache;
+import net.swiftos.common.cache.IKVRamCache;
 import net.swiftos.common.cache.KVACacheImpl;
 import net.swiftos.common.event.IEventHub;
 import net.swiftos.common.model.net.IBaseHttpModel;
@@ -68,6 +69,12 @@ public class AppModule implements IAppModule {
     @Singleton
     public ACache provideACache() {
         return ACache.get(globalApp);
+    }
+
+    @Provides
+    @Singleton
+    public IKVRamCache provideKVRamCache() {
+        return appModule.provideKVRamCache();
     }
 
     @Provides

@@ -10,8 +10,8 @@ import java.util.Map;
  */
 public class LruCache<K, V> implements LruCacheCallback<V>, IKVRamCache<K,V> {
 
-    //when mem available < 128 MB
-    private long criticalMemSize = 128 * 1024 * 1024;
+    //when mem available < 32 MB
+    private long criticalMemSize = 32 * 1024 * 1024;
 
     public final LinkedHashMap<K, V> map;
 

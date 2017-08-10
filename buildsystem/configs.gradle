@@ -19,7 +19,7 @@ ext {
     junitVersion = "4.12"
     tinkerVersion = "1.7.7"
     multidexVersion = "1.0.1"
-    aspectjVersion = "1.8.9"
+    aspectjVersion = "1.8.+"
     cranimelibVersion = "0.3.4"
     eventbusVersion = "3.0.0"
     emojilibVersion = "1.4.1"
@@ -60,7 +60,8 @@ ext {
         filedownloader: "com.liulishuo.filedownloader:library:${filedownloaderVersion}",
         utils: "com.jude:utils:${utilsVersion}",
         arouter_api: "com.alibaba:arouter-api:${arouterVersion}",
-        arouter_compiler: "com.alibaba:arouter-compiler:1.1.2"
+        arouter_compiler: "com.alibaba:arouter-compiler:1.1.2",
+        photo_picker: "me.iwf.photopicker:PhotoPicker:0.8.4@aar"
     ]
 
     classpaths = [

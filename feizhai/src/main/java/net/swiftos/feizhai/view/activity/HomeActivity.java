@@ -1,8 +1,6 @@
 package net.swiftos.feizhai.view.activity;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -19,8 +17,8 @@ import net.swiftos.common.presenter.BasePresenter;
 import net.swiftos.common.user.RegisteredEvent;
 import net.swiftos.common.user.aop.LoginChecked;
 import net.swiftos.common.user.aop.LoginRequired;
-import net.swiftos.eventposter.impls.customevent.annotation.InjectEvent;
-import net.swiftos.eventposter.impls.customevent.entity.RunContextType;
+import net.swiftos.eventposter.modules.customevent.annotation.InjectEvent;
+import net.swiftos.eventposter.modules.customevent.entity.RunContextType;
 import net.swiftos.feizhai.R;
 import net.swiftos.feizhai.buss.ServiceManager;
 import net.swiftos.feizhai.di.component.DaggerHomeComponent;
@@ -111,14 +109,6 @@ public class HomeActivity extends BaseActivityWithDrawLayout<HomeComponent> impl
     @Override
     protected int barColor() {
         return R.color.primary;
-    }
-
-    @Override
-    protected HomeComponent setupActivityComponent() {
-        return DaggerHomeComponent.builder()
-                .feiZhaiAPIComponent(ServiceManager.getFeiZhaiAPIComponent())
-                .homeModule(new HomeModule(this))
-                .build();
     }
 
     @Override

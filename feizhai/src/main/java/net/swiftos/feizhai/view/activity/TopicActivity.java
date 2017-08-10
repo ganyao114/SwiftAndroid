@@ -16,7 +16,7 @@ import net.swiftos.feizhai.di.component.TopicComponent;
 import net.swiftos.feizhai.di.module.TopicModule;
 import net.swiftos.feizhai.model.bean.ArticleInfo;
 import net.swiftos.feizhai.protocol.TopicProtocol;
-import net.swiftos.feizhai.view.adapter.ArticleListAdapter;
+import net.swiftos.feizhai.view.adapter.ArticleListAdapterDemo;
 import net.swiftos.view.recyclerview.CommonAdapter;
 import net.swiftos.view.recyclerview.LoadMoreRecyclerView;
 
@@ -60,7 +60,7 @@ public class TopicActivity extends BaseRefreshActivity<TopicComponent> implement
                 articleInfos.add(new ArticleInfo());
             }
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-            articlesAdapter = new ArticleListAdapter(this, R.layout.item_topic, articleInfos);
+            articlesAdapter = new ArticleListAdapterDemo(this, R.layout.item_topic, articleInfos);
             layoutManager.setAutoMeasureEnabled(true);
             articleList.setLayoutManager(layoutManager);
             articleList.setHasFixedSize(true);

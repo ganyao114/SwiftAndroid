@@ -7,7 +7,7 @@ import android.os.Looper;
 import net.swiftos.eventposter.exception.EventInvokeException;
 import net.swiftos.eventposter.invoker.pool.impl.MySigleThreadQueue;
 import net.swiftos.eventposter.invoker.pool.impl.MyWorkThreadQueue;
-import net.swiftos.eventposter.impls.customevent.entity.RunContextType;
+import net.swiftos.eventposter.modules.customevent.entity.RunContextType;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

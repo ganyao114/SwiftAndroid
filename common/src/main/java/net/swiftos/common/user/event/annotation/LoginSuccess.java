@@ -1,7 +1,7 @@
 package net.swiftos.common.user.event.annotation;
 
 import net.swiftos.eventposter.annotation.EventBase;
-import net.swiftos.eventposter.impls.activitylife.handler.ActivityLifeHandler;
+import net.swiftos.eventposter.modules.activitylife.handler.ActivityLifeHandler;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

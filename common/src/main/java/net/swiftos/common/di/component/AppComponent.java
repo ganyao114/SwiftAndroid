@@ -5,6 +5,7 @@ import android.os.Handler;
 
 import net.swiftos.common.api.IAPIGenerator;
 import net.swiftos.common.cache.IKVDiskCache;
+import net.swiftos.common.cache.IKVRamCache;
 import net.swiftos.common.cache.KVACacheImpl;
 import net.swiftos.common.di.module.AppModule;
 import net.swiftos.common.event.IEventHub;
@@ -43,6 +44,8 @@ public interface AppComponent {
     ConcurrentHashMap globalData();
 
     IAPIGenerator apiGenerator();
+
+    IKVRamCache kvRamCache();
 
     IKVDiskCache kvDiskCache();
 

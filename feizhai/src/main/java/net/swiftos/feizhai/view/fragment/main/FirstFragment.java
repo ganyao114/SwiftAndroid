@@ -13,7 +13,7 @@ import net.swiftos.feizhai.R;
 import net.swiftos.feizhai.model.bean.Article;
 import net.swiftos.feizhai.model.bean.ArticleInfo;
 import net.swiftos.feizhai.protocol.HomeProtocol;
-import net.swiftos.feizhai.view.adapter.ArticleListAdapter;
+import net.swiftos.feizhai.view.adapter.ArticleListAdapterDemo;
 import net.swiftos.utils.ValidateUtil;
 import net.swiftos.view.banner.ADInfo;
 import net.swiftos.view.banner.ImageCycleView;
@@ -25,11 +25,11 @@ import java.util.List;
 
 import android.support.v4.widget.NestedScrollView;
 
-import com.andview.refreshview.XRefreshView;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import butterknife.Bind;
+import android.support.v4.widget.SwipeRefreshLayout;
 
 /**
  * Created by ganyao on 2017/4/9.
@@ -37,7 +37,8 @@ import butterknife.Bind;
 
 public class FirstFragment extends BaseFragment<HomeProtocol.Presenter>
         implements LoadMoreRecyclerView.LoadMoreListener
-        , HomeProtocol.View.SubViewFirst, XRecyclerView.LoadingListener {
+        , HomeProtocol.View.SubViewFirst, XRecyclerView.LoadingListener
+        , SwipeRefreshLayout.OnRefreshListener {
 
     @Bind(R.id.loop_view)
     ImageCycleView cycleView;
@@ -45,6 +46,8 @@ public class FirstFragment extends BaseFragment<HomeProtocol.Presenter>
     XRecyclerView articleList;
     @Bind(R.id.home_main_scroll)
     NestedScrollView scrollView;
+    @Bind(R.id.main_refresh_layout)
+    SwipeRefreshLayout refreshLayout;
 
     private List<ArticleInfo> articleInfos;
 
@@ -57,6 +60,7 @@ public class FirstFragment extends BaseFragment<HomeProtocol.Presenter>
     @Override
     protected void onLazyLoad() {
         super.onLazyLoad();
+        refreshLayout.setOnRefreshListener(this);
         initAds();
         initArticles();
     }
@@ -91,12 +95,12 @@ public class FirstFragment extends BaseFragment<HomeProtocol.Presenter>
                 articleInfos.add(new ArticleInfo());
             }
             LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-            articlesAdapter = new ArticleListAdapter(getContext(), R.layout.item_topic, articleInfos);
+            articlesAdapter = new ArticleListAdapterDemo(getContext(), R.layout.item_topic, articleInfos);
             layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             articleList.setLayoutManager(layoutManager);
             articleList.setHasFixedSize(false);
             articleList.setNestedScrollingEnabled(false);
-            articleList.setLoadingMoreEnabled(true);
+            articleList.setLoadingMoreEnabled(false);
             articleList.setLoadingMoreProgressStyle(ProgressStyle.BallRotate);
             articleList.setPullRefreshEnabled(false);
             articleList.setLoadingListener(this);
@@ -154,5 +158,15 @@ public class FirstFragment extends BaseFragment<HomeProtocol.Presenter>
     @Override
     public void onLoadMore() {
         onLoadMore(view);
+    }
+
+    @Override
+    public void showProgress() {
+        refreshLayout.setEnabled(true);
+    }
+
+    @Override
+    public void dismissProgress() {
+        refreshLayout.setEnabled(false);
     }
 }

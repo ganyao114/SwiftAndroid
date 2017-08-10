@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import net.swiftos.common.R;
+import net.swiftos.common.di.builder.ComponentBuilder;
 import net.swiftos.common.presenter.BasePresenter;
 import net.swiftos.common.protocol.BaseProtocol;
 import net.swiftos.common.view.activity.BaseActivity;
@@ -171,7 +171,7 @@ public abstract class BaseFragment<T> extends Fragment implements BaseProtocol.V
     protected abstract void initView(LayoutInflater inflater, ViewGroup container);
 
     protected Object setComponent() {
-        return null;
+        return ComponentBuilder.build(this);
     }
 
     protected T setPresenter() {

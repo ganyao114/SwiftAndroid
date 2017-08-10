@@ -3,7 +3,7 @@ package net.swiftos.eventposter.core;
 import android.app.Application;
 
 import net.swiftos.eventposter.factory.HandlerFactory;
-import net.swiftos.eventposter.impls.activitylife.handler.ActivityLifeHandler;
+import net.swiftos.eventposter.modules.activitylife.handler.ActivityLifeHandler;
 import net.swiftos.eventposter.template.IHandler;
 
 /**

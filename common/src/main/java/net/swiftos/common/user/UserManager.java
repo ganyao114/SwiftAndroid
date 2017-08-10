@@ -6,8 +6,6 @@ import net.swiftos.common.user.di.DaggerUserManagerComponent;
 import net.swiftos.common.user.di.UserManagerModule;
 import net.swiftos.common.user.entity.IUserInfo;
 import net.swiftos.common.user.entity.Users;
-import net.swiftos.eventposter.core.EventPoster;
-import net.swiftos.eventposter.impls.customevent.handler.CustomEventHandler;
 import net.swiftos.common.user.di.UserManagerComponent;
 import net.swiftos.common.user.entity.IUser;
 

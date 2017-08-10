@@ -2,6 +2,7 @@ package net.swiftos.common.di.module;
 
 import net.swiftos.common.api.IAPIGenerator;
 import net.swiftos.common.cache.IKVDiskCache;
+import net.swiftos.common.cache.IKVRamCache;
 import net.swiftos.common.event.IEventHub;
 import net.swiftos.common.model.net.IBaseHttpModel;
 import net.swiftos.common.model.net.IImageLoader;
@@ -14,6 +15,8 @@ import net.swiftos.common.presenter.IAsyncSubjectsQueue;
  */
 
 public interface IAppModule {
+
+    IKVRamCache provideKVRamCache();
 
     IKVDiskCache provideKVDiskCache();
 

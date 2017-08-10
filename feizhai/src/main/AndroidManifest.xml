@@ -43,6 +43,9 @@
         <activity android:name=".view.activity.RegisterActivity"
             android:theme="@style/ImageTranslucentTheme">
         </activity>
+        <activity android:name=".view.activity.NewArticleActivity"
+            android:theme="@style/ImageTranslucentTheme">
+        </activity>
     </application>
 
 </manifest>

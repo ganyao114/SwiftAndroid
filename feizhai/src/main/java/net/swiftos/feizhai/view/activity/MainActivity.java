@@ -1,29 +1,21 @@
 package net.swiftos.feizhai.view.activity;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.IdRes;
-import android.support.annotation.MainThread;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import net.swiftos.common.application.BaseApplication;
 import net.swiftos.common.ospermission.PermissionCheck;
 import net.swiftos.common.presenter.BasePresenter;
-import net.swiftos.eventposter.impls.customevent.annotation.InjectEvent;
-import net.swiftos.eventposter.impls.customevent.entity.RunContextType;
+import net.swiftos.eventposter.modules.customevent.annotation.InjectEvent;
+import net.swiftos.eventposter.modules.customevent.entity.RunContextType;
 import net.swiftos.feizhai.R;
 import net.swiftos.common.user.aop.DebugLog;
 import net.swiftos.common.user.aop.LoginChecked;
 import net.swiftos.common.user.aop.LoginRequired;
 import net.swiftos.view.articleview.ArticleTextView;
 import net.swiftos.view.articleview.ArticleView;
-import net.swiftos.view.nineimagegroupview.NineImageAdapter;
-import net.swiftos.view.nineimagegroupview.NineImageGroupView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 

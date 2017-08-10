@@ -85,7 +85,7 @@ dependencies {
     compile rootProject.ext.dependencies.filedownloader
     compile rootProject.ext.dependencies.utils
     compile rootProject.ext.dependencies.arouter_api
-    compile 'com.huxq17.xrefreshview:xrefreshview:3.6.9'
     compile 'com.jcodecraeer:xrecyclerview:1.3.2'
+    compile rootProject.ext.dependencies.photo_picker
     compile project(path: ':eventposter')
 }

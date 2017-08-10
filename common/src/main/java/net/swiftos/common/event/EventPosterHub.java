@@ -1,7 +1,7 @@
 package net.swiftos.common.event;
 
 import net.swiftos.eventposter.core.EventPoster;
-import net.swiftos.eventposter.impls.customevent.handler.CustomEventHandler;
+import net.swiftos.eventposter.modules.customevent.handler.CustomEventHandler;
 
 /**
  * Created by ganyao on 2017/3/20.

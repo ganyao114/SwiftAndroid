@@ -3,7 +3,9 @@ package net.swiftos.common.di.module;
 import net.swiftos.common.api.IAPIGenerator;
 import net.swiftos.common.api.RetrofitAPIGenerator;
 import net.swiftos.common.cache.IKVDiskCache;
+import net.swiftos.common.cache.IKVRamCache;
 import net.swiftos.common.cache.KVACacheImpl;
+import net.swiftos.common.cache.LruCache;
 import net.swiftos.common.event.EventPosterHub;
 import net.swiftos.common.event.IEventHub;
 import net.swiftos.common.model.net.IBaseHttpModel;
@@ -22,6 +24,11 @@ import dagger.Provides;
  */
 
 public class DefaultAppModule implements IAppModule {
+
+    @Override
+    public IKVRamCache provideKVRamCache() {
+        return new LruCache(1024);
+    }
 
     @Override
     public IKVDiskCache provideKVDiskCache() {
