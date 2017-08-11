@@ -19,6 +19,7 @@ public class BaseProtocol {
         void unLockUI();
         void finish();
         T getComponent();
+        Object getParentComponent();
     }
     public interface Presenter extends IAsyncSubjectsQueue {
         void onViewInited();

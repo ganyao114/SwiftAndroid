@@ -31,8 +31,11 @@ public abstract class BaseFragment<T> extends Fragment implements BaseProtocol.V
     protected String name;
 
     //自己的 presenter
-    protected T presenter;
-    protected Object component;
+    protected BasePresenter presenter;
+    protected T component;
+
+    //父 Component
+    protected Object parentComponent;
 
     protected boolean isOwnPresenter = false;
 
@@ -43,16 +46,22 @@ public abstract class BaseFragment<T> extends Fragment implements BaseProtocol.V
             ButterKnife.bind(this, view);
             initView(inflater, container);
             component = setComponent();
+            if (component == null) {
+                parentComponent = getParentComponent();
+                if (parentComponent != null) {
+                    ComponentBuilder.injectOnly(parentComponent, this);
+                }
+            }
             presenter = setPresenter();
             if (presenter == null) {
-                presenter = (T) getActivityPresenter();
-                if (presenter != null && presenter instanceof BasePresenter) {
-                    ((BasePresenter) presenter).attachView(viewType(), this);
+                presenter = getActivityPresenter();
+                if (presenter != null) {
+                    presenter.attachView(viewType(), this);
                 }
             } else {
                 isOwnPresenter = true;
                 if (presenter instanceof BasePresenter) {
-                    BasePresenter ownPresenter = (BasePresenter) presenter;
+                    BasePresenter ownPresenter = presenter;
                     ownPresenter.onViewInited();
                 }
             }
@@ -132,8 +141,18 @@ public abstract class BaseFragment<T> extends Fragment implements BaseProtocol.V
         }
     }
 
-    public Object getComponent() {
+    public T getComponent() {
         return component;
+    }
+
+    @Override
+    public Object getParentComponent() {
+        if (getActivity() instanceof BaseProtocol.View) {
+            BaseProtocol.View ac = (BaseProtocol.View) getActivity();
+            return ac.getComponent();
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -170,11 +189,11 @@ public abstract class BaseFragment<T> extends Fragment implements BaseProtocol.V
 
     protected abstract void initView(LayoutInflater inflater, ViewGroup container);
 
-    protected Object setComponent() {
-        return ComponentBuilder.build(this);
+    protected T setComponent() {
+        return (T) ComponentBuilder.inject(this);
     }
 
-    protected T setPresenter() {
+    protected BasePresenter setPresenter() {
         return null;
     }
 

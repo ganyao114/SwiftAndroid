@@ -130,7 +130,7 @@ public class FirstFragment extends BaseFragment<HomeProtocol.Presenter>
     public void onLoadMore(View view) {
         int lastId = articles.size() == 0 ? 0
                 : articles.get(articles.size() - 1).getId();
-        presenter.hotArticles(page + 1, lastId);
+//        presenter.hotArticles(page + 1, lastId);
     }
 
     @Override

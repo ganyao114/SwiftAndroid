@@ -2,6 +2,7 @@ package net.swiftos.common.di.component;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 
+import net.swiftos.common.di.builder.ComponentBuilder;
 import net.swiftos.common.user.UserManager;
 import net.swiftos.common.user.di.UserManagerComponent;
 
@@ -54,9 +55,16 @@ public class ComponentManager {
     public static <T> T getStaticComponent(Class<T> type) {
         synchronized (type) {
             T t = (T) components.get(type);
-            if (t == null && wrappers.containsKey(type)) {
-                t = (T) wrappers.get(type).initer.init();
-                components.put(type, t);
+            if (t == null) {
+                if (wrappers.containsKey(type)) {
+                    t = (T) wrappers.get(type).initer.init();
+                    components.put(type, t);
+                } else {
+                    t = ComponentBuilder.build(type);
+                    if (t != null) {
+                        components.put(type, t);
+                    }
+                }
             }
             return t;
         }
@@ -66,7 +74,7 @@ public class ComponentManager {
         Class type = typeMap.get(key);
         if (type == null)
             return null;
-        return (T) components.get(type);
+        return (T) getStaticComponent(type);
     }
 
     public static <T> T initComponent(Class<T> type) {

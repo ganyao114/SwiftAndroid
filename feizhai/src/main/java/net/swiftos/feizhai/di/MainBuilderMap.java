@@ -13,11 +13,10 @@ import net.swiftos.feizhai.protocol.HomeProtocol;
 public class MainBuilderMap {
 
     public static HomeComponent buildHomeComponent(HomeProtocol.View view) {
-        HomeComponent component =  DaggerHomeComponent.builder()
+        HomeComponent component = DaggerHomeComponent.builder()
                 .feiZhaiAPIComponent(ServiceManager.getFeiZhaiAPIComponent())
                 .homeModule(new HomeModule(view))
                 .build();
-        component.inject(view);
         return component;
     }
 

@@ -86,4 +86,8 @@ public abstract class BasePresenter extends Presenter implements Navigater.INavi
         return (T) views.get(viewType);
     }
 
+    @Override
+    public <T> void onNavigate(T data) {
+
+    }
 }

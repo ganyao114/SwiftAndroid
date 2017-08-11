@@ -19,6 +19,7 @@ import net.swiftos.common.application.BaseApplication;
 import net.swiftos.common.di.builder.ComponentBuilder;
 import net.swiftos.common.navigation.Navigater;
 import net.swiftos.common.presenter.BasePresenter;
+import net.swiftos.common.protocol.BaseProtocol;
 import net.swiftos.utils.ValidateUtil;
 
 import butterknife.ButterKnife;
@@ -27,7 +28,7 @@ import butterknife.ButterKnife;
  * T = component type
  * Created by ganyao on 2016/10/26.
  */
-public abstract class BaseActivity<T> extends AppCompatActivity implements Navigater.INavigate {
+public abstract class BaseActivity<T> extends AppCompatActivity implements Navigater.INavigate, BaseProtocol.View<T> {
 
     public BasePresenter basePresenter;
 
@@ -157,6 +158,11 @@ public abstract class BaseActivity<T> extends AppCompatActivity implements Navig
 
     public T getComponent() {
         return component;
+    }
+
+    @Override
+    public Object getParentComponent() {
+        return null;
     }
 
     public BasePresenter getPresenter() {
