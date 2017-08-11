@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
  * Created by ganyao on 2017/3/7.
  */
 
-public abstract class BaseFragment<T> extends Fragment implements BaseProtocol.View, BaseProtocol.ProgressView {
+public abstract class BaseFragment<T> extends Fragment implements BaseProtocol.View<T>, BaseProtocol.ProgressView {
 
     /**
      * 懒加载控制

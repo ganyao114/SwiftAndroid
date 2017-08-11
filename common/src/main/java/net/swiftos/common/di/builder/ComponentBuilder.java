@@ -2,12 +2,8 @@ package net.swiftos.common.di.builder;
 
 import android.util.Log;
 
-import net.swiftos.eventposter.utils.LOG;
-
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -17,16 +13,16 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ComponentBuilder {
 
+    private static Map<Class,Method> injectors = new ConcurrentHashMap<>();
     private static Map<Class,Method> builders = new ConcurrentHashMap<>();
-    private static Map<Class,Method> builders_component_type = new ConcurrentHashMap<>();
 
     public static <T> Object generate(Object target) {
         Class type = target.getClass();
-        Method builderMethod = builders.get(type);
+        Method builderMethod = injectors.get(type);
         if (builderMethod == null) {
-            for (Class key:builders.keySet()) {
+            for (Class key: injectors.keySet()) {
                 if (key.isInstance(target)) {
-                    builderMethod = builders.get(key);
+                    builderMethod = injectors.get(key);
                     break;
                 }
             }
@@ -44,7 +40,7 @@ public class ComponentBuilder {
     }
 
     public static <T> T build(Class<T> componentType) {
-        Method builderMethod = builders_component_type.get(componentType);
+        Method builderMethod = builders.get(componentType);
         if (builderMethod == null) {
             return null;
         }
@@ -59,12 +55,12 @@ public class ComponentBuilder {
 
     public static <T> Object inject(Object target) {
         Class type = target.getClass();
-        Method builderMethod = builders.get(type);
+        Method builderMethod = injectors.get(type);
         Class parType = null;
         if (builderMethod == null) {
-            for (Class key:builders.keySet()) {
+            for (Class key: injectors.keySet()) {
                 if (key.isInstance(target)) {
-                    builderMethod = builders.get(key);
+                    builderMethod = injectors.get(key);
                     parType = key;
                     break;
                 }
@@ -147,11 +143,11 @@ public class ComponentBuilder {
             if (!Modifier.isStatic(method.getModifiers()))
                 continue;
             if (parTypes.length == 1) {
-                builders.put(parTypes[0], method);
+                injectors.put(parTypes[0], method);
             } else if (parTypes.length == 0) {
                 Class componentType = method.getReturnType();
                 if (componentType != null) {
-                    builders_component_type.put(componentType, method);
+                    builders.put(componentType, method);
                 }
             }
         }

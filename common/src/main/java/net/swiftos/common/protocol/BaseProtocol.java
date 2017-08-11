@@ -21,11 +21,13 @@ public class BaseProtocol {
         T getComponent();
         Object getParentComponent();
     }
-    public interface Presenter extends IAsyncSubjectsQueue {
+    public interface Presenter<C> extends IAsyncSubjectsQueue {
         void onViewInited();
         void onViewDestroyed();
         <T> void attachView(Class<T> viewType, T view);
         <T> void detachView(Class<T> viewType);
+        void injectComponent(C component);
+        C getComponent();
     }
     public interface Model {
         void destroyRequests();

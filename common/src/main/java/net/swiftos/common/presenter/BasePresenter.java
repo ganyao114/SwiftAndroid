@@ -14,11 +14,13 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by ganyao on 2016/10/26.
  */
 
-public abstract class BasePresenter extends Presenter implements Navigater.INavigate, BaseProtocol.Presenter {
+public abstract class BasePresenter<C> extends Presenter implements Navigater.INavigate, BaseProtocol.Presenter<C> {
 
     protected IAsyncSubjectsQueue asyncSubjects;
 
     protected Map<Class,Object> views = new ConcurrentHashMap<>();
+
+    protected C component;
 
     public BasePresenter() {
         BaseApplication.getAppComponent()
@@ -69,7 +71,7 @@ public abstract class BasePresenter extends Presenter implements Navigater.INavi
         onViewAttached(viewType, view);
     }
 
-    protected  <T> void onViewAttached(Class<T> viewType, T view) {
+    protected <T> void onViewAttached(Class<T> viewType, T view) {
 
     }
 
@@ -89,5 +91,15 @@ public abstract class BasePresenter extends Presenter implements Navigater.INavi
     @Override
     public <T> void onNavigate(T data) {
 
+    }
+
+    @Override
+    public void injectComponent(C component) {
+        this.component = component;
+    }
+
+    @Override
+    public C getComponent() {
+        return component;
     }
 }

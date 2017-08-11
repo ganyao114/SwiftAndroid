@@ -10,11 +10,10 @@ import javax.inject.Inject;
 
 public abstract class BaseHttpModel {
 
-    @Inject
     public IBaseHttpModel baseModel;
 
     public BaseHttpModel() {
-        BaseApplication.getAppComponent().inject(this);
+        baseModel = BaseApplication.getAppComponent().getBaseHttpModel();
         baseModel.setBaseResponse(setBaseReponse());
     }
 

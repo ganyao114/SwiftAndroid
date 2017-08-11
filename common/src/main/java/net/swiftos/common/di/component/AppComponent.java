@@ -37,8 +37,6 @@ public interface AppComponent {
 
     void inject(BaseHttpModel model);
 
-    void inject(BasePresenter presenter);
-
     Context globalContext();
 
     ConcurrentHashMap globalData();
