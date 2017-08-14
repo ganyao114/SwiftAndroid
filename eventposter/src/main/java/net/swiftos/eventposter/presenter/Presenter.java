@@ -62,12 +62,12 @@ public abstract class Presenter implements IPresenter{
 
     @Override
     public void onPresenterInit(IPresenter context) {
-        EventPoster.regist(this);
+        EventPoster.register(this);
     }
 
     @Override
     public void onPresenterDestory(IPresenter context) {
-        EventPoster.unRegist(this);
+        EventPoster.unRegister(this);
     }
 
     public void notifyChildDestory(Presenter presenter){

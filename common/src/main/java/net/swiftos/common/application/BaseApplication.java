@@ -2,6 +2,8 @@ package net.swiftos.common.application;
 
 import android.Manifest;
 import android.app.Application;
+import android.content.BroadcastReceiver;
+import android.util.Log;
 
 import com.jude.utils.JActivityManager;
 import com.jude.utils.JUtils;
@@ -17,11 +19,14 @@ import net.swiftos.common.log.SwiftLog;
 import net.swiftos.common.model.net.OkHttpDownLoader;
 import net.swiftos.common.ospermission.PermissionCheck;
 import net.swiftos.common.presenter.BasePresenter;
+import net.swiftos.common.receiverregister.ReceiverDynamicRegister;
 import net.swiftos.common.user.di.UserManagerComponent;
 import net.swiftos.eventposter.core.EventPoster;
 import net.swiftos.eventposter.presenter.Presenter;
+import net.swiftos.utils.VersionUtils;
 
 import java.io.File;
+import java.util.List;
 
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
@@ -69,6 +74,18 @@ public class BaseApplication extends Application {
                 ComponentBuilder.addBuildMap(map);
             }
         }
+        if (VersionUtils.isAndroidO()) {
+            ReceiverDynamicRegister.registerAsync(this, new ReceiverDynamicRegister.Callback() {
+                @Override
+                public void onSuccess(List<BroadcastReceiver> receivers) {
+                }
+
+                @Override
+                public void onError(Throwable throwable) {
+
+                }
+            }, null);
+        }
     }
 
     public static void init(Class<? extends BasePresenter> presenter, Application app) {
@@ -85,6 +102,19 @@ public class BaseApplication extends Application {
         Presenter.With(null).start(presenter);
         JUtils.initialize(app);
         app.registerActivityLifecycleCallbacks(JActivityManager.getActivityLifecycleCallbacks());
+        if (VersionUtils.isAndroidO()) {
+            ReceiverDynamicRegister.registerAsync(app, new ReceiverDynamicRegister.Callback() {
+                @Override
+                public void onSuccess(List<BroadcastReceiver> receivers) {
+
+                }
+
+                @Override
+                public void onError(Throwable throwable) {
+
+                }
+            }, null);
+        }
     }
 
     public static AppComponent getAppComponent() {

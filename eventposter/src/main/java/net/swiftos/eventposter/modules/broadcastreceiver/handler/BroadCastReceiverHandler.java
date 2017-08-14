@@ -39,8 +39,14 @@ public class BroadCastReceiverHandler implements IHandler<BroadCastEntity> {
         BroadCastEntity broadCastEntity = new BroadCastEntity();
         broadCastEntity.setMethod(annoInfo.getMethod());
         IntentFilter filter = new IntentFilter();
-        for (String str:receiver.value())
+        for (String str:receiver.actions())
             filter.addAction(str);
+        for (String str:receiver.categories())
+            filter.addCategory(str);
+        for (String str:receiver.schemes())
+            filter.addDataScheme(str);
+        if (receiver.priority() >= 0)
+            filter.setPriority(receiver.priority());
         broadCastEntity.setFilter(filter);
         return broadCastEntity;
     }

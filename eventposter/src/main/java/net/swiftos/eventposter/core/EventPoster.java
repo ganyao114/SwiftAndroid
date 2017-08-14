@@ -19,19 +19,19 @@ public class EventPoster {
         return (T) handler;
     }
 
-    public static void regist(Object object){
+    public static void register(Object object){
         Injecter.inject(object);
     }
 
-    public static void unRegist(Object object){
+    public static void unRegister(Object object){
         Injecter.remove(object);
     }
 
-    public static void registDeep(Object object){
+    public static void registerDeep(Object object){
         Injecter.injectDeep(object);
     }
 
-    public static void unRegistDeep(Object object){
+    public static void unRegisterDeep(Object object){
         Injecter.removeDeep(object);
     }
 
@@ -40,7 +40,7 @@ public class EventPoster {
         HandlerFactory.getHandler(ActivityLifeHandler.class).init(application);
     }
 
-    public static void destory(Application application){
+    public static void destroy(Application application){
         app = null;
         HandlerFactory.getHandler(ActivityLifeHandler.class).destroy(application);
     }

@@ -16,6 +16,11 @@ public @interface BindCache {
     public static int NO_KEY = -1;
     public static int NO_EXPIRE = -1;
 
+    public static int S = 1000;
+    public static int M = 60 * S;
+    public static int H = 60 * M;
+    public static int D = 24 * H;
+
     int keyPosition() default NO_KEY;
     CacheType type() default RamAndDisk;
     long expireRam() default NO_EXPIRE;

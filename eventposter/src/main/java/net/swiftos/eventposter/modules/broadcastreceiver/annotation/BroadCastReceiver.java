@@ -15,5 +15,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @EventBase(BroadCastReceiverHandler.class)
 public @interface BroadCastReceiver {
-    String[] value();
+    String[] actions() default {};
+    String[] categories() default {};
+    String[] schemes() default {};
+    int priority() default -1;
 }

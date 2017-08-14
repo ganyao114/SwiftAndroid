@@ -20,12 +20,12 @@ public class EventPosterHub implements IEventHub {
 
     @Override
     public void register(Object object) {
-        EventPoster.registDeep(object);
+        EventPoster.registerDeep(object);
     }
 
     @Override
     public void unRegister(Object object) {
-        EventPoster.unRegistDeep(object);
+        EventPoster.unRegisterDeep(object);
     }
 
     @Override
