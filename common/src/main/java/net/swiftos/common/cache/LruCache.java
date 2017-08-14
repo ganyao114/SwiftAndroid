@@ -65,7 +65,7 @@ public class LruCache<K, V> implements LruCacheCallback<V>, IKVRamCache<K,V> {
      * head of the queue. This returns null if a value is not cached and cannot
      * be created.
      */
-    public final V get(K key) {
+    public V get(K key) {
         if (key == null) {
             throw new NullPointerException("key == null");
         }
@@ -210,7 +210,7 @@ public class LruCache<K, V> implements LruCacheCallback<V>, IKVRamCache<K,V> {
      *
      * @return the previous value mapped by {@code key}.
      */
-    public final V remove(K key) {
+    public V remove(K key) {
         if (key == null) {
             throw new NullPointerException("key == null");
         }

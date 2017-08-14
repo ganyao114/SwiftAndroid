@@ -1,7 +1,11 @@
 package net.swiftos.common.model.net;
 
 
+import android.Manifest;
+import android.content.pm.PermissionInfo;
 import android.util.LruCache;
+
+import com.tbruyelle.rxpermissions.RxPermissions;
 
 import net.swiftos.common.application.BaseApplication;
 import net.swiftos.common.exception.CommonExceptionFactory;
@@ -10,6 +14,7 @@ import net.swiftos.common.exception.IExceptionFactory;
 import net.swiftos.common.exception.NetworkException;
 import net.swiftos.common.model.bean.BaseResponse;
 import net.swiftos.common.model.entity.AsyncCallback;
+import net.swiftos.common.ospermission.PermissionCheck;
 import net.swiftos.utils.StatusUtil;
 
 import rx.Observable;
@@ -38,7 +43,6 @@ public class BaseRxModel {
         this.exceptionFactory = exceptionFactory;
         BaseApplication.getAppComponent().inject(this);
     }
-
     public <T> Observable<T> getAsyncObservable(Observable<BaseResponse<T>> observable, IResponseAdapter baseResponse) {
         return observable
                 .doOnSubscribe(this::checkNetwork)
@@ -108,6 +112,7 @@ public class BaseRxModel {
         };
     }
 
+    @PermissionCheck(Manifest.permission.ACCESS_NETWORK_STATE)
     public void checkNetwork() throws NetworkException {
         if (!StatusUtil.checkNetWorkStatus(BaseApplication.getApplication())) {
             throw new NetworkException("no network");
