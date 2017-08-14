@@ -95,7 +95,10 @@ public class BindCacheAspect  {
                 if (res == null) {
                     res = joinPoint.proceed();
                     if (res != null) {
-                        ramCache.save(key, res);
+                        if (bindCache.expireRam() == BindCache.NO_EXPIRE)
+                            ramCache.save(key, res);
+                        else
+                            ramCache.save(key, res, (int) bindCache.expireRam());
                     }
                 }
                 return res;
@@ -110,15 +113,18 @@ public class BindCacheAspect  {
                             if (res == null) {
                                 res = joinPoint.proceed();
                                 if (res != null) {
-                                    if (bindCache.expire() == BindCache.NO_EXPIRE)
+                                    if (bindCache.expireDisk() == BindCache.NO_EXPIRE)
                                         diskCache.save(key, res);
                                     else
-                                        diskCache.save(key, res, (int) bindCache.expire());
+                                        diskCache.save(key, res, (int) bindCache.expireDisk());
                                 }
                             }
                         }
                         if (res != null) {
-                            ramCache.save(key, res);
+                            if (bindCache.expireRam() == BindCache.NO_EXPIRE)
+                                ramCache.save(key, res);
+                            else
+                                ramCache.save(key, res, (int) bindCache.expireRam());
                         }
                     }
                     return res;
@@ -130,10 +136,10 @@ public class BindCacheAspect  {
                 if (res == null) {
                     res = joinPoint.proceed();
                     if (res != null) {
-                        if (bindCache.expire() == BindCache.NO_EXPIRE)
+                        if (bindCache.expireDisk() == BindCache.NO_EXPIRE)
                             diskCache.save(key, res);
                         else
-                            diskCache.save(key, res, (int) bindCache.expire());
+                            diskCache.save(key, res, (int) bindCache.expireDisk());
                     }
                 }
                 return res;

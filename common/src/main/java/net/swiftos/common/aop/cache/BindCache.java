@@ -18,6 +18,6 @@ public @interface BindCache {
 
     int keyPosition() default NO_KEY;
     CacheType type() default RamAndDisk;
-    long expire() default NO_EXPIRE;
-
+    long expireRam() default NO_EXPIRE;
+    long expireDisk() default NO_EXPIRE;
 }
