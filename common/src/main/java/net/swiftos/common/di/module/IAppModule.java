@@ -6,6 +6,7 @@ import net.swiftos.common.cache.IKVRamCache;
 import net.swiftos.common.event.IEventHub;
 import net.swiftos.common.model.net.IBaseHttpModel;
 import net.swiftos.common.model.net.IImageLoader;
+import net.swiftos.common.model.net.IJson;
 import net.swiftos.common.presenter.IAsyncSubjectsQueue;
 
 
@@ -29,4 +30,6 @@ public interface IAppModule {
     IImageLoader provideImageLoader();
 
     IEventHub provideEventHub();
+
+    IJson provideJson();
 }

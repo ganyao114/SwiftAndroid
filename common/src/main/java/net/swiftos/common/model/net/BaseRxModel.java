@@ -2,15 +2,11 @@ package net.swiftos.common.model.net;
 
 
 import android.Manifest;
-import android.content.pm.PermissionInfo;
-import android.util.LruCache;
-
-import com.tbruyelle.rxpermissions.RxPermissions;
 
 import net.swiftos.common.application.BaseApplication;
-import net.swiftos.common.exception.CommonExceptionFactory;
+import net.swiftos.common.exception.CommonExceptionHandler;
 import net.swiftos.common.exception.ExceptionAdapter;
-import net.swiftos.common.exception.IExceptionFactory;
+import net.swiftos.common.exception.IExceptionHandler;
 import net.swiftos.common.exception.NetworkException;
 import net.swiftos.common.model.bean.BaseResponse;
 import net.swiftos.common.model.entity.AsyncCallback;
@@ -32,14 +28,14 @@ public class BaseRxModel {
 
     private final static String TAG = "Model --->";
 
-    private IExceptionFactory exceptionFactory;
+    private IExceptionHandler exceptionFactory;
 
     public BaseRxModel() {
         BaseApplication.getAppComponent().inject(this);
-        exceptionFactory = new CommonExceptionFactory();
+        exceptionFactory = new CommonExceptionHandler();
     }
 
-    public BaseRxModel(IExceptionFactory exceptionFactory) {
+    public BaseRxModel(IExceptionHandler exceptionFactory) {
         this.exceptionFactory = exceptionFactory;
         BaseApplication.getAppComponent().inject(this);
     }
@@ -138,4 +134,7 @@ public class BaseRxModel {
         }
     }
 
+    public void setExceptionHandler(IExceptionHandler exceptionFactory) {
+        this.exceptionFactory = exceptionFactory;
+    }
 }

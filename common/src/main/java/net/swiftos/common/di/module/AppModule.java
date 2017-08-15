@@ -13,6 +13,7 @@ import net.swiftos.common.cache.KVACacheImpl;
 import net.swiftos.common.event.IEventHub;
 import net.swiftos.common.model.net.IBaseHttpModel;
 import net.swiftos.common.model.net.IImageLoader;
+import net.swiftos.common.model.net.IJson;
 import net.swiftos.common.model.net.PicassoLoader;
 import net.swiftos.common.model.net.RxBaseHttpModel;
 import net.swiftos.common.presenter.IAsyncSubjectsQueue;
@@ -108,6 +109,13 @@ public class AppModule implements IAppModule {
     @Singleton
     public IEventHub provideEventHub() {
         return appModule.provideEventHub();
+    }
+
+    @Override
+    @Provides
+    @Singleton
+    public IJson provideJson() {
+        return appModule.provideJson();
     }
 
 }

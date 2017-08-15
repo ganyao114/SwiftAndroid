@@ -13,6 +13,7 @@ import net.swiftos.common.model.net.BaseHttpModel;
 import net.swiftos.common.model.net.BaseRxModel;
 import net.swiftos.common.model.net.IBaseHttpModel;
 import net.swiftos.common.model.net.IImageLoader;
+import net.swiftos.common.model.net.IJson;
 import net.swiftos.common.presenter.BasePresenter;
 import net.swiftos.common.presenter.IAsyncSubjectsQueue;
 import net.swiftos.common.view.activity.BaseActivity;
@@ -58,5 +59,7 @@ public interface AppComponent {
     IImageLoader imageLoader();
 
     IEventHub eventHub();
+
+    IJson json();
 
 }

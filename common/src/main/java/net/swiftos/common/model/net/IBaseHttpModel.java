@@ -1,5 +1,6 @@
 package net.swiftos.common.model.net;
 
+import net.swiftos.common.exception.IExceptionHandler;
 import net.swiftos.common.model.entity.AsyncCallback;
 import net.swiftos.common.presenter.IAsyncSubject;
 
@@ -10,6 +11,7 @@ import net.swiftos.common.presenter.IAsyncSubject;
  */
 public interface IBaseHttpModel<O,A> {
     void setBaseResponse(IResponseAdapter baseResponse);
+    void setExceptionHandler(IExceptionHandler handler);
     <M> IAsyncSubject<O> getAsyncSubject(A api, AsyncCallback<M> callback);
     <M> IAsyncSubject<O> getAsyncSubjectWithCache(A api, IGetFromCache<M> getFromCache, ISaveToCache<M> saveToCache, AsyncCallback<M> callback);
     <M> IAsyncSubject<O> mergeSubjects(AsyncCallback<M> callback, A... subjects);

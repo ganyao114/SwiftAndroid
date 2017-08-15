@@ -1,12 +1,12 @@
 package net.swiftos.common.model.net;
 
 import net.swiftos.common.exception.ExceptionAdapter;
+import net.swiftos.common.exception.IExceptionHandler;
 import net.swiftos.common.model.entity.AsyncCallback;
 import net.swiftos.common.presenter.IAsyncSubject;
 import net.swiftos.common.presenter.RxSubject;
 
 import rx.Observable;
-import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -23,6 +23,11 @@ public class RxBaseHttpModel implements IBaseHttpModel<Subscription, Observable>
     @Override
     public void setBaseResponse(IResponseAdapter baseResponse) {
         this.baseResponse = baseResponse;
+    }
+
+    @Override
+    public void setExceptionHandler(IExceptionHandler handler) {
+        baseRxModel.setExceptionHandler(handler);
     }
 
     @Override

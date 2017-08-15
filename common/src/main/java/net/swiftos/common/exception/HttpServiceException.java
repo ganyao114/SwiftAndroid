@@ -5,7 +5,16 @@ package net.swiftos.common.exception;
  */
 
 public class HttpServiceException extends BaseException {
+
     public HttpServiceException(String message) {
         super(message);
+    }
+
+    public HttpServiceException(String message, int flag) {
+        super(message, flag);
+    }
+
+    public HttpServiceException(String message, Throwable cause, int flag) {
+        super(message, cause, flag);
     }
 }

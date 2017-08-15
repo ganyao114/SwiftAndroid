@@ -23,7 +23,7 @@ public class CommonResponseAdapter<T> implements IResponseAdapter<BaseResponse<T
         String msg = baseResponse.getMessage();
         T data = baseResponse.getData();
         if (status != BaseResponse.SUCCESS) {
-            throw new HttpServiceException(msg);
+            throw new HttpServiceException(msg, status);
         }
         return data;
     }

@@ -11,17 +11,21 @@ import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Retrofit;
-
 /**
  * Created by gy939 on 2017/1/15.
  */
 
-public class CommonExceptionFactory implements IExceptionFactory {
+public class CommonExceptionHandler implements IExceptionHandler {
+
+    private static IExceptionHandler handler = new CommonExceptionHandler();
 
     private List<Class<? extends Throwable>> failureTypes = new ArrayList();
 
-    public CommonExceptionFactory() {
+    public static IExceptionHandler getInstance() {
+        return handler;
+    }
+
+    public CommonExceptionHandler() {
         failureTypes.add(HttpServiceException.class);
         failureTypes.add(JsonParseException.class);
         failureTypes.add(JsonIOException.class);

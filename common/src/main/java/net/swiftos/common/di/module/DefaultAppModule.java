@@ -8,8 +8,10 @@ import net.swiftos.common.cache.KVACacheImpl;
 import net.swiftos.common.cache.LruCacheWithExpire;
 import net.swiftos.common.event.EventPosterHub;
 import net.swiftos.common.event.IEventHub;
+import net.swiftos.common.model.net.GsonImpl;
 import net.swiftos.common.model.net.IBaseHttpModel;
 import net.swiftos.common.model.net.IImageLoader;
+import net.swiftos.common.model.net.IJson;
 import net.swiftos.common.model.net.PicassoLoader;
 import net.swiftos.common.model.net.RxBaseHttpModel;
 import net.swiftos.common.presenter.IAsyncSubjectsQueue;
@@ -56,5 +58,10 @@ public class DefaultAppModule implements IAppModule {
     @Override
     public IEventHub provideEventHub() {
         return new EventPosterHub();
+    }
+
+    @Override
+    public IJson provideJson() {
+        return new GsonImpl();
     }
 }
