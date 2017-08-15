@@ -63,6 +63,7 @@ public class BroadCastReceiverHandler implements IHandler<BroadCastEntity> {
             }
         };
         EventPoster.getApp().registerReceiver(receiver,eventEntity.getFilter());
+        eventEntity.putReceiver(object, receiver);
     }
 
     @Override
