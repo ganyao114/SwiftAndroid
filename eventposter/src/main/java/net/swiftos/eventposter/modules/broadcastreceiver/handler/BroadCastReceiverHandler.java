@@ -67,7 +67,10 @@ public class BroadCastReceiverHandler implements IHandler<BroadCastEntity> {
 
     @Override
     public void unload(BroadCastEntity eventEntity, Object object) {
-
+        BroadcastReceiver receiver = eventEntity.removeReceiver(object);
+        if (receiver != null) {
+            EventPoster.getApp().unregisterReceiver(receiver);
+        }
     }
 
     @Override

@@ -114,7 +114,7 @@ public class ComponentBuilder {
         try {
             inject = component.getClass().getDeclaredMethod("inject", parType);
         } catch (Exception e) {
-            Log.e("ComponentBuilder: ", "lazy search fail");
+            Log.v("ComponentBuilder: ", "lazy search fail");
         }
         if (inject == null) {
             for (Method method:component.getClass().getDeclaredMethods()) {

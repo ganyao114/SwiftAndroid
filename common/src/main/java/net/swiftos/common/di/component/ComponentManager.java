@@ -58,11 +58,11 @@ public class ComponentManager {
             if (t == null) {
                 if (wrappers.containsKey(type)) {
                     t = (T) wrappers.get(type).initer.init();
-                    components.put(type, t);
+                    registerStaticComponent(type, t);
                 } else {
                     t = ComponentBuilder.build(type);
                     if (t != null) {
-                        components.put(type, t);
+                        registerStaticComponent(type, t);
                     }
                 }
             }
