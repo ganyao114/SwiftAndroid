@@ -25,8 +25,8 @@ public class RetrofitAPIGenerator implements IAPIGenerator {
     protected Retrofit retrofit;
 
     private HttpUrl BASE_URL;
-    private Map<String,String> headers, pars;
     private APIServiceConfigs configs = new APIServiceConfigs();
+    private BasicParamsInterceptor paramsInterceptor = new BasicParamsInterceptor();
 
     protected OkHttpClient getOkHttpClient() {
         if (okHttpClient == null) {
@@ -34,7 +34,7 @@ public class RetrofitAPIGenerator implements IAPIGenerator {
                 configs = new APIServiceConfigs();
             }
             okHttpClient = new OkHttpClient.Builder()
-                    .addNetworkInterceptor(new BasicParamsInterceptor(headers, pars, null))
+                    .addNetworkInterceptor(paramsInterceptor)
                     .connectTimeout(configs.getConnectTimeout(), TimeUnit.MILLISECONDS)
                     .readTimeout(configs.getReadTimeout(), TimeUnit.MILLISECONDS)
                     .build();
@@ -61,12 +61,12 @@ public class RetrofitAPIGenerator implements IAPIGenerator {
 
     @Override
     public void setHeaders(Map<String, String> headers) {
-        this.headers = headers;
+        paramsInterceptor.setHeaders(headers);
     }
 
     @Override
     public void setPars(Map<String, String> pars) {
-        this.pars = pars;
+        paramsInterceptor.setPars(pars);
     }
 
     @Override

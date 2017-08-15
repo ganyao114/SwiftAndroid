@@ -20,6 +20,13 @@ public class BasicParamsInterceptor implements Interceptor {
     private Map<String,String> pars;
     private ICallback callback;
 
+    public BasicParamsInterceptor() {
+    }
+
+    public BasicParamsInterceptor(ICallback callback) {
+        this.callback = callback;
+    }
+
     public BasicParamsInterceptor(Map<String, String> headers, Map<String, String> pars, ICallback callback) {
         this.headers = headers;
         this.pars = pars;
@@ -63,4 +70,19 @@ public class BasicParamsInterceptor implements Interceptor {
         Request covert(Chain chain, Request.Builder builder);
     }
 
+    public Map<String, String> getHeaders() {
+        return headers;
+    }
+
+    public void setHeaders(Map<String, String> headers) {
+        this.headers = headers;
+    }
+
+    public Map<String, String> getPars() {
+        return pars;
+    }
+
+    public void setPars(Map<String, String> pars) {
+        this.pars = pars;
+    }
 }
