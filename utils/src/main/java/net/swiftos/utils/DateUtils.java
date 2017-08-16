@@ -18,6 +18,9 @@ public class DateUtils {
 	public static final String YYYY = "yyyy";
 	public static final String MM = "MM";
 	public static final String DD = "dd";
+	public static final String HH_MM_SS = "HH:mm:ss";
+    public static final String HH_MM = "HH:mm";
+    public static final String MM_DD_HH_MM = "MM-dd HH:mm";
 
 	public static String generateTime(long time) {
 		int totalSeconds = (int) (time / 1000);
@@ -33,8 +36,24 @@ public class DateUtils {
 		int seconds = totalSeconds % 60;
 		int minutes = (totalSeconds / 60) % 60;
 		int hours = totalSeconds / 3600;
-		return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        return hours > 0 ? String.format("%02d:%02d:%02d", hours, minutes, seconds) : String.format("%02d:%02d", minutes, seconds);
 	}
+
+    /** 根据long总毫秒数，获得时分秒 **/
+    public static String getHMFormatByLong(long time) {
+        Date date = new Date(time);
+        SimpleDateFormat sdf = new SimpleDateFormat(HH_MM);
+        String str = sdf.format(date);
+        return str;
+    }
+
+    /** 根据long总毫秒数，获得时分秒 **/
+    public static String getMDHMFormatByLong(long time) {
+        Date date = new Date(time);
+        SimpleDateFormat sdf = new SimpleDateFormat(MM_DD_HH_MM);
+        String str = sdf.format(date);
+        return str;
+    }
 
 	/**
 	 * @param
@@ -108,6 +127,17 @@ public class DateUtils {
 	public static Date string2date(String dateString) {
 		Date formateDate = null;
 		DateFormat format = new SimpleDateFormat(YYYY_MM_DD_HH_MM_SS);
+		try {
+			formateDate = format.parse(dateString);
+		} catch (ParseException e) {
+			return null;
+		}
+		return formateDate;
+	}
+
+	public static Date string2dateHMS(String dateString) {
+		Date formateDate = null;
+		DateFormat format = new SimpleDateFormat(HH_MM_SS);
 		try {
 			formateDate = format.parse(dateString);
 		} catch (ParseException e) {
@@ -193,7 +223,12 @@ public class DateUtils {
 	 * @param time
 	 * @return
 	 */
-	public static String getFriendlyTime(Date time) {  
+	public static String getFriendlyTime(Date time) {
+
+        if (time.getTime() == 0) {
+            return "无记录";
+        }
+
         //获取time距离当前的秒数  
         int ct = (int)((System.currentTimeMillis() - time.getTime())/1000);  
         if(ct == 0) {  
