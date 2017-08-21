@@ -1,5 +1,7 @@
 package net.swiftos.common.protocol;
 
+import android.view.View;
+
 import net.swiftos.common.model.entity.Session;
 import net.swiftos.common.presenter.IAsyncSubjectsQueue;
 import net.swiftos.eventposter.core.EventPoster;
@@ -20,6 +22,7 @@ public class BaseProtocol {
         void finish();
         T getComponent();
         Object getParentComponent();
+        <V extends android.view.View> V findView(int id);
     }
     public interface Presenter<C> extends IAsyncSubjectsQueue {
         void onViewInited();

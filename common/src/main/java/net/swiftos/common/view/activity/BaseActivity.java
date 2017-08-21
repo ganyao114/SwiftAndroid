@@ -156,6 +156,11 @@ public abstract class BaseActivity<T> extends AppCompatActivity implements Navig
         }
     }
 
+    @Override
+    public <V extends View> V findView(int id) {
+        return (V) findViewById(id);
+    }
+
     public T getComponent() {
         return component;
     }

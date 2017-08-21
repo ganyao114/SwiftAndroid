@@ -36,7 +36,7 @@ public abstract class BaseNestFragment<T> extends BaseFragment<T> {
         main_viewpager = (ViewPager) view.findViewById(setViewPagerId());
         fragments = setFragments();
         titles = setTitles();
-        adapter = new MyAdapter(getFragmentManager());
+        adapter = new MyAdapter(getChildFragmentManager());
         adapter.notifyDataSetChanged();
         main_viewpager.setAdapter(adapter);
         main_viewpager.setOffscreenPageLimit(fragments.size());

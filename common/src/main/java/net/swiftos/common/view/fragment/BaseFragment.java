@@ -185,6 +185,11 @@ public abstract class BaseFragment<T> extends Fragment implements BaseProtocol.V
 
     }
 
+    @Override
+    public <V extends View> V findView(int id) {
+        return view.findViewById(id);
+    }
+
     protected abstract @IdRes int setLayoutId();
 
     protected abstract void initView(LayoutInflater inflater, ViewGroup container);

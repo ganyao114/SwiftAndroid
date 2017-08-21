@@ -3,6 +3,7 @@ package net.swiftos.common.application;
 import android.Manifest;
 import android.app.Application;
 import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.util.Log;
 
 import com.jude.utils.JActivityManager;
@@ -30,6 +31,7 @@ import java.util.List;
 
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
+import android.support.multidex.MultiDex;
 
 /**
  * Created by gy939 on 2017/1/11.
@@ -138,6 +140,12 @@ public class BaseApplication extends Application {
         } catch (Exception e) {
             SwiftLog.LOGE("PicassoLoader", "picasso init error");
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(base);
     }
 
     protected Class[] setComponentsBuilderMap() {
