@@ -41,7 +41,7 @@ public class CommonHttpModel extends BaseHttpModel {
     }
 
     @Override
-    protected IResponseAdapter setBaseReponse() {
+    protected IResponseAdapter baseResponse() {
         return new CommonResponseAdapter();
     }
 

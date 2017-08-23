@@ -40,7 +40,7 @@ public class CustomEventHandler implements IHandler<CustomEventEntity>{
         String name = eventAnno.name();
         Method method = annoInfo.getMethod();
         if (name== null||name.equals(""))
-            name = method.getName();
+            name = method.getName() + "@" + method.hashCode();
         Class parType = method.getParameterTypes()[0];
         CustomEventEntity entity = new CustomEventEntity();
         entity.setMethod(method);

@@ -7,6 +7,9 @@ import android.os.Build;
  */
 
 public class VersionUtils {
+    public static boolean isAndroidN (){
+        return Build.VERSION.SDK_INT >= 25;
+    }
     public static boolean isAndroidO (){
         return Build.VERSION.SDK_INT >= 26;
     }
